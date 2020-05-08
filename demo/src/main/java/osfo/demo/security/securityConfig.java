@@ -9,10 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import osfo.demo.entrypoint.unauthorized;
 import osfo.demo.handler.failHandler;
 import osfo.demo.handler.successHandler;
+import osfo.demo.security.uplogin.upauthfilter;
 
 @EnableWebSecurity
 public class securityConfig extends WebSecurityConfigurerAdapter {
@@ -27,24 +29,17 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
     unauthorized unauthorize;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
 
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/jpalogin","/sslogin","/jpabooklist","/jparegister","/img/*","/jpacurrentuser","/test","/getdetail","/testimg","/register","/login").permitAll()
-                .antMatchers("/jpashowcart","/jpacleancart","/jpaaddtocart","/jpashowhistory","/jpadeleteorder","/jpaaddcomment","/uploaduserimg","/finduserimg/*","/test1").hasAnyAuthority("user","ADMIN")
-                .antMatchers("/jpaeditsave","/jpaeditdelete","/jpashowuser","/uploadimg","/jpaintroduction").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginProcessingUrl("/sslogin")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .successHandler(shandler)
-                .failureHandler(fhandler)
-                .permitAll();
+                .antMatchers("/register","/login/*","/store").permitAll()
+                .antMatchers("/store/*","/goods/*").hasAnyAuthority("user")
+                .anyRequest().authenticated();
+        http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
@@ -52,5 +47,13 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public upauthfilter upauthfilterr() throws Exception {
+        upauthfilter filter = new upauthfilter();
+        filter.setAuthenticationManager(super.authenticationManagerBean());
+        filter.setAuthenticationFailureHandler(fhandler);
+        filter.setAuthenticationSuccessHandler(shandler);
+        return filter;
     }
 }

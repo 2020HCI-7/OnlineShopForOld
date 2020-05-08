@@ -25,7 +25,7 @@ public class successHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException, ServletException {
         SecurityContext ctx = SecurityContextHolder.getContext();
         Authentication auth = ctx.getAuthentication();
-        User user = (User) auth.getPrincipal();
+        /*User user = (User) auth.getPrincipal();
         String id=user.getUsername();
         Collection<GrantedAuthority> authorities= (Collection<GrantedAuthority>) auth.getAuthorities();
 
@@ -47,7 +47,8 @@ public class successHandler implements AuthenticationSuccessHandler {
             response.setHeader("Access-Control-Allow-Credentials","true");
             response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.getWriter().write("1");
-        }
+        }*/
+        response.getWriter().write("1");
 
 
 

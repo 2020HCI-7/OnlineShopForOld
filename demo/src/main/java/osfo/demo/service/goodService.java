@@ -15,5 +15,9 @@ public class goodService {
     {
         return gooddao.getgoodsbydealerid(id);
     }
+    public List<Goods> getallgoods()
+    {
+        return gooddao.getallgood();
+    }
 
 }

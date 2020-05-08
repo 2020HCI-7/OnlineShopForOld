@@ -14,5 +14,9 @@ public class goodDao {
     {
         return goodrepo.getgoodsbydealerid(id);
     }
+    public List<Goods> getallgood()
+    {
+        return goodrepo.findAll();
+    }
 
 }

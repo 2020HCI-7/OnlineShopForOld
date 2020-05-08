@@ -26,6 +26,11 @@ public class goodcontroller {
     {
         return goodservice.getgoodsbydealerid(id);
     }
+    @RequestMapping(value="/goods/getallgood")
+    public Object getallgood()
+    {
+        return goodservice.getallgoods();
+    }
     @RequestMapping(value="/goods/getbtsound")
     public Object getgoodsbysound(HttpServletRequest request, HttpServletResponse response)
     {
