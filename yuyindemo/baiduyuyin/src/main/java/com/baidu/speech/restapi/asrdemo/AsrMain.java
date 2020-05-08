@@ -74,9 +74,8 @@ public class AsrMain {
     */
 
     public static void main(String[] args) throws IOException, DemoException {
-        if(args.length>0)
-        {
-            FILENAME=args[0];
+        if (args.length > 0) {
+            FILENAME = args[0];
         }
         AsrMain demo = new AsrMain();
         // 填写下面信息
@@ -106,7 +105,7 @@ public class AsrMain {
         return result;
     }
 
-    private String runRawPostMethod(String token) throws IOException, DemoException {         
+    private String runRawPostMethod(String token) throws IOException, DemoException {
         String url2 = URL + "?cuid=" + ConnUtil.urlEncode(CUID) + "&dev_pid=" + DEV_PID + "&token=" + token;
         //测试自训练平台需要打开以下信息
         //String url2 = URL + "?cuid=" + ConnUtil.urlEncode(CUID) + "&dev_pid=" + DEV_PID + "&lm_id="+ LM_ID + "&token=" + token;
@@ -185,13 +184,13 @@ public class AsrMain {
 
     private String base64Encode(byte[] content) {
 
-         Base64.Encoder encoder = Base64.getEncoder(); // JDK 1.8  推荐方法
-         String str = encoder.encodeToString(content);
+        Base64.Encoder encoder = Base64.getEncoder(); // JDK 1.8  推荐方法
+        String str = encoder.encodeToString(content);
 
 /**
-        char[] chars = Base64Util.encode(content); // 1.7 及以下，不推荐，请自行跟换相关库
-        String str = new String(chars);
-**/
+ char[] chars = Base64Util.encode(content); // 1.7 及以下，不推荐，请自行跟换相关库
+ String str = new String(chars);
+ **/
         return str;
     }
 

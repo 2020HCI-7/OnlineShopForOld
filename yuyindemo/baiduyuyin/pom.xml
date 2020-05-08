@@ -29,7 +29,8 @@
                         </manifest>
                     </archive>
                     <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef> <!-- jar包后缀，生成的jar包形式为：project-1.0-SNAPSHOT-jar-with-dependencies.jar -->
+                        <descriptorRef>jar-with-dependencies
+                        </descriptorRef> <!-- jar包后缀，生成的jar包形式为：project-1.0-SNAPSHOT-jar-with-dependencies.jar -->
                     </descriptorRefs>
                 </configuration>
                 <!-- 添加此项后，可直接使用mvn package | mvn install -->
