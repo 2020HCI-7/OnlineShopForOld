@@ -1,6 +1,9 @@
 package osfo.demo.security.uplogin;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 public class uptoken extends AbstractAuthenticationToken {
     /**
@@ -9,12 +12,24 @@ public class uptoken extends AbstractAuthenticationToken {
      * @param authorities the collection of <tt>GrantedAuthority</tt>s for the principal
      *                    represented by this authentication object.
      */
-    public String id;
+    public String username;
     public String password;
-    public uptoken(String id,String password) {
+    public Integer id;
+
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return super.getAuthorities();
+    }
+
+    public uptoken(String username, String password) {
         super(null);
-        this.id=id;
+        this.username=username;
         this.password=password;
+
+
+    }
+    public uptoken(){
+        super(null);
     }
 
     @Override
@@ -24,7 +39,7 @@ public class uptoken extends AbstractAuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return this.id;
+        return this.username;
     }
 }
 

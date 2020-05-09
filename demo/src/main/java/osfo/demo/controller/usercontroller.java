@@ -15,11 +15,18 @@ public class usercontroller {
     userService userservice;
 
 
-    @RequestMapping("/register")
+    @RequestMapping("/register/consumer")
     public int userregister(@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("neck_name") String neckname,@RequestParam("openid") String openid)
     {
 
         userservice.register(username,password,neckname,openid);
+        return 0;
+    }
+    @RequestMapping("/register/dealer")
+    public int dealerregister(@RequestParam("username") String username,@RequestParam("password") String password)
+    {
+
+        userservice.register1(username,password);
         return 0;
     }
 }

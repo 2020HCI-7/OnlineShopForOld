@@ -15,4 +15,12 @@ public class storeService {
     {
         return storedao.getallstore();
     }
+    public void savestore(Integer dealerid,String address,String phone)
+    {
+        Store store=new Store();
+        store.setAddress(address);
+        store.setPhonenumber(phone);
+        store.setDealerid(dealerid);
+        storedao.savestore(store);
+    }
 }

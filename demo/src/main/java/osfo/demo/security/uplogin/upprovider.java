@@ -7,15 +7,22 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import osfo.demo.dao.userDao;
+import osfo.demo.entity.User;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Component
 public class upprovider implements AuthenticationProvider {
     @Autowired
-    @Qualifier(value="myUserService")
-    private UserDetailsService userDetailsService;
+    userDao userdao;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
@@ -23,18 +30,22 @@ public class upprovider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal();
         // 获取表单用户填写的密码
         String password = (String) authentication.getCredentials();
+        User user=userdao.getbyusername(username).get(0);
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        ((uptoken)authentication).id=user.getId();
 
-        String password1 = userDetails.getPassword();
+
         System.out.print(username);
         System.out.print(password);
-        System.out.print(password1);
-        if (!passwordEncoder.matches(password,password1)){
+
+        if (!passwordEncoder.matches(password,passwordEncoder.encode(user.getPassword()))){
             throw new BadCredentialsException("用户名或密码不正确");
         }
-        System.out.print("right");
-        return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
+        System.out.print(((uptoken)authentication).id);
+
+        return new UsernamePasswordAuthenticationToken(user,password,authorities);
     }
 
     @Override

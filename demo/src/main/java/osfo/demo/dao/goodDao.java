@@ -18,5 +18,9 @@ public class goodDao {
     {
         return goodrepo.findAll();
     }
+    public void savegood(Goods good)
+    {
+        goodrepo.save(good);
+    }
 
 }

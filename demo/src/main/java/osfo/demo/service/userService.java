@@ -3,6 +3,7 @@ package osfo.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import osfo.demo.dao.ConsumerDao;
+import osfo.demo.dao.dealerDao;
 import osfo.demo.entity.Consumer;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 public class userService {
     @Autowired
     ConsumerDao consumerdao;
+    @Autowired
+    dealerDao dealerdao;
     public void testconsumer()
     {
         consumerdao.insertuser();
@@ -23,6 +26,11 @@ public class userService {
     public int register(String username,String password,String neck_name,String openid)
     {
         consumerdao.saveuser(username,password,neck_name,openid);
+        return 0;
+    }
+    public int register1(String username,String password)
+    {
+        dealerdao.savedealer(username,password);
         return 0;
     }
 

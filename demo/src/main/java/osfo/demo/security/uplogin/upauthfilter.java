@@ -16,9 +16,9 @@ public class upauthfilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
-        String id=httpServletRequest.getParameter("id");
+        String username=httpServletRequest.getParameter("username");
         String password=httpServletRequest.getParameter("password");
 
-        return this.getAuthenticationManager().authenticate(new uptoken(id,password));
+        return this.getAuthenticationManager().authenticate(new uptoken(username,password));
     }
 }

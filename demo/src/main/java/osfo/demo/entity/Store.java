@@ -16,7 +16,9 @@ public class Store {
         this.phonenumber = phonenumber;
     }
 
-
+    public void setDealerid(int dealerid) {
+        this.dealerid = dealerid;
+    }
 
     public void setAddress(String address) {
         this.address = address;
@@ -33,6 +35,6 @@ public class Store {
     }
     public Store()
     {
-        this.dealerid=this.dealer.getId();
+
     }
 }
