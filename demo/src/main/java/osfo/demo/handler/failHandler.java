@@ -15,6 +15,6 @@ public class failHandler implements AuthenticationFailureHandler {
         response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Access-Control-Allow-Credentials","true");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.getWriter().write("0");
+        response.getWriter().write("login fail");
     }
 }

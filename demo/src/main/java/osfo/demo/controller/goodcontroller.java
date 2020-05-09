@@ -31,7 +31,7 @@ public class goodcontroller {
     {
         return goodservice.getallgoods();
     }
-    @RequestMapping(value="/goods/getbtsound")
+    @RequestMapping(value="/goods/getbysound")
     public Object getgoodsbysound(HttpServletRequest request, HttpServletResponse response)
     {
         MultipartHttpServletRequest mprequest = (MultipartHttpServletRequest) request;

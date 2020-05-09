@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class OderItem {
+public class OrderItem {
     @OneToOne
     Userorder userorder;
     @OneToOne

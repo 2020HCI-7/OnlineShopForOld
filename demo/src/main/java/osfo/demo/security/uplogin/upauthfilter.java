@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class upauthfilter extends AbstractAuthenticationProcessingFilter {
     public upauthfilter() {
-        super(new AntPathRequestMatcher("/login/mobile", "POST"));
+        super(new AntPathRequestMatcher("/login/up", "POST"));
     }
 
     @Override

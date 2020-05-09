@@ -48,7 +48,7 @@ public class successHandler implements AuthenticationSuccessHandler {
             response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.getWriter().write("1");
         }*/
-        response.getWriter().write("1");
+        response.getWriter().write("login success");
 
 
 

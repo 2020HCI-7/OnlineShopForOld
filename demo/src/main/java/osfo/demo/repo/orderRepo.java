@@ -1,8 +1,13 @@
 package osfo.demo.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import osfo.demo.entity.Goods;
 import osfo.demo.entity.Userorder;
 
-public interface orderRepo extends JpaRepository<Userorder,Integer> {
+import java.util.List;
 
+public interface orderRepo extends JpaRepository<Userorder,Integer> {
+    @Query("SELECT b from Userorder b where b.user.id=?1")
+    List<Userorder> getgoodsbydealerid(Integer dealerid);
 }
