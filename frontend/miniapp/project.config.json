@@ -1,5 +1,5 @@
 {
-	"description": "项目配置文件",
+	"description": "项目配置文件。",
 	"packOptions": {
 		"ignore": []
 	},
@@ -7,21 +7,13 @@
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
-		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": true,
-		"autoAudits": false,
-		"coverView": true,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.11.0",
+	"libVersion": "1.9.98",
 	"appid": "wx6bd02913306a9008",
-	"projectname": "OnlineShopForOld",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
+	"projectname": "wxapp-mall",
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -31,6 +23,10 @@
 			"list": []
 		},
 		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
 			"current": -1,
 			"list": []
 		},

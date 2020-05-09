@@ -1,0 +1,61 @@
+<view class="main">
+    <view class="goods-title">{{goods.title}}</view>
+    <view class="goods-box" style="background-image: url('{{goods.image}}');">
+        <!-- <image src="{{goods.image}}" class="goods-image"></image> -->
+        
+        <navigator open-type="switchTab" url="../cart/cart">
+            <view class="carts-icon {{scaleCart?'on':''}}">
+                <image src="/image/cart2.png"></image>
+                <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
+            </view>
+        </navigator>
+        
+        <view class="goods-price">
+            <text>价格：\n </text>
+            <text style="font-size: 80rpx;">￥{{goods.price}}</text>
+        </view>
+
+        <view class="audio-icon">
+            <audio poster="{{audioPoster}}" name="{{audioName}}" 
+                author="{{audioAuthor}}" src="{{audioSrc}}" id="ItemAudio" loop>
+                <icon type="info" />
+            </audio>
+        </view>
+        <view class="video-region">
+            <video 
+                id="VirtualAvatar"
+                src="{{videoSrc}}"
+                class="video-window"
+             />
+        </view>
+        <!-- <view class="goods-operation">
+            <text class="goods-operation-num">数量  {{num}}</text>
+            <text class="goods-operation-add" bindtap="addCount">+</text>
+            <text class="goods-to-cart" bindtap="addToCart">加入购物车</text>
+            <image src="/image/cart1.png"  class="goods-cart-img" bindtap="addToCart"></image>
+        </view> -->
+        <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
+        <!-- <view class="goods-stock">{{goods.stock}}</view> -->
+    </view>
+    <view class="control">
+        <image class="control-icon" src="/image/icons/left.png" />
+        <button class="control-button" type="default" bindtap="addToCart">
+            买
+        </button>
+        <image class="control-icon" src="/image/icons/right.png" />
+    </view>
+    <view class="goods-tab-box">
+        <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">联系商家</view>
+        <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">商品详情</view>
+        <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">产品参数</view>
+        <view class="goods-content">
+            <view wx:if="{{curIndex === 0}}">
+                <view wx:if="{{goods.serviceNumber !== ''}}">商家手机：{{goods.serviceNumber}}</view>
+                <view wx:if="{{goods.serviceWechat !== ''}}">商家微信：{{goods.serviceWechat}}</view>
+                {{goods.service}}
+            </view>
+            <view wx:if="{{curIndex === 1}}">{{goods.detail}}</view>
+            <view wx:if="{{curIndex === 2}}">{{goods.parameter}}</view>
+        </view>
+    </view>
+</view>
