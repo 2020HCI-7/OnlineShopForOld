@@ -13,6 +13,8 @@ import java.util.List;
 public class ConsumerDao {
     @Autowired
     consumerRepo consumerrepo;
+    @Autowired
+    userRepo userrepo;
     public Consumer getconsumerbyid(Integer id)
     {
         if(consumerrepo.findById(id).isPresent())

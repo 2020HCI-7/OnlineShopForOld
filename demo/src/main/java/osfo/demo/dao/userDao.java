@@ -26,7 +26,7 @@ public class userDao {
     }
     public List<User> getbyusername(String username)
     {
-        return userrepo.getorderbyusername(username);
+        return userrepo.getuserbyusername(username);
     }
 
 }
