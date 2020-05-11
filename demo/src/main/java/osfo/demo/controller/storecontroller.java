@@ -20,9 +20,9 @@ public class storecontroller {
     }
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/create")
-    public void createstore(@RequestParam("address") String address,@RequestParam("phone") String phone)
+    public Object createstore(@RequestParam("address") String address,@RequestParam("phone") String phone)
     {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        storeservice.savestore(id,address,phone);
+        return storeservice.savestore(id,address,phone);
     }
 }

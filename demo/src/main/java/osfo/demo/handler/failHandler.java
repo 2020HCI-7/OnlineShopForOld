@@ -1,5 +1,6 @@
 package osfo.demo.handler;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,11 @@ public class failHandler implements AuthenticationFailureHandler {
         response.setContentType("application/json;charset=UTF-8");
         response.setHeader("Access-Control-Allow-Credentials","true");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.getWriter().write("login fail");
+        JSONObject res=new JSONObject();
+        res.put("success",false);
+        res.put("errmsg","login fail");
+        res.put("content",null);
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(res.toJSONString());
     }
 }

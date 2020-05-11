@@ -1,5 +1,7 @@
 package osfo.demo.handler;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -48,7 +50,13 @@ public class successHandler implements AuthenticationSuccessHandler {
             response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.getWriter().write("1");
         }*/
-        response.getWriter().write("login success");
+
+        JSONObject res=new JSONObject();
+        res.put("success",true);
+        res.put("errmsg","");
+        res.put("content",null);
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(res.toJSONString());
 
 
 

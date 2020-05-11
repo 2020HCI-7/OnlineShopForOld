@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import osfo.demo.dao.ConsumerDao;
 import osfo.demo.dao.dealerDao;
 import osfo.demo.entity.Consumer;
+import osfo.demo.util.restapi.response;
 
 import java.util.List;
 
@@ -14,24 +15,25 @@ public class userService {
     ConsumerDao consumerdao;
     @Autowired
     dealerDao dealerdao;
-    public void testconsumer()
+    public response testconsumer()
     {
         consumerdao.insertuser();
+        return new response(true,"",null);
 
     }
     public List<Consumer> getalluser()
     {
         return consumerdao.getall();
     }
-    public int register(String username,String password,String neck_name,String openid)
+    public response register(String username,String password,String neck_name,String openid)
     {
         consumerdao.saveuser(username,password,neck_name,openid);
-        return 0;
+        return new response(true,"",null);
     }
-    public int register1(String username,String password)
+    public response register1(String username,String password)
     {
         dealerdao.savedealer(username,password);
-        return 0;
+        return new response(true,"",null);
     }
 
 

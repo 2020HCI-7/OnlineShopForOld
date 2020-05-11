@@ -17,17 +17,17 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
-    public int userregister(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("neck_name") String neckname, @RequestParam("openid") String openid)
+    public Object userregister(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("neck_name") String neckname, @RequestParam("openid") String openid)
     {
 
-        userservice.register(username,password,neckname,openid);
-        return 0;
+        return userservice.register(username,password,neckname,openid);
+
     }
     @RequestMapping("/register/dealer")
-    public int dealerregister(@RequestParam("username") String username,@RequestParam("password") String password)
+    public Object dealerregister(@RequestParam("username") String username,@RequestParam("password") String password)
     {
 
-        userservice.register1(username,password);
-        return 0;
+        return userservice.register1(username,password);
+
     }
 }

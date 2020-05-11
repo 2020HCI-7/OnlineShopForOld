@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import osfo.demo.dao.storeDao;
 import osfo.demo.entity.Store;
+import osfo.demo.util.restapi.response;
 
 import java.util.List;
 
@@ -11,16 +12,18 @@ import java.util.List;
 public class storeService {
     @Autowired
     storeDao storedao;
-    public List<Store> getallstore()
+    public response getallstore()
     {
-        return storedao.getallstore();
+
+        return new response(true,"",storedao.getallstore());
     }
-    public void savestore(Integer dealerid,String address,String phone)
+    public response savestore(Integer dealerid,String address,String phone)
     {
         Store store=new Store();
         store.setAddress(address);
         store.setPhonenumber(phone);
         store.setDealerid(dealerid);
         storedao.savestore(store);
+        return new response(true,"",null);
     }
 }

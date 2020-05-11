@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import osfo.demo.entity.User;
 import osfo.demo.service.goodService;
 import osfo.demo.util.restapi.asrdemo.AsrMain;
+import osfo.demo.util.restapi.response;
 import sun.tools.jar.CommandLine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ import java.util.List;
 
 @RestController
 public class goodcontroller {
+    public String filepath="/home/admin/";
     @Autowired
     goodService goodservice;
     @RequestMapping(value="/goods/getbydealerid")
@@ -40,14 +42,15 @@ public class goodcontroller {
     @RequestMapping(value="/goods/getallgood")
     public Object getallgood()
     {
+
         return goodservice.getallgoods();
     }
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/goods/addgood")
-    public void addgood(@RequestParam("normalprice") float x1,@RequestParam("leastprice") float x2,@RequestParam("goodname") String name,@RequestParam("descrip") String des,@RequestParam("storage") float storage)
+    public Object addgood(@RequestParam("normalprice") float x1,@RequestParam("leastprice") float x2,@RequestParam("goodname") String name,@RequestParam("descrip") String des,@RequestParam("storage") float storage)
     {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        goodservice.addgood(id,x1,x2,name,des,storage);
+        return goodservice.addgood(id,x1,x2,name,des,storage);
 
     }
     @RequestMapping(value="/goods/uploadimg")
@@ -64,22 +67,22 @@ public class goodcontroller {
         String filename = null;
         String tmpname=null;
         try {
-            File dir = new File("C:\\Users\\97023\\Desktop\\audio");
+            File dir = new File(filepath+"image");
             if (!dir.exists()) {// 判断文件目录是否存在
                 System.out.println("123");
                 dir.mkdirs();
             }
-            filename = request.getParameter("id") + "."
-                    + extOfFile;
+            filename = request.getParameter("id") + ".myimage"
+                    ;
 
-            bos = new BufferedOutputStream(new FileOutputStream("C:\\Users\\97023\\Desktop\\audio\\" + filename));
+            bos = new BufferedOutputStream(new FileOutputStream(filepath+"image/" + filename));
 
             bos.write(multipartFile.getBytes());
             bos.flush();
 
 
 
-            return "success";
+            return new response(true,"",null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,15 +99,11 @@ public class goodcontroller {
         return 0;
 
     }
-    @RequestMapping(value="/goods/test")
-    public Object test(HttpServletRequest request, HttpServletResponse response)
-    {
 
-    }
     @RequestMapping(value="/goods/getimg",produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public Object getimg(@RequestParam("id") String id) throws Exception
     {
-        File file=new File("C:\\Users\\97023\\Desktop\\audio\\" + id+".jpg");
+        File file=new File(filepath+"image/" + id+".myimage");
 
         FileInputStream inputStream = new FileInputStream(file);
         byte[] bytes = new byte[inputStream.available()];
@@ -127,7 +126,7 @@ public class goodcontroller {
         String filename = null;
         String tmpname=null;
         try {
-            File dir = new File("C:\\Users\\97023\\Desktop\\audio");
+            File dir = new File(filepath+"audio");
             if (!dir.exists()) {// 判断文件目录是否存在
                 System.out.println("123");
                 dir.mkdirs();
@@ -136,25 +135,25 @@ public class goodcontroller {
                     + extOfFile;
             tmpname=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + (int) (Math.random() * 1000) + ".wav"
                     ;
-            bos = new BufferedOutputStream(new FileOutputStream("C:\\Users\\97023\\Desktop\\audio\\" + filename));
+            bos = new BufferedOutputStream(new FileOutputStream(filepath+"audio/" + filename));
 
             bos.write(multipartFile.getBytes());
             bos.flush();
 
             Runtime rt = Runtime.getRuntime();
-            Process pr = rt.exec("ffmpeg -i "+"C:\\Users\\97023\\Desktop\\audio\\" + filename+" -ar 16000 -acodec pcm_s16le "+"C:\\Users\\97023\\Desktop\\audio\\" +tmpname);
+            Process pr = rt.exec("ffmpeg -i "+filepath+"audio/" + filename+" -ar 16000 -acodec pcm_s16le "+filepath+"audio/" +tmpname);
             while(pr.isAlive())
             {
 
             }
             System.out.println(multipartFile.getSize());
-            AsrMain tmp=new AsrMain("C:\\Users\\97023\\Desktop\\audio\\" + tmpname);
+            AsrMain tmp=new AsrMain(filepath+"audio/" + tmpname);
 
             JSONObject convert=new JSONObject(tmp.run());
             String name=convert.getJSONArray("result").getString(0);
             name=name.substring(0,name.length()-1);
             System.out.println(name);
-            return goodservice.getgoodsbyname(name);
+            return  goodservice.getgoodsbyname(name);
 
         } catch (Exception e) {
             e.printStackTrace();

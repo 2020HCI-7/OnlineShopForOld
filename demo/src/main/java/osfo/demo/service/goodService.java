@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import osfo.demo.dao.goodDao;
 import osfo.demo.dao.storeDao;
 import osfo.demo.entity.Goods;
+import osfo.demo.util.restapi.response;
 
 import java.util.List;
 
@@ -14,15 +15,18 @@ public class goodService {
     goodDao gooddao;
     @Autowired
     storeDao storedao;
-    public List<Goods> getgoodsbydealerid(Integer id)
+    public Object getgoodsbydealerid(Integer id)
     {
-        return gooddao.getgoodsbydealerid(id);
+
+        new response(true,"",gooddao.getgoodsbydealerid(id));
+        return new response(true,"",gooddao.getgoodsbydealerid(id));
     }
-    public List<Goods> getallgoods()
+    public response getallgoods()
     {
-        return gooddao.getallgood();
+
+        return new response(true,"",gooddao.getallgood());
     }
-    public void addgood(Integer dealerid,float nprice,float lprice,String name,String des,float storage)
+    public Object addgood(Integer dealerid,float nprice,float lprice,String name,String des,float storage)
     {
         Goods good=new Goods();
         good.setGoodname(name);
@@ -32,10 +36,11 @@ public class goodService {
         good.setStorage(storage);
         good.setStore(storedao.getstorebyid(dealerid).get());
         gooddao.savegood(good);
+        return new response(true,"",null);
     }
-    public List<Goods> getgoodsbyname(String name)
+    public Object getgoodsbyname(String name)
     {
-        return gooddao.getgoodsbyname(name);
+        return new response(true,"",gooddao.getgoodsbyname(name));
     }
 
 }
