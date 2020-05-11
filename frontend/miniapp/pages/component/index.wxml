@@ -1,6 +1,6 @@
 <view class="main">
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
-        <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <block wx:for="{{imgUrls}}" wx:key="index">
             <swiper-item>
                 <image src="{{item}}" class="slide-image" width="100%"/>
             </swiper-item>
@@ -18,13 +18,21 @@
         <view class="select-title"><text>精选主题</text></view>
         <view class="select-top">
             <view class="select-top-small">
-                <navigator url="list/list">
+                <!-- <navigator url="list/list">
                     <image src="/image/s1.png"></image>
+                </navigator> -->
+                <navigator url="cart/cart">
+                    <!-- <image src="/image/s1.png"></image> -->
+                    <text class="main-module-l">一键买菜</text>
                 </navigator>
             </view>
             <view class="select-top-small">
-                <navigator url="list/list">
+                <!-- <navigator url="list/list">
                     <image src="/image/s2.png"></image>
+                </navigator> -->
+                <navigator url="details/details">
+                    <!-- <image src="/image/s2.png"></image> -->
+                    <text class="main-module-r">语音买菜</text>
                 </navigator>
             </view>
         </view>

@@ -1,20 +1,13 @@
 <view class="main">
-    <view class="goods-title">{{goods.title}}</view>
-    <view class="goods-box" style="background-image: url('{{goods.image}}');">
+    <view class="goods-box">
         <!-- <image src="{{goods.image}}" class="goods-image"></image> -->
-        
         <navigator open-type="switchTab" url="../cart/cart">
             <view class="carts-icon {{scaleCart?'on':''}}">
                 <image src="/image/cart2.png"></image>
-                <text class="carts-icon-num" wx:if="{{hasCarts}}">{{totalNum}}</text>
+                <text class="carts-icon-num" wx:if="{{hasCarts}}">{{inCartNum}}</text>
             </view>
         </navigator>
-        
-        <view class="goods-price">
-            <text>价格：\n </text>
-            <text style="font-size: 80rpx;">￥{{goods.price}}</text>
-        </view>
-
+        <image wx:if="{{showToCartAnim}}" src="/image/cart1.png" class="to-carts-icon"></image>
         <view class="audio-icon">
             <audio poster="{{audioPoster}}" name="{{audioName}}" 
                 author="{{audioAuthor}}" src="{{audioSrc}}" id="ItemAudio" loop>
@@ -29,33 +22,49 @@
              />
         </view>
         <!-- <view class="goods-operation">
-            <text class="goods-operation-num">数量  {{num}}</text>
+            <text class="goods-operation-num">数量  {{goodsAmount}}</text>
             <text class="goods-operation-add" bindtap="addCount">+</text>
             <text class="goods-to-cart" bindtap="addToCart">加入购物车</text>
             <image src="/image/cart1.png"  class="goods-cart-img" bindtap="addToCart"></image>
         </view> -->
-        <image wx:if="{{show}}" src="/image/cart1.png" class="to-carts-icon"></image>
+        <swiper class="swiper-box" 
+            autoplay="{{goodAutoPlay}}"
+            current="{{curGoodIndex}}"
+            interval="{{goodSwiperInterval}}"
+            bindchange="goodSwiperChange">
+            <block wx:for="{{goods}}" wx:key="index">
+                <swiper-item>
+                    <view class="goods-image" style="background-image: url('{{item.image}}');">
+                        <view class="goods-title">{{item.title}}</view>
+                        <view class="goods-price">
+                            <text>价格：\n </text>
+                            <text style="font-size: 80rpx;">￥{{item.price}}</text>
+                        </view> 
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
         <!-- <view class="goods-stock">{{goods.stock}}</view> -->
     </view>
     <view class="control">
-        <image class="control-icon" src="/image/icons/left.png" />
+        <image class="control-icon" src="/image/icons/left.png" data-type="left" bind:tap="bindTapSwitch" />
         <button class="control-button" type="default" bindtap="addToCart">
             买
         </button>
-        <image class="control-icon" src="/image/icons/right.png" />
+        <image class="control-icon" src="/image/icons/right.png" data-type="right" bind:tap="bindTapSwitch" />
     </view>
     <view class="goods-tab-box">
-        <view class="goods-tab-nav {{curIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">联系商家</view>
-        <view class="goods-tab-nav {{curIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">商品详情</view>
-        <view class="goods-tab-nav {{curIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">产品参数</view>
+        <view class="goods-tab-nav {{tabIndex === 0 ?'on':''}}" bindtap="bindTap" data-index="0">联系商家</view>
+        <view class="goods-tab-nav {{tabIndex === 1 ?'on':''}}" bindtap="bindTap" data-index="1">商品详情</view>
+        <view class="goods-tab-nav {{tabIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">产品参数</view>
         <view class="goods-content">
-            <view wx:if="{{curIndex === 0}}">
-                <view wx:if="{{goods.serviceNumber !== ''}}">商家手机：{{goods.serviceNumber}}</view>
-                <view wx:if="{{goods.serviceWechat !== ''}}">商家微信：{{goods.serviceWechat}}</view>
-                {{goods.service}}
+            <view wx:if="{{tabIndex === 0}}">
+                <view wx:if="{{goods[curGoodIndex].serviceNumber !== ''}}">商家手机：{{goods[curGoodIndex].serviceNumber}}</view>
+                <view wx:if="{{goods[curGoodIndex].serviceWechat !== ''}}">商家微信：{{goods[curGoodIndex].serviceWechat}}</view>
+                {{goods[curGoodIndex].service}}
             </view>
-            <view wx:if="{{curIndex === 1}}">{{goods.detail}}</view>
-            <view wx:if="{{curIndex === 2}}">{{goods.parameter}}</view>
+            <view wx:if="{{tabIndex === 1}}">{{goods[curGoodIndex].detail}}</view>
+            <view wx:if="{{tabIndex === 2}}">{{goods[curGoodIndex].parameter}}</view>
         </view>
     </view>
 </view>

@@ -107,8 +107,8 @@
     width: 1005;
     border-bottom: 1px solid #f0f0f1;
     margin-bottom: 42rpx;
-  }
-  .recommend-title text{
+}
+.recommend-title text{
     position: absolute;
     left: 50%;
     top: -20rpx;
@@ -122,4 +122,55 @@
     font-weight: bold;
     text-align: center;
     letter-spacing: 1px;
-  }
+}
+
+.yuyinWrap {
+    position: relative;
+    margin-top:300rpx;
+}
+
+.yuyinBtn {
+    width: 100%;
+    height: 250rpx;
+    position: absolute;
+    /* right: 112rpx;
+    bottom: 12rpx; */
+    border: 3px solid #eee;
+    background: #fff;
+    color: #606267;
+    line-height: 250rpx;
+    font-size: 128rpx;
+}
+
+.yuyinBtnBg {
+    background: #eee;
+}
+
+.yuyinBtn::after {
+    /* background: #fff; *//* color: #000; */
+    border-radius: 0;
+    border: none;
+}
+
+.startYuyinImage {
+    position: fixed;
+    top: 210rpx;
+    left: 50%;
+    width: 190rpx;
+    height: 240rpx;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20rpx;
+    color: #fff;
+    text-align: center;
+    margin-left: -95rpx;
+}
+
+.startYuyinImage cover-image {
+    margin: 30rpx auto;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.startYuyinImage cover-view {
+    margin-top: 25rpx;
+}

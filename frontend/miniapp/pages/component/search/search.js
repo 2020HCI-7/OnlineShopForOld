@@ -1,3 +1,9 @@
+const app = getApp();
+//引入插件：微信同声传译
+const plugin = requirePlugin('WechatSI');
+//获取全局唯一的语音识别管理器recordRecoManager
+const manager = plugin.getRecordRecognitionManager();
+
 let timeId = null;
 Page({
     data: {
@@ -21,14 +27,18 @@ Page({
         ],
         showKeywords: false,
         keywords: ['山东肚脐橙', '湖南冰糖橙', '麻涌香蕉', '冰糖心苹果'],
-        value: '',
+        userInput: '',
         showResult: false,
+
+        //语音
+        recordState: false, //录音状态
+        content:'',//内容
     },
     cancelSearch() {
         this.setData({
             showResult: false,
             showKeywords: false,
-            value: ''
+            userInput: ''
         })
     },
     searchInput(e) {
@@ -50,7 +60,7 @@ Page({
     keywordHandle(e) {
         const text = e.target.dataset.text;
         this.setData({
-            value: text,
+            userInput: text,
             showKeywords: false,
             showResult: true
         })
@@ -79,7 +89,64 @@ Page({
             this.setData({
                 history: JSON.parse(history)
             })
-            console.log(this.data.history);
+            //console.log(this.data.history);
         }
+        //识别语音
+        this.initRecord();
+    },
+    //识别语音 -- 初始化
+    initRecord: function () {
+        const that = this;
+        // 有新的识别内容返回，则会调用此事件
+        manager.onRecognize = function (res) {
+            console.log(res)
+        }
+        // 正常开始录音识别时会调用此事件
+        manager.onStart = function (res) {
+            console.log("成功开始录音识别", res)
+        }
+        // 识别错误事件
+        manager.onError = function (res) {
+            console.error("error msg", res)
+        }
+        //识别结束事件
+        manager.onStop = function (res) {
+            console.log('..............结束录音')
+            console.log('录音临时文件地址 -->' + res.tempFilePath); 
+            console.log('录音总时长 -->' + res.duration + 'ms'); 
+            console.log('文件大小 --> ' + res.fileSize + 'B');
+            console.log('语音内容 --> ' + res.result);
+            if (res.result == '') {
+                wx.showModal({
+                    title: '提示',
+                    content: '听不清楚，请重新说一遍！',
+                    showCancel: false,
+                    success: function (res) {}
+                })
+                return;
+            }
+            var text = that.data.userInput + res.result;
+            that.setData({
+                userInput: text
+            })
+        }
+    },
+    //语音  --按住说话
+    touchStart: function (e) {
+        this.setData({
+            recordState: true
+        })
+        // 语音开始识别
+        manager.start({
+            lang: 'zh_CN',// 识别的语言，目前支持zh_CN en_US zh_HK sichuanhua
+        })
+    },
+    //语音  --松开结束
+    touchEnd: function (e) {
+        this.setData({
+            recordState: false
+        })
+        // 语音结束识别
+        manager.stop();
     }
 })
