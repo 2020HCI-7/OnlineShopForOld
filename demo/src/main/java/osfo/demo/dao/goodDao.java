@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import osfo.demo.entity.Goods;
 import osfo.demo.repo.goodRepo;
 
+import java.util.LinkedList;
 import java.util.List;
 @Repository
 public class goodDao {
@@ -22,5 +23,19 @@ public class goodDao {
     {
         goodrepo.save(good);
     }
+   public List<Goods> getgoodsbyname(String name)
+   {
+       List<Goods> allgood=getallgood();
+       List<Goods> result=new LinkedList<Goods>();
+       for(Goods good:allgood)
+       {
+
+           if(good.getGoodname().indexOf(name)!=-1)
+           {
+               result.add(good);
+           }
+       }
+       return result;
+   }
 
 }

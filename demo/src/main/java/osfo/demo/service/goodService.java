@@ -33,5 +33,9 @@ public class goodService {
         good.setStore(storedao.getstorebyid(dealerid).get());
         gooddao.savegood(good);
     }
+    public List<Goods> getgoodsbyname(String name)
+    {
+        return gooddao.getgoodsbyname(name);
+    }
 
 }

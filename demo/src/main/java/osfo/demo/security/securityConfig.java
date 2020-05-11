@@ -36,8 +36,8 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register/*","/login/*","/store").permitAll()
-                .antMatchers("/store/*","/goods/*").hasAnyAuthority("user","dealer")
+                .antMatchers("/register/*","/login/*","/store","/goods/*").permitAll()
+                .antMatchers("/store/*").hasAnyAuthority("user","dealer")
                 .anyRequest().authenticated();
         http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
 

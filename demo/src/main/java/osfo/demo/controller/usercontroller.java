@@ -1,5 +1,6 @@
 package osfo.demo.controller;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
-    public int userregister(@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("neck_name") String neckname,@RequestParam("openid") String openid)
+    public int userregister(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("neck_name") String neckname, @RequestParam("openid") String openid)
     {
 
         userservice.register(username,password,neckname,openid);
