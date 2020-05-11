@@ -32,12 +32,12 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 
         http
 
+
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register/*","/login/*","/store","/goods/*").permitAll()
-                .antMatchers("/store/*").hasAnyAuthority("user","dealer")
+                .antMatchers("/register/*","/login/*","/store/*","/goods/*").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
 

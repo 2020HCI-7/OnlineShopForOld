@@ -1,8 +1,12 @@
 package osfo.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Entity;
 
 @Entity
+
 public class Dealer extends User {
     public Dealer()
     {

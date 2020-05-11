@@ -1,13 +1,18 @@
 package osfo.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
+
 public class Store {
     @Id
-    private int dealerid;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+
     @OneToOne
-    @PrimaryKeyJoinColumn(referencedColumnName = "id")
     private Dealer dealer;
     private String address;
     private String phonenumber;
@@ -16,8 +21,10 @@ public class Store {
         this.phonenumber = phonenumber;
     }
 
-    public void setDealerid(int dealerid) {
-        this.dealerid = dealerid;
+
+
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
     }
 
     public void setAddress(String address) {
@@ -28,7 +35,9 @@ public class Store {
         return phonenumber;
     }
 
-
+    public Dealer getDealer() {
+        return dealer;
+    }
 
     public String getAddress() {
         return address;

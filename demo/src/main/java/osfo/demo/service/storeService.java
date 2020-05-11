@@ -2,6 +2,7 @@ package osfo.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import osfo.demo.dao.dealerDao;
 import osfo.demo.dao.storeDao;
 import osfo.demo.entity.Store;
 import osfo.demo.util.restapi.response;
@@ -12,6 +13,8 @@ import java.util.List;
 public class storeService {
     @Autowired
     storeDao storedao;
+    @Autowired
+    dealerDao dealerdao;
     public response getallstore()
     {
 
@@ -22,8 +25,13 @@ public class storeService {
         Store store=new Store();
         store.setAddress(address);
         store.setPhonenumber(phone);
-        store.setDealerid(dealerid);
+
+        store.setDealer(dealerdao.getdealerbyid(dealerid).get());
         storedao.savestore(store);
         return new response(true,"",null);
+    }
+    public response getstorebydealerid(Integer id)
+    {
+        return new response(true,"",storedao.getstorebyid(id));
     }
 }

@@ -11,9 +11,7 @@ public class Goods {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
-
     @OneToOne
     private Store store;
     private float normal_price;
@@ -21,6 +19,7 @@ public class Goods {
     private String goodname;
     private String description;
     private float storage;
+
 
 
     public void setDescription(String description) {

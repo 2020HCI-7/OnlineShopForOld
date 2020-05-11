@@ -8,6 +8,6 @@ import osfo.demo.entity.User;
 import java.util.List;
 
 public interface   goodRepo extends JpaRepository<Goods,Integer> {
-    @Query("SELECT b from Goods b where b.store.dealerid=?1")
+    @Query("SELECT b from Goods b where b.store.dealer.id=?1")
     List<Goods> getgoodsbydealerid(Integer dealerid);
 }

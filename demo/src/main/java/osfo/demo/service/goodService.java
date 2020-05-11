@@ -34,7 +34,7 @@ public class goodService {
         good.setLeast_price(lprice);
         good.setNormal_price(nprice);
         good.setStorage(storage);
-        good.setStore(storedao.getstorebyid(dealerid).get());
+        good.setStore(storedao.getstorebyid(dealerid).get(0));
         gooddao.savegood(good);
         return new response(true,"",null);
     }
