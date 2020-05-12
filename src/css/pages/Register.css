@@ -1,0 +1,36 @@
+/*registerDiv*/
+#registerDiv {
+    margin: auto;
+    text-align: center;
+    padding-top: 150px; 
+  
+    width: 500px;
+    height: 400px;
+  }
+  
+  #registerRow{
+    margin: auto;
+    text-align: center;
+  
+    width: 450px;
+    height: 35px;
+  }
+  
+  #registerCol {
+    text-align: left;
+  
+    height: 35px;
+  }
+  
+  #registerText {
+    position: relative;
+    top: 5px;
+    left: 25px;
+  }
+  
+  
+  #finishRegisterButton{
+    left: 30px;
+  
+    width: 400px;
+  }
