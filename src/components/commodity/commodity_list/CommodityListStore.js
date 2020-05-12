@@ -54,9 +54,8 @@ var CommodityListStore = assign({}, EventEmitter.prototype,{
             function(data){
                 console.log(data);
                 if(data.success){
-                    responseCommodityList = data.commodities;
+                    responseCommodityList = data.content;
                     t.items.commodityList = responseCommodityList.map((item, index) =>{
-                        item["status"] = CommodityToChinese.toChinese(item.status);
                         item["key"] = index;
                         return item;
                     })
@@ -64,7 +63,7 @@ var CommodityListStore = assign({}, EventEmitter.prototype,{
                     t.emitChange();
                 }
                 else{
-                    alert(data.errmsg);
+                    console.log(data.errmsg);
                 }
                 return data.success;
             }

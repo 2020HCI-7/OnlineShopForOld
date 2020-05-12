@@ -36,7 +36,7 @@ class UploadImageController extends Component {
             function (data) {
                 if (data.success) {
                     t.setState({
-                        imageUrl : ImageFetch.getServerImgUrl() + data.imageUrl,
+                        imageUrl: ImageFetch.getServerImgUrl() + this.props.commodityId,
                     })
                     message.success("上传成功");
                 }

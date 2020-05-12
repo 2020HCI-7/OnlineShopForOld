@@ -3,7 +3,7 @@ var assign = require("object-assign");
 
 const serverUrl = "http://202.120.40.8:30495";
 
-const serverImgUrl = "http://202.120.40.8:30492/image/";
+const serverImgUrl = "http://202.120.40.8:30492/goods/getimg?id=";
 
 const imageHeader = new Headers({
     
@@ -28,7 +28,7 @@ var ImageFetch = assign({}, EventEmitter.prototype,{
     },
 
     fetchUpdateCommodityImage: function(formData, id){
-        var url = serverUrl + "/file/commodity/picture?commodityid=" + id;
+        var url = serverUrl + "goods/uploadimg?id=" + id;
         console.log(url);
         var response = fetch(url,{
             method: "POST",

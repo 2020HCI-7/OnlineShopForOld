@@ -31,10 +31,11 @@ var CommodityAddStore = assign({}, EventEmitter.prototype,{
     init: function(initInfo){
         this.record.initInfo = initInfo;
         this.items.commodityInfo = {
-            name: "",
-            price: 0,
-            amount: 0,
-            introduction: "",
+            goodname: "",
+            normalprice: 0,
+            storage: 0,
+            descrip: "",
+            leastprice: 0,
         }
     },
 

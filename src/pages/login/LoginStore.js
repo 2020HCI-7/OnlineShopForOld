@@ -151,12 +151,12 @@ var LoginStore = assign({}, EventEmitter.prototype,{
                     message.error("该用户已被禁用");
                 }
                 else{
-                    message.error("登录失败");
+                    message.error("用户名或密码错误");
                 }
                 return;
             }
         }).catch(function(err){
-            message.error("登录失败");
+            message.error("用户名或密码错误");
             console.log(err);
         });
     },

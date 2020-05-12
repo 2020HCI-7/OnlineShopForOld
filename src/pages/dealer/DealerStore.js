@@ -47,7 +47,7 @@ var DealerStore = assign({}, EventEmitter.prototype,{
     initAccount(){
         this.items.account = {
             userId: 2,
-            username: "hahaha",
+            username: "000009",
             userRole: "dealer",
         };
         this.emitChange();

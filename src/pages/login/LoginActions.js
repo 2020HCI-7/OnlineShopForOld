@@ -1,15 +1,15 @@
 import AppDispatcher from "../../dispatcher/AppDispatcher";
 
 var LoginAction = {
-    initAction: function(){
+    initAction: function () {
         AppDispatcher.dispatch({
-            actionType: "REGISTER_INIT",
+            actionType: "LOGIN_INIT",
         })
     },
 
     handleChangeAction: function(key, value){
         AppDispatcher.dispatch({
-            actionType: "REGISTER_HANDLE_CHANGE",
+            actionType: "LOGIN_HANDLE_CHANGE",
             key: key,
             value: value,
         })
@@ -17,7 +17,7 @@ var LoginAction = {
 
     finishLoginAction: function(){
         AppDispatcher.dispatch({
-            actionType: "REGISTER_FINISH_REGISTER",
+            actionType: "LOGIN_FINISH_LOGIN",
         })
     },
 }

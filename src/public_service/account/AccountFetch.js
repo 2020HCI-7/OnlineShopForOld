@@ -1,7 +1,7 @@
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
-const serverUrl = "http://202.120.40.8:30495";
+const serverUrl = "http://101.132.98.60:12345";
 
 const homeUrl = "http://localhost:3000";
 
@@ -10,9 +10,6 @@ const postHeader = new Headers({
 });
 
 const getHeader = new Headers({
-    "Access-Control-Allow-Origin":"*",
-    "Content-Type":"text/plain",
-    "Authorization" : "BasicCustom"
 });
 
 var AccountFetch = assign({}, EventEmitter.prototype,{
@@ -22,45 +19,45 @@ var AccountFetch = assign({}, EventEmitter.prototype,{
     },
 
     fetchLogin: function(username, password, usertype){
-        var url = serverUrl + "/account/login";
+        var url = serverUrl + "/login/up";
         var params = {
-            username: username + "&" + usertype,
+            username: username,
             password: password,
         }
         var fetchBody = Object.keys(params).map((key) => {
             return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
         }).join("&");
 
-        var response = fetch(url,{
+        var response = fetch(url + "?" + fetchBody, {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/x-www-form-urlencoded",
             }),
             credentials: "include",
             mode: "cors",
-            body: fetchBody,
+            body: params,
         });
         return response;
     },
 
-    fetchRegister: function (username, password, usertype) {
-        var url = serverUrl + "/account/register";
+    fetchRegister: function (username, password) {
+        var url = serverUrl + "/register/dealer";
         var params = {
-            username: username + "&" + usertype,
+            username: username,
             password: password,
         }
         var fetchBody = Object.keys(params).map((key) => {
             return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
         }).join("&");
 
-        var response = fetch(url, {
+        var response = fetch(url + "?" + fetchBody, {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/x-www-form-urlencoded",
             }),
             credentials: "include",
             mode: "cors",
-            body: fetchBody,
+            body: params,
         });
         return response;
     },
@@ -72,6 +69,33 @@ var AccountFetch = assign({}, EventEmitter.prototype,{
             headers: getHeader,
             credentials: "include",
             mode: "cors",
+        });
+        return response;
+    },
+
+    fetchGetSelfShop: function () {
+        var url = serverUrl + "/store/get";
+        var response = fetch(url, {
+            method: "GET",
+            headers: getHeader,
+            credentials: "include",
+            mode: "cors",
+        });
+        return response;
+    },
+
+    fetchModifySelfShop: function (shopInfo) {
+        var params = shopInfo;
+        var fetchBody = Object.keys(params).map((key) => {
+            return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
+        }).join("&");
+        var url = serverUrl + "/store/create";
+        var response = fetch(url + "?" + fetchBody, {
+            method: "POST",
+            headers: getHeader,
+            credentials: "include",
+            mode: "cors",
+            body: JSON.stringify(shopInfo),
         });
         return response;
     },

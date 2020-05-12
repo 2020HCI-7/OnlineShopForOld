@@ -3,22 +3,20 @@
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
-const serverUrl = "http://202.120.40.8:30495";
+const serverUrl = "http://101.132.98.60:12345";
 
 const postHeader = new Headers({
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
 });
 
 const getHeader = new Headers({
-    "Access-Control-Allow-Origin":"*",
-    "Content-Type":"text/plain",
-    "Authorization" : "BasicCustom"
 });
 var CommodityFetch = assign({}, EventEmitter.prototype,{
 
-    fetchGetCommodityList: function(){
-        var url = serverUrl + "/commodities/dealer/list";
-        var response = fetch(url,{
+    fetchGetCommodityList: function () {
+        console.log(this.id);
+        var url = serverUrl + "/goods/getbydealerid";
+        var response = fetch(url + "?" + "dealerid=" + 25, {
             method: "GET",
             headers: getHeader,
             credentials: "include",
@@ -68,11 +66,11 @@ var CommodityFetch = assign({}, EventEmitter.prototype,{
     },
 
     fetchAddCommodityInfo: function(commodity){
-        var url = serverUrl + "/commodities/dealer/add";
-        var fetchBody = {
-            commodity: commodity,
-        };
-        var response = fetch(url,{
+        var url = serverUrl + "/goods/addgood";
+        var fetchBody = Object.keys(commodity).map((key) => {
+            return encodeURIComponent(key) + "=" + encodeURIComponent(commodity[key]);
+        }).join("&");
+        var response = fetch(url + "?" + fetchBody,{
             method: "POST",
             headers: postHeader,
             credentials: "include",

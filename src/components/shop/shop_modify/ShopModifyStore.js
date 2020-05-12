@@ -1,14 +1,12 @@
 import AccountFetch from "../../../public_service/account/AccountFetch";
 import ImageFetch from "../../../public_service/image/ImageFetch";
 import { message } from 'antd';
+import CommodityFetch from "../../../public_service/commodity/CommodityFetch";
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
 const ShopInfoModifyAccess = {
-    name: "modify",
-    status: "read",
-    latitude: "modify",
-    longitude: "modify",
+    address: "modify",
     phone: "modify",
 };
 
@@ -45,21 +43,9 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
     },
 
     getShopInfo: function () {
-        //del
-        this.items.shopInfo = {
-            shopImageSize: 130,
-            name: "modify",
-            status: "read",
-            latitude: "modify",
-            longitude: "modify",
-            phone: "modify",
-        }
-        this.emitChange();
-        return;
-
         var response = null;
         var t = this;
-        response = AccountFetch.fetchGetSelfUserInfo("dealer");
+        response = AccountFetch.fetchGetSelfShop();
         response.then(
             function (response) {
                 if (response.status !== 200) {
@@ -71,10 +57,47 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
         ).then(
             function (data) {
                 if (data.success) {
-                    t.items.shopInfo = data.user;
-                    t.items.shopInfo["shopImageSize"] = 130;
-                    t.items.shopInfo["updateImage"] = ImageFetch.fetchUpdateShopImage;
-                    t.emitChange();
+                    console.log(data.content);
+                    if (data.content.length === 0) {
+                        console.log("????");
+                        var new_res = AccountFetch.fetchModifySelfShop({
+                            address: "",
+                            phone: "",
+                        });
+                        new_res.then(
+                            function (response) {
+                                if (response.status !== 200) {
+                                    console.log("存在一个问题，状态码为：" + response.status);
+                                    return;
+                                }
+                                return response.json();
+                            }
+                        ).then(
+                            function (data) {
+                                if (data.success) {
+                                    t.items.shopInfo = {
+                                        address: " ",
+                                        phone: " ",
+                                    }
+                                    t.emitChange();
+                                }
+                                else {
+                                    console.log(data.errmsg, 1);
+                                }
+                            }
+                        ).catch(function (err) {
+                            console.log(err);
+                        });
+                    }
+                    else {
+                        t.items.shopInfo = {};
+                        var end = data.content.length - 1;
+                        CommodityFetch.id = data.content[end].dealer.id;
+                        console.log(CommodityFetch.id)
+                        t.items.shopInfo.phone = data.content[end].phonenumber;
+                        t.items.shopInfo.address = data.content[end].address;
+                        t.emitChange();
+                    }
                 }
                 else {
                     console.log(data.errmsg, 1);
@@ -97,7 +120,7 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
     finishShopInfoModify: function () {
         var response = null;
         console.log(this.items.shopInfo);
-        response = AccountFetch.fetchModifySelfUserInfo(this.items.shopInfo);
+        response = AccountFetch.fetchModifySelfShop(this.items.shopInfo);
         response.then(
             function (response) {
                 console.log(response);
@@ -120,7 +143,6 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
         ).catch(function (err) {
             console.log(err);
         });
-
     },
 });
 
