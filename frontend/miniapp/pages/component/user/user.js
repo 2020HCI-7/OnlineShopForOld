@@ -1,9 +1,22 @@
 // page/component/new-pages/user/user.js
+const app = getApp()
+
 Page({
-  data:{
-    thumb:'',
-    nickname:'',
-    orders:[],
+  data:{    
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse("button.open-type.getUserInfo"),
+
+    orders:[
+      {
+        number: 12345,
+        thumb: "/image/s4.png",
+        name: "红豆",
+        count: 2,
+        status: "finished",
+        money: 123.4
+      }
+    ],
     hasAddress:false,
     address:{}
   },
@@ -47,6 +60,34 @@ Page({
         })
       }
     })
+
+    //得到用户信息
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
   /**
    * 发起支付请求
@@ -69,5 +110,14 @@ Page({
         })
       }
     })
-  }
+  },
+
+  //尝试获得用户信息
+  getUserInfo(e) {
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
 })

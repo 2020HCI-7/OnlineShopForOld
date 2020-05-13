@@ -34,13 +34,15 @@
             bindchange="goodSwiperChange">
             <block wx:for="{{goods}}" wx:key="index">
                 <swiper-item>
-                    <view class="goods-image" style="background-image: url('{{item.image}}');">
+                    <!-- <view class="goods-image" style="background-image: url('{{item.image}}');">
+                    </view> -->
+                    <image class="goods-image" src="{{item.image}}">
                         <view class="goods-title">{{item.title}}</view>
                         <view class="goods-price">
                             <text>价格：\n </text>
                             <text style="font-size: 80rpx;">￥{{item.price}}</text>
                         </view> 
-                    </view>
+                    </image>
                 </swiper-item>
             </block>
         </swiper>

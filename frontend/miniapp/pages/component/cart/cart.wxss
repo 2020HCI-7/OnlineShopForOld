@@ -69,12 +69,12 @@
 }
 .cart-footer{
     position: fixed;
-    bottom: 0;
+    bottom: 120rpx;
     left: 0;
     width: 100%;
     height: 90rpx;
     line-height: 90rpx;
-    padding:0 100rpx 0 80rpx;
+    padding:0 10rpx 0 80rpx;
     box-sizing: border-box;
     background: #AB956D;
     color: #fff;
@@ -107,4 +107,12 @@
     padding:40rpx 0;
     color: #999;
     text-align: center;
+    font-size: 128rpx;
+}
+
+.make-order-button{
+    position: absolute;
+    bottom: 0rpx;
+    width: 100%;
+    box-sizing: border-box;
 }

@@ -119,6 +119,12 @@ Page({
       carts: carts,
       totalPrice: total.toFixed(2)
     });
+  },
+
+  bindMakeOrder(e) {
+    wx.navigateTo({
+      url: "/pages/component/orders/orders",
+    })
   }
 
 })

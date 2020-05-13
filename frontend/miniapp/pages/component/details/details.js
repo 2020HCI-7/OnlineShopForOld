@@ -21,7 +21,7 @@ Page({
     goods: [
       {
         id: 0,
-        image: '/image/goods1.png',
+        image: '../../../image/goods1.png',
         title: '新鲜梨',
         price: 1.23,
         stock: '有货',
@@ -33,7 +33,7 @@ Page({
       },
       {
         id: 1,
-        image: '/image/s5.png',
+        image: '../../../image/s5.png',
         title: '芹菜',
         price: 15.23,
         stock: '有货',
@@ -45,7 +45,7 @@ Page({
       },
       {
         id: 2,
-        image: '/image/s4.png',
+        image: '../../../image/s4.png',
         title: '红豆',
         price: 1.23,
         stock: '有货',

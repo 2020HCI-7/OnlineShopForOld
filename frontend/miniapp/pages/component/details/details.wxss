@@ -125,6 +125,9 @@
     margin-bottom: 20rpx;
 }
 .goods-title{
+    position: absolute;
+    top: 0rpx;
+    width: 100%;
     text-align: center;
     font-size: 60rpx;
     font-weight: bold;
@@ -133,6 +136,7 @@
 }
 .swiper-box{
     height: 750rpx;
+    width: 100%;
 }
 .goods-image{
     /* position: absolute; */
