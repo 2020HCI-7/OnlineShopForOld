@@ -1,5 +1,9 @@
 // page/component/new-pages/user/user.js
 const app = getApp()
+//引入插件：微信同声传译
+const plugin = requirePlugin('WechatSI');
+
+var innerAudioContext = wx.createInnerAudioContext();
 
 Page({
   data:{    
@@ -13,12 +17,25 @@ Page({
         thumb: "/image/s4.png",
         name: "红豆",
         count: 2,
-        status: "finished",
-        money: 123.4
+        status: "待付款",
+        money: 123.4,
+        showPay: true,
+        logistics: ""
+      },
+      {
+        number: 12345,
+        thumb: "/image/s4.png",
+        name: "红豆",
+        count: 2,
+        status: "已付款",
+        money: 123.4,
+        showPay: false,
+        logistics: "待发货"
       }
     ],
     hasAddress:false,
-    address:{}
+    address:{},
+    addressToString: "",
   },
   onLoad(){
     var self = this;
@@ -54,9 +71,20 @@ Page({
     wx.getStorage({
       key: 'address',
       success: function(res){
+        var addressToString =
+          "姓名:" + res.data.name + 
+          " 手机号:" + res.data.phone + 
+          " 地址:" + res.data.detail
+        var len = 40
+        if (addressToString.length > len) {
+          addressToString = addressToString.substring(0, len);
+          addressToString = addressToString + "..."
+        }
+        
         self.setData({
           hasAddress: true,
-          address: res.data
+          address: res.data,
+          addressToString: addressToString
         })
       }
     })
@@ -120,4 +148,39 @@ Page({
       hasUserInfo: true
     })
   },
+  
+  // 播报订单信息
+  bindTapBroadcast(e) {
+    if (innerAudioContext.src === "") {
+      var self = this
+
+      var text = "接下来为您播报订单数据："
+      for (var i = 0; i < this.data.orders.length; i++) {
+        text += "第" + (i+1).toString() + "个订单,"
+        var order = this.data.orders[i]
+        text += "订单编号：Y" + order.number.toString() + ";"
+        text += "商品名称：" + order.name + ";"
+        text += "商品数量：" + order.count.toString() + "个;"
+        text += "商品总价：" + order.money.toString() + "元;"
+      }
+
+      plugin.textToSpeech({
+        lang: "zh_CN",
+        tts: true,
+        content: text,
+        success: function(res) {
+          innerAudioContext.src = res.filename
+          innerAudioContext.play()
+        },
+        fail: function(res) {
+            //console.log("fail tts", res)
+            console.log("translate speech fail:", ReadableStream)
+        }
+      })
+    }
+    else {
+      innerAudioContext.play()
+    }
+  },
+
 })

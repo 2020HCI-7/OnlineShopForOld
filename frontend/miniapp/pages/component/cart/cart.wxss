@@ -111,8 +111,15 @@
 }
 
 .make-order-button{
-    position: absolute;
+    position: fixed;
     bottom: 0rpx;
     width: 100%;
     box-sizing: border-box;
+}
+
+.blank-region {
+    position: relative;
+    height: 120rpx;
+    width: 100%;
+    bottom: 0rpx;
 }

@@ -1,0 +1,35 @@
+<!--pages/component/speech/speech.wxml-->
+
+<view class="title-box">
+    <text style="font-size:96rpx">语音买菜</text>
+</view>
+
+<textarea 
+    class="text-area" 
+    placeholder="输入你想买的菜的名称和数量" 
+    maxlength="-1"
+    bindinput="bindInputChange"
+    value="{{userInput}}">
+    
+</textarea>
+
+<button class="confirm-button" bind:tap="bindSpeechShopping" type="primary">
+    <text >确 认</text>
+</button>
+
+<view class="yuyinWrap">
+    <view class=''>
+        <button 
+            class="yuyinBtn {{recordState == true ? 'yuyinBtnBg':''}}" 
+            bindtouchstart="touchStart" 
+            bindtouchend="touchEnd">
+            <text wx:if="{{recordState == false}}">按住 说话</text>
+            <text wx:else>松开 结束</text>
+        </button>
+    </view>
+    <!-- 开始语音 弹出语音图标表示正在录音 -->
+    <cover-view class="startYuyinImage" wx:if="{{recordState == true}}">
+        <cover-image src="../../../image/icons/microphone.png"></cover-image>
+        <cover-view>开始语音</cover-view>
+    </cover-view>
+</view>

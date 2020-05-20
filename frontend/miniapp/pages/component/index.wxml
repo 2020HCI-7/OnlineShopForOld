@@ -21,93 +21,61 @@
                 <!-- <navigator url="list/list">
                     <image src="/image/s1.png"></image>
                 </navigator> -->
-                <navigator url="cart/cart">
-                    <!-- <image src="/image/s1.png"></image> -->
-                    <text class="main-module-l">一键买菜</text>
-                </navigator>
+                <!-- <navigator url="cart/cart">
+                    <text class="top-module-l">一键买菜</text>
+                </navigator> -->
+                <button class="top-module-l" bind:tap="BindOneClickShopping">一键买菜</button>
             </view>
             <view class="select-top-small">
                 <!-- <navigator url="list/list">
                     <image src="/image/s2.png"></image>
                 </navigator> -->
-                <navigator url="details/details">
-                    <!-- <image src="/image/s2.png"></image> -->
-                    <text class="main-module-r">语音买菜</text>
-                </navigator>
+                <!-- <navigator url="details/details">
+                    <text class="top-module-r">语音买菜</text>
+                </navigator> -->
+                <button class="top-module-r" bind:tap="BindVoiceShopping">语音买菜</button>
             </view>
         </view>
-        <!-- <view class="select-bottom">
-            <navigator url="list/list">
-                <image src="/image/s3.png"></image>
-            </navigator>
-        </view> -->
+        <view class="select-bottom">
+            <view class="select-bottom-small">
+                <!-- <navigator url="cart/cart">
+                    <text class="bottom-module-l">浏览菜市场</text>
+                </navigator> -->
+                <button class="bottom-module-l" bind:tap="BindMarket">浏览菜市场</button>
+            </view>
+            <view class="select-bottom-small">
+                <!-- <navigator url="user/user">
+                    <text class="bottom-module-r">订单播报</text>
+                </navigator> -->
+                <button class="bottom-module-r" bind:tap="BindAnnounce">订单播报</button>
+            </view>
+        </view>
     </view>
-    <!-- <view class="newest">
-        <view class="newest-title"><text>最近新品</text></view>
+    <view class="select-title"><text>菜品分类</text></view>
+    <view class="newest">
+        <!-- <view class="newest-title"><text>最近新品</text></view> -->
         <view class="newest-box">
             <view class="newest-list">
                 <navigator url="details/details">
                     <image src="/image/s4.png"></image>
-                    <view class="newest-text"><text>瓜子 100g</text></view>
-                    <view class="newest-text"><text>￥ 0.01</text></view>
+                    <view class="newest-text"><text>瓜子干货</text></view>
+                    <!-- <view class="newest-text"><text>￥ 0.01</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
                 <navigator url="details/details">
                     <image src="/image/s5.png"></image>
-                    <view class="newest-text"><text>芹菜 半斤</text></view>
-                    <view class="newest-text"><text>￥ 0.02</text></view>
+                    <view class="newest-text"><text>蔬菜</text></view>
+                    <!-- <view class="newest-text"><text>￥ 0.02</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
                 <navigator url="details/details">
                     <image src="/image/s6.png"></image>
-                    <view class="newest-text"><text>素米 375g</text></view>
-                    <view class="newest-text"><text>￥ 0.03</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="details/details">
-                    <image src="/image/s4.png"></image>
-                    <view class="newest-text"><text>瓜子 100g</text></view>
-                    <view class="newest-text"><text>￥ 0.01</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="details/details">
-                    <image src="/image/s5.png"></image>
-                    <view class="newest-text"><text>芹菜 半斤</text></view>
-                    <view class="newest-text"><text>￥ 0.02</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="details/details">
-                    <image src="/image/s6.png"></image>
-                    <view class="newest-text"><text>素米 375g</text></view>
-                    <view class="newest-text"><text>￥ 0.03</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="details/details">
-                    <image src="/image/s4.png"></image>
-                    <view class="newest-text"><text>瓜子 100g</text></view>
-                    <view class="newest-text"><text>￥ 0.01</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="details/details">
-                    <image src="/image/s5.png"></image>
-                    <view class="newest-text"><text>芹菜 半斤</text></view>
-                    <view class="newest-text"><text>￥ 0.02</text></view>
-                </navigator>
-            </view>
-            <view class="newest-list">
-                <navigator url="details/details">
-                    <image src="/image/s6.png"></image>
-                    <view class="newest-text"><text>素米 375g</text></view>
-                    <view class="newest-text"><text>￥ 0.03</text></view>
+                    <view class="newest-text"><text>粮油</text></view>
+                    <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
                 </navigator>
             </view>
         </view>
-    </view> -->
+    </view>
 </view>

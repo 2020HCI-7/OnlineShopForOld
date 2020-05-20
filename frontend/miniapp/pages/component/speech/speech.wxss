@@ -1,0 +1,74 @@
+/* pages/component/speech/speech.wxss */
+
+.title-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.yuyinWrap {
+    position: fixed;
+    /* margin-top:300rpx; */
+    bottom: 0;
+    width: 100%;
+    height: 250rpx;
+}
+
+.yuyinBtn {
+    width: 100%;
+    height: 250rpx;
+    position: absolute;
+    /* right: 112rpx;
+    bottom: 12rpx; */
+    border: 3px solid #eee;
+    background: #fff;
+    color: #606267;
+    line-height: 250rpx;
+    font-size: 128rpx;
+}
+
+.yuyinBtnBg {
+    background: #eee;
+}
+
+.yuyinBtn::after {
+    /* background: #fff; *//* color: #000; */
+    border-radius: 0;
+    border: none;
+}
+
+.startYuyinImage {
+    position: fixed;
+    top: 210rpx;
+    left: 50%;
+    width: 190rpx;
+    height: 240rpx;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20rpx;
+    color: #fff;
+    text-align: center;
+    margin-left: -95rpx;
+}
+
+.startYuyinImage cover-image {
+    margin: 30rpx auto;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.startYuyinImage cover-view {
+    margin-top: 25rpx;
+}
+
+.confirm-button {
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    bottom: 250rpx;
+}
+
+.text-area {
+    height: 50%;
+    width: 100%;
+}

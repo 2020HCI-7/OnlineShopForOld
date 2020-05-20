@@ -8,7 +8,9 @@
     "pages/component/address/address",
     "pages/component/orders/orders",
     "pages/component/list/list",
-    "pages/component/search/search"
+    "pages/component/coupon/coupon",
+    "pages/component/search/search",
+    "pages/component/speech/speech"
   ],
   "window": {
     "navigationBarTextStyle": "white",

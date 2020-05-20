@@ -14,6 +14,7 @@
                 </view>
                 <text class="cart-del" bindtap="deleteList" data-index="{{index}}">×</text>
             </view>
+            <view class="blank-region"><text ></text></view>
         </view>
 
         <view class="cart-footer">
@@ -25,7 +26,7 @@
             <text>全选</text>
             <text class="cart-toatl-price">￥{{totalPrice}}</text>
         </view>
-        <button class="make-order-button" bind:tap="bindMakeOrder">
+        <button class="make-order-button" bind:tap="bindMakeOrder" type="primary">
             <text >下 单</text>
         </button>
     </view>

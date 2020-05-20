@@ -14,6 +14,16 @@ Page({
       hasList: true,
       carts:[
         {id:1,title:'芹菜',image:'/image/s5.png',num:4,price:0.01,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
         {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true}
       ]
     });

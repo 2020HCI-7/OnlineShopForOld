@@ -1,0 +1,15 @@
+<view class="coupons-box">
+    <view class="coupons">我的优惠券</view>
+    <view class="coupons-list" wx:for="{{coupons}}" wx:key="index">
+        <view class="coupons-number">优惠券编号：{{item.number}}</view>
+        <view class="coupons-detail">
+            <image src="{{item.thumb}}"></image>
+            <view class="">{{item.name}}</view>
+            <view class="">*{{item.count}}</view>
+            <text class="coupons-describe">{{item.describe}}</text>
+        </view>
+        <view class="coupons-footer">
+            <text>使用截止日期：{{item.end}}</text>
+        </view>
+    </view>
+</view>
