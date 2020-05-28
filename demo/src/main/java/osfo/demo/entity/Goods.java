@@ -12,10 +12,10 @@ public class Goods {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    @OneToOne
-    private Store store;
-    private float normal_price;
-    private float least_price;
+
+    private Integer storeId;
+    private float normalPrice;
+    private float leastPrice;
     private String goodname;
     private String description;
     private float storage;
@@ -30,41 +30,45 @@ public class Goods {
         this.goodname = goodname;
     }
 
-    public void setLeast_price(float least_price) {
-        this.least_price = least_price;
-    }
 
-    public void setNormal_price(float normal_price) {
-        this.normal_price = normal_price;
-    }
 
     public void setStorage(float storage) {
         this.storage = storage;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public float getLeast_price() {
-        return least_price;
+    public void setLeastPrice(float leastPrice) {
+        this.leastPrice = leastPrice;
     }
 
-    public float getNormal_price() {
-        return normal_price;
+    public void setNormalPrice(float normalPrice) {
+        this.normalPrice = normalPrice;
+    }
+
+    public float getNormalPrice() {
+        return normalPrice;
+    }
+
+    public float getLeastPrice() {
+        return leastPrice;
     }
 
     public float getStorage() {
         return storage;
     }
 
-    public Store getStore() {
-        return store;
-    }
+
 
     public String getDescription() {
         return description;

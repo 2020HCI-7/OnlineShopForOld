@@ -26,15 +26,10 @@ public class goodService {
 
         return new response(true,"",gooddao.getallgood());
     }
-    public Object addgood(Integer dealerid,float nprice,float lprice,String name,String des,float storage)
+    public Object addgood(Integer dealerid,Goods good)
     {
-        Goods good=new Goods();
-        good.setGoodname(name);
-        good.setDescription(des);
-        good.setLeast_price(lprice);
-        good.setNormal_price(nprice);
-        good.setStorage(storage);
-        good.setStore(storedao.getstorebyid(dealerid).get(0));
+
+        good.setStoreId(storedao.getstorebyid(dealerid).get(0).getId());
         gooddao.savegood(good);
         return new response(true,"",null);
     }

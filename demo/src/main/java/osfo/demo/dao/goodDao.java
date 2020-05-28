@@ -7,6 +7,8 @@ import osfo.demo.repo.goodRepo;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class goodDao {
     @Autowired
@@ -36,6 +38,10 @@ public class goodDao {
            }
        }
        return result;
+   }
+   public Optional<Goods> getgoodbyid(Integer id)
+   {
+       return goodrepo.findById(id);
    }
 
 }

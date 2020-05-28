@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import osfo.demo.entity.Goods;
 import osfo.demo.entity.User;
 import osfo.demo.service.goodService;
 import osfo.demo.util.restapi.asrdemo.AsrMain;
@@ -47,10 +49,11 @@ public class goodcontroller {
     }
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/goods/addgood")
-    public Object addgood(@RequestParam("normalprice") float x1,@RequestParam("leastprice") float x2,@RequestParam("goodname") String name,@RequestParam("descrip") String des,@RequestParam("storage") float storage)
+    public Object addgood(@RequestBody Goods good)
     {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        return goodservice.addgood(id,x1,x2,name,des,storage);
+
+        return goodservice.addgood(id,good);
 
     }
     @RequestMapping(value="/goods/uploadimg")

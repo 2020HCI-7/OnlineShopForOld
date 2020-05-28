@@ -8,6 +8,7 @@ import osfo.demo.entity.Userorder;
 import java.util.List;
 
 public interface orderRepo extends JpaRepository<Userorder,Integer> {
-    @Query("SELECT b from Userorder b where b.user.id=?1")
-    List<Userorder> getgoodsbydealerid(Integer dealerid);
+    Iterable<Userorder> findAllByStoreId(Integer id);
+    Iterable<Userorder> findAllByUserId(Integer id);
+
 }

@@ -9,6 +9,7 @@ import osfo.demo.repo.orderRepo;
 import osfo.demo.repo.orderitemRepo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class orderDao {
@@ -16,12 +17,26 @@ public class orderDao {
     orderRepo orderrepo;
     @Autowired
     orderitemRepo orderitemrepo;
-    public List<Userorder> getorderbyuserid(Integer id)
+    public Iterable<Userorder> getorderbyuserid(Integer id)
     {
-        return orderrepo.getgoodsbydealerid(id);
+        return orderrepo.findAllByUserId(id);
     }
-    public List<OrderItem> getorderitem(Integer id)
+    public Iterable<Userorder> getorderbystoreid(Integer id)
     {
-        return orderitemrepo.getOrderItemsByorOrderById(id);
+        return orderrepo.findAllByStoreId(id);
     }
+    public Optional<Userorder> getorderbyid(Integer id){return orderrepo.findById(id);}
+    public Iterable<OrderItem> getorderitem(Integer id)
+    {
+        return orderitemrepo.getOrderItemsByUserorderId(id);
+    }
+    public Userorder saveorder(Userorder order)
+    {
+        return orderrepo.save(order);
+    }
+    public OrderItem saveorderitem(OrderItem orderitem)
+    {
+        return orderitemrepo.save(orderitem);
+    }
+
 }

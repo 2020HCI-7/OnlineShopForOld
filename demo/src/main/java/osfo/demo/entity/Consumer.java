@@ -7,39 +7,43 @@ import javax.persistence.Table;
 
 public class Consumer extends User {
     String phonenumber;
-    String wexin_openid;
-    String neck_name;
+    String wexinOpenid;
+    String neckName;
 
-    public String getNeck_name() {
-        return neck_name;
-    }
+
 
     public String getPhonenumber() {
         return phonenumber;
     }
 
-    public String getWexin_openid() {
-        return wexin_openid;
+    public void setNeckName(String neckName) {
+        this.neckName = neckName;
     }
 
-    public void setNeck_name(String neck_name) {
-        this.neck_name = neck_name;
+    public void setWexinOpenid(String wexinOpenid) {
+        this.wexinOpenid = wexinOpenid;
+    }
+
+    public String getWexinOpenid() {
+        return wexinOpenid;
+    }
+
+    public String getNeckName() {
+        return neckName;
     }
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
-    public void setWexin_openid(String wexin_openid) {
-        this.wexin_openid = wexin_openid;
-    }
+
     public Consumer()
     {
         setRole("user");
     }
     public Consumer(String username,String password,String neck_name ,String wexin_openid)
     {
-        this.neck_name=neck_name;
+        this.neckName=neck_name;
         this.setRole("user");
         this.setUsername(username);
         this.setPassword(password);

@@ -24,10 +24,10 @@ public class dealerDao {
     {
         return dealerrepo.findAll();
     }
-    public void savedealer(String username,String password)
+    public Dealer savedealer(Dealer dealer)
     {
-        Dealer dealer=new Dealer(username,password);
-        dealerrepo.save(dealer);
+
+        return dealerrepo.save(dealer);
 
     }
 

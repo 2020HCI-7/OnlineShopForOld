@@ -2,8 +2,10 @@ package osfo.demo.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import osfo.demo.entity.Address;
 import osfo.demo.entity.Consumer;
 import osfo.demo.entity.User;
+import osfo.demo.repo.addressRepo;
 import osfo.demo.repo.consumerRepo;
 import osfo.demo.repo.userRepo;
 
@@ -15,6 +17,8 @@ public class ConsumerDao {
     consumerRepo consumerrepo;
     @Autowired
     userRepo userrepo;
+    @Autowired
+    addressRepo addressrepo;
     public Consumer getconsumerbyid(Integer id)
     {
         if(consumerrepo.findById(id).isPresent())
@@ -29,10 +33,10 @@ public class ConsumerDao {
     {
         return consumerrepo.findAll();
     }
-    public void saveuser(String username,String password,String neckname,String openid)
+    public Consumer saveuser(Consumer consumer)
     {
-        Consumer consumer=new Consumer(username,password,neckname,openid);
-        consumerrepo.save(consumer);
+
+        return consumerrepo.save(consumer);
 
     }
     public void insertuser()
@@ -46,5 +50,14 @@ public class ConsumerDao {
         consumer.setUsername("shenruien");
 
         consumerrepo.save(consumer);
+    }
+    public Address addaddress(Address address)
+    {
+
+        return addressrepo.save(address);
+    }
+    public Iterable<Address> getalladdrbyuserid(Integer userid)
+    {
+        return addressrepo.findAllByUserId(userid);
     }
 }

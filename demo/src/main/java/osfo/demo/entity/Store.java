@@ -21,7 +21,9 @@ public class Store {
         this.phonenumber = phonenumber;
     }
 
-
+    public Integer getId() {
+        return id;
+    }
 
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;

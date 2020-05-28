@@ -6,10 +6,10 @@ import javax.persistence.*;
 public class Address {
     @Id
     @GeneratedValue
-    private Integer userid;
-    @OneToOne
+    private Integer id;
 
-    private User user;
+
+    private Integer userId;
     private String address;
     private String phonenumber;
     private String receivername;
@@ -26,12 +26,8 @@ public class Address {
         this.receivername = receivername;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getAddress() {
@@ -42,15 +38,17 @@ public class Address {
         return phonenumber;
     }
 
-    public Integer getUserid() {
-        return userid;
-    }
+
 
     public String getReceivername() {
         return receivername;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

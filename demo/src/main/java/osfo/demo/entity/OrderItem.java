@@ -7,10 +7,10 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class OrderItem {
-    @OneToOne
-    Userorder userorder;
-    @OneToOne
-    Goods good;
+
+    Integer userorderId;
+
+    Integer goodId;
     @Id
     @GeneratedValue
     private Integer id;
@@ -20,16 +20,16 @@ public class OrderItem {
         this.id = id;
     }
 
-    public void setGood(Goods good) {
-        this.good = good;
+    public Integer getGoodId() {
+        return goodId;
     }
 
     public void setNumber(float number) {
         this.number = number;
     }
 
-    public void setUserorder(Userorder userorder) {
-        this.userorder = userorder;
+    public void setUserorderId(Integer userorderId) {
+        this.userorderId = userorderId;
     }
 
     public Integer getId() {
@@ -40,12 +40,11 @@ public class OrderItem {
         return number;
     }
 
-    public Goods getGood() {
-        return good;
+    public void setGoodId(Integer goodId) {
+        this.goodId = goodId;
     }
 
-    public Userorder getUserorder() {
-        return userorder;
+    public Integer getUserorderId() {
+        return userorderId;
     }
-    
 }

@@ -12,12 +12,12 @@ public class Userorder {
     @GeneratedValue
     public Integer id;
     public Date date;
-    @OneToOne
-    private User user;
-    @OneToOne
-    private Dealer dealer;
-    @OneToOne
-    private Address address;
+
+    private Integer userId;
+
+    private Integer storeId;
+
+    private Integer addressId;
     private Integer status;
     private String comment;
     public void setDate(Date date) {
@@ -32,13 +32,11 @@ public class Userorder {
         return date;
     }
 
-    public void setUser(User user) {
+   /* public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -52,24 +50,34 @@ public class Userorder {
         this.comment = comment;
     }
 
-    public void setDealer(Dealer dealer) {
-        this.dealer = dealer;
-    }
 
-    public User getUser() {
-        return user;
-    }
 
     public Integer getStatus() {
         return status;
     }
 
-    public Address getAddress() {
-        return address;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Dealer getDealer() {
-        return dealer;
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
     }
 
     public String getComment() {
