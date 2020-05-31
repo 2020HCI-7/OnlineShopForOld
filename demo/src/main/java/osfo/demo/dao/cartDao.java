@@ -18,5 +18,9 @@ public class cartDao {
     {
         return cartrepo.findAllByUserId(id);
     }
+    public void delete(Integer cartid)
+    {
+        cartrepo.deleteById(cartid);
+    }
 
 }

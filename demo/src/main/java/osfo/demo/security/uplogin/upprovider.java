@@ -32,6 +32,7 @@ public class upprovider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
         User user=userdao.getbyusername(username).get(0);
         Collection<GrantedAuthority> authorities = new ArrayList<>();
+        System.out.println(user.getRole());
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
         ((uptoken)authentication).id=user.getId();

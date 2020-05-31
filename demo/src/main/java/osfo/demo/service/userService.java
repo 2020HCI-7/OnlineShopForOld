@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import osfo.demo.dao.ConsumerDao;
 import osfo.demo.dao.dealerDao;
-import osfo.demo.entity.Address;
-import osfo.demo.entity.Consumer;
-import osfo.demo.entity.Dealer;
+import osfo.demo.dao.discountDao;
+import osfo.demo.entity.*;
 import osfo.demo.util.restapi.response;
 
 import java.util.List;
@@ -17,12 +16,8 @@ public class userService {
     ConsumerDao consumerdao;
     @Autowired
     dealerDao dealerdao;
-    public response testconsumer()
-    {
-        consumerdao.insertuser();
-        return new response(true,"",null);
-
-    }
+    @Autowired
+    discountDao discountdao;
     public List<Consumer> getalluser()
     {
         return consumerdao.getall();
@@ -45,6 +40,16 @@ public class userService {
     public response getaddressbyuserid(Integer userid)
     {
         return new response(true,"",consumerdao.getalladdrbyuserid(userid));
+    }
+    public response useradddiscount(Integer userid, Discount discount)
+    {
+        UserDiscount tmp=new UserDiscount();
+        tmp.setDiscountId(discount.getId());
+        tmp.setUserId(userid);
+        tmp.setJian(discount.getJian());
+        tmp.setMan(discount.getMan());
+        tmp.setStoreId(discount.getStoreId());
+        return new response(true,"",discountdao.useradddiscount(tmp));
     }
 
 

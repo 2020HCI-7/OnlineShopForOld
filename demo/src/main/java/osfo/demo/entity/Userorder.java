@@ -20,6 +20,8 @@ public class Userorder {
     private Integer addressId;
     private Integer status;
     private String comment;
+    public float money;
+    public float finalmoney;
     public void setDate(Date date) {
         this.date = date;
     }
@@ -36,7 +38,13 @@ public class Userorder {
         this.user = user;
     }*/
 
+    public void setFinalmoney(float finalmoney) {
+        this.finalmoney = finalmoney;
+    }
 
+    public float getFinalmoney() {
+        return finalmoney;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -50,7 +58,13 @@ public class Userorder {
         this.comment = comment;
     }
 
+    public void setMoney(float money) {
+        this.money = money;
+    }
 
+    public float getMoney() {
+        return money;
+    }
 
     public Integer getStatus() {
         return status;

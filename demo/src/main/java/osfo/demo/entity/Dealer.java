@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Dealer extends User {
     public Dealer()
     {
-
+        setRole("dealer");
     }
     public Dealer(String username,String password )
     {

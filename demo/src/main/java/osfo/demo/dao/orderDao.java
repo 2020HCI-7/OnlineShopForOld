@@ -32,7 +32,9 @@ public class orderDao {
     }
     public Userorder saveorder(Userorder order)
     {
-        return orderrepo.save(order);
+        Userorder tmp= orderrepo.save(order);
+        orderrepo.flush();
+        return tmp;
     }
     public OrderItem saveorderitem(OrderItem orderitem)
     {

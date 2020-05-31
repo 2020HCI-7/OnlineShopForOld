@@ -37,9 +37,9 @@ public class goodcontroller {
     @Autowired
     goodService goodservice;
     @RequestMapping(value="/goods/getbydealerid")
-    public Object getgoodsbydealerid(@RequestParam("dealerid") Integer id)
+    public Object getgoodsbystoreid(@RequestParam("storeid") Integer id)
     {
-        return goodservice.getgoodsbydealerid(id);
+        return goodservice.getgoodsbystoreid(id);
     }
     @RequestMapping(value="/goods/getallgood")
     public Object getallgood()
@@ -56,6 +56,7 @@ public class goodcontroller {
         return goodservice.addgood(id,good);
 
     }
+
     @RequestMapping(value="/goods/uploadimg")
     public Object uploadimg(HttpServletRequest request, HttpServletResponse response)
     {

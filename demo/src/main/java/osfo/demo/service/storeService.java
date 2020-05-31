@@ -3,7 +3,9 @@ package osfo.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import osfo.demo.dao.dealerDao;
+import osfo.demo.dao.discountDao;
 import osfo.demo.dao.storeDao;
+import osfo.demo.entity.Discount;
 import osfo.demo.entity.Store;
 import osfo.demo.util.restapi.response;
 
@@ -15,6 +17,8 @@ public class storeService {
     storeDao storedao;
     @Autowired
     dealerDao dealerdao;
+    @Autowired
+    discountDao discountdao;
     public response getallstore()
     {
 
@@ -32,6 +36,15 @@ public class storeService {
     }
     public response getstorebydealerid(Integer id)
     {
-        return new response(true,"",storedao.getstorebyid(id));
+        return new response(true,"",storedao.getstorebydealerid(id));
+    }
+    public response adddiscount(Discount discount)
+    {
+        return new response(true,"",discountdao.adddiscount(discount));
+    }
+    public response deletediscount(Discount discount)
+    {
+        discountdao.deletediscount(discount);
+        return new response(true,"",null);
     }
 }

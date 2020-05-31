@@ -39,18 +39,7 @@ public class ConsumerDao {
         return consumerrepo.save(consumer);
 
     }
-    public void insertuser()
-    {
-        Consumer consumer=new Consumer();
-        consumer.setNeck_name("shenruien");
-        consumer.setPhonenumber("123456");
-        consumer.setWexin_openid("123456");
-        consumer.setPassword("123456");
-        consumer.setStatus(1);
-        consumer.setUsername("shenruien");
 
-        consumerrepo.save(consumer);
-    }
     public Address addaddress(Address address)
     {
 

@@ -13,9 +13,9 @@ import java.util.Optional;
 public class goodDao {
     @Autowired
     goodRepo goodrepo;
-    public List<Goods> getgoodsbydealerid(Integer id)
+    public List<Goods> getgoodsbystorerid(Integer id)
     {
-        return goodrepo.getgoodsbydealerid(id);
+        return goodrepo.getgoodsbystoreid(id);
     }
     public List<Goods> getallgood()
     {
@@ -32,7 +32,7 @@ public class goodDao {
        for(Goods good:allgood)
        {
 
-           if(good.getGoodname().indexOf(name)!=-1)
+           if(good.getGoodname().contains(name))
            {
                result.add(good);
            }

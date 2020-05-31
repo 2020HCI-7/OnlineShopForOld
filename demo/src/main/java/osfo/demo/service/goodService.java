@@ -15,11 +15,11 @@ public class goodService {
     goodDao gooddao;
     @Autowired
     storeDao storedao;
-    public Object getgoodsbydealerid(Integer id)
+    public Object getgoodsbystoreid(Integer id)
     {
 
-        new response(true,"",gooddao.getgoodsbydealerid(id));
-        return new response(true,"",gooddao.getgoodsbydealerid(id));
+
+        return new response(true,"",gooddao.getgoodsbystorerid(id));
     }
     public response getallgoods()
     {
@@ -29,7 +29,7 @@ public class goodService {
     public Object addgood(Integer dealerid,Goods good)
     {
 
-        good.setStoreId(storedao.getstorebyid(dealerid).get(0).getId());
+        good.setStoreId(storedao.getstorebydealerid(dealerid).get(0).getId());
         gooddao.savegood(good);
         return new response(true,"",null);
     }

@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import osfo.demo.entity.Address;
-import osfo.demo.entity.Consumer;
-import osfo.demo.entity.Dealer;
-import osfo.demo.entity.User;
+import osfo.demo.entity.*;
 import osfo.demo.service.userService;
 
 import javax.annotation.Resource;
@@ -45,6 +42,19 @@ public class usercontroller {
     public Object getaddrbyuserid()
     {
         return userservice.getaddressbyuserid(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    }
+
+    @RequestMapping(value="/user/edit")
+    public Object setconsumer(@RequestBody Consumer consumer)
+    {
+        return userservice.register(consumer);
+    }
+    @RequestMapping(value="/user/adddiscount")
+    public Object adddiscount(@RequestBody Discount discount)
+    {
+        Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return userservice.useradddiscount(userid,discount);
+
     }
 
 }
