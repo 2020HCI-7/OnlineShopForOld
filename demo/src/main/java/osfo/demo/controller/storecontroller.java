@@ -34,11 +34,13 @@ public class storecontroller {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return storeservice.getstorebydealerid(id);
     }
+    @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)
     {
         return storeservice.adddiscount(discount);
     }
+    @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/removediscount")
     public Object removediscount(@RequestBody Discount discount)
     {

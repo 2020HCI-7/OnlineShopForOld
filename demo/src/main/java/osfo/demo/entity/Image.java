@@ -2,19 +2,21 @@ package osfo.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Image {
 
     @Id
     public Integer id;
-    public Byte[] image;
+    @Lob
+    public byte[] image;
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -22,7 +24,7 @@ public class Image {
         return id;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 }

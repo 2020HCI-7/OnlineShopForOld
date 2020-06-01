@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import osfo.demo.entity.Goods;
+import osfo.demo.entity.Image;
 import osfo.demo.entity.User;
 import osfo.demo.service.goodService;
 import osfo.demo.util.restapi.asrdemo.AsrMain;
@@ -36,17 +37,17 @@ public class goodcontroller {
     public String filepath="/home/admin/";
     @Autowired
     goodService goodservice;
-    @RequestMapping(value="/goods/getbydealerid")
-    public Object getgoodsbystoreid(@RequestParam("storeid") Integer id)
+    @RequestMapping(value="/goods/getbystoreid")
+    public Object getgoodsbystoreid(@RequestParam("storeId") Integer id)
     {
         return goodservice.getgoodsbystoreid(id);
     }
     @RequestMapping(value="/goods/getallgood")
     public Object getallgood()
     {
-
         return goodservice.getallgoods();
     }
+
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/goods/addgood")
     public Object addgood(@RequestBody Goods good)
@@ -57,11 +58,11 @@ public class goodcontroller {
 
     }
 
-    @RequestMapping(value="/goods/uploadimg")
+    @RequestMapping(value="/image/upload")
     public Object uploadimg(HttpServletRequest request, HttpServletResponse response)
     {
         MultipartHttpServletRequest mprequest = (MultipartHttpServletRequest) request;
-        request.getParameter("id");
+        Integer tmpid=Integer.parseInt(request.getParameter("id")) ;
         MultipartFile multipartFile=mprequest.getFile("file");
         // 2.获得文件扩展名
         String extOfFile = getExtOfFile(multipartFile);
@@ -70,8 +71,9 @@ public class goodcontroller {
         BufferedOutputStream bos = null;
         String filename = null;
         String tmpname=null;
+
         try {
-            File dir = new File(filepath+"image");
+            /*File dir = new File(filepath+"image");
             if (!dir.exists()) {// 判断文件目录是否存在
                 System.out.println("123");
                 dir.mkdirs();
@@ -82,8 +84,11 @@ public class goodcontroller {
             bos = new BufferedOutputStream(new FileOutputStream(filepath+"image/" + filename));
 
             bos.write(multipartFile.getBytes());
-            bos.flush();
-
+            bos.flush();*/
+            Image tmp=new Image();
+            tmp.setId(tmpid);
+            tmp.setImage(multipartFile.getBytes());
+            goodservice.upload(tmp);
 
 
             return new response(true,"",null);
@@ -103,16 +108,20 @@ public class goodcontroller {
         return 0;
 
     }
-
-    @RequestMapping(value="/goods/getimg",produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    public Object getimg(@RequestParam("id") String id) throws Exception
+    @RequestMapping(value="/goods/search")
+    public Object getbyname(@RequestBody String sound) throws Exception
     {
-        File file=new File(filepath+"image/" + id+".myimage");
+        return goodservice.getgoodsbyname(sound);
+    }
+    @RequestMapping(value="/image/get",produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public Object getimg(@RequestParam("id") Integer id) throws Exception
+    {
+        /*File file=new File(filepath+"image/" + id+".myimage");
 
         FileInputStream inputStream = new FileInputStream(file);
         byte[] bytes = new byte[inputStream.available()];
-        inputStream.read(bytes, 0, inputStream.available());
-        return bytes;
+        inputStream.read(bytes, 0, inputStream.available());*/
+        return goodservice.getimagebyid(id);
 
 
 

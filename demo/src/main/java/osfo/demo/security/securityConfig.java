@@ -37,7 +37,10 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register/*","/login/*","/store/*","/goods/*","/actuator/*","/actuator","/cart/*","/order/*").permitAll()
+                .antMatchers("/register/*","/login/*","/store/*","/goods/*","/actuator","/image/*").permitAll()
+                .antMatchers("/cart/*").hasRole("user")
+                .antMatchers("/order/*").hasAnyRole("user","dealer")
+                .antMatchers("/actuator/*").hasRole("admin")
                 .anyRequest().authenticated();
         http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
 

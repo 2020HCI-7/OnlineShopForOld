@@ -1,9 +1,6 @@
 package osfo.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class OrderItem {
@@ -12,7 +9,7 @@ public class OrderItem {
 
     Integer goodId;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private float number;
 
