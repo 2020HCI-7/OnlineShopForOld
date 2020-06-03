@@ -38,9 +38,9 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/register/*","/login/*","/store/*","/goods/*","/actuator","/image/*").permitAll()
-                .antMatchers("/cart/*").hasRole("user")
-                .antMatchers("/order/*").hasAnyRole("user","dealer")
-                .antMatchers("/actuator/*").hasRole("admin")
+                .antMatchers("/cart/*").hasAuthority("user")
+                .antMatchers("/order/*").hasAnyAuthority("user","dealer")
+                .antMatchers("/actuator/*").hasAuthority("admin")
                 .anyRequest().authenticated();
         http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
 

@@ -109,7 +109,7 @@ public class goodcontroller {
 
     }
     @RequestMapping(value="/goods/search")
-    public Object getbyname(@RequestBody String sound) throws Exception
+    public Object getbyname(@RequestParam("sound") String sound) throws Exception
     {
         return goodservice.getgoodsbyname(sound);
     }
