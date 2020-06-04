@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import osfo.demo.entity.Consumer;
 @Repository
 public interface consumerRepo extends JpaRepository<Consumer,Integer> {
+    Iterable<Consumer> findAllByWexinOpenid(String openid);
 }

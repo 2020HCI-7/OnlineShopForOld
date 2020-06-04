@@ -56,6 +56,11 @@ public class usercontroller {
         return userservice.useradddiscount(userid,discount);
 
     }
+    @RequestMapping(value="/user/getbyopenid")
+    public Object getbyopenid(@RequestParam("openid") String openid)
+    {
+        return userservice.getconsumerbyopenid(openid);
+    }
     @RequestMapping(value="/user/info")
     public Object userinfo()
     {

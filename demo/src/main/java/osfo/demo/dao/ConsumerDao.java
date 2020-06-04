@@ -24,6 +24,7 @@ public class ConsumerDao {
         if(consumerrepo.findById(id).isPresent())
         {
             return consumerrepo.getOne(id);
+
         }
         return new Consumer();
 
@@ -32,6 +33,10 @@ public class ConsumerDao {
     public List<Consumer> getall()
     {
         return consumerrepo.findAll();
+    }
+    public Iterable<Consumer> getbyopenid(String openid)
+    {
+        return consumerrepo.findAllByWexinOpenid(openid);
     }
     public Consumer saveuser(Consumer consumer)
     {

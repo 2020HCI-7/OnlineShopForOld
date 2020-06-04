@@ -51,6 +51,10 @@ public class userService {
         tmp.setStoreId(discount.getStoreId());
         return new response(true,"",discountdao.useradddiscount(tmp));
     }
+    public response getconsumerbyopenid(String openid)
+    {
+        return new response(true,"",consumerdao.getbyopenid(openid));
+    }
     public response getconsumerinfo(Integer id)
     {
         return new response(true,"",consumerdao.getconsumerbyid(id));
