@@ -1,6 +1,6 @@
-const login = "/auth/wechat/login"
-const register = "/auth/wechat/register"
-const host = "http://47.103.112.85:30552"
+const hostUrl = "http://localhost:8080"
+const loginUrl = "/login"
+const registerUrl = "/register/consumer"
 const register_data = "/warehouse/user/register-info"
 const user_info = "/warehouse/user/info"
 const modify_info = "/warehouse/user/info"
@@ -24,9 +24,9 @@ const draw_history = "/billing/user/draw-history"
 const jobs_smart = "/arrangement/user/jobs-smart"
 
 module.exports = {
-  login,
-  register,
-  host,
+  loginUrl,
+  registerUrl,
+  hostUrl,
   register_data,
   user_info,
   modify_info,

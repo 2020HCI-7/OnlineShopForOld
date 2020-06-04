@@ -1,0 +1,11 @@
+<!--components/_button/_button.wxml-->
+<_button>
+  <button
+    class="component_button"
+    data-key="{{buttonKey}}"
+    bindtap="handleButtonClicked"
+    hover-class="btn_hover"
+  >
+    {{buttonText}}
+  </button>
+</_button>

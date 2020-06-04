@@ -1,0 +1,19 @@
+/* components/_button/_button.wxss */
+.component_button{
+  width: inherit;
+  line-height: inherit;
+
+  color: inherit;
+  border-color: inherit;
+  background-color: inherit;
+
+  
+}
+
+/*
+.container{
+  width: 100px;
+  line-height: 50px;
+  background-color: blue;
+}
+*/

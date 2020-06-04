@@ -1,0 +1,11 @@
+/* component/componentLink/component.wxss */
+.component_link{
+  position: relative;
+  top: -20px;
+  
+  color: blue;
+
+  overflow: hidden;
+
+  font-size: 15px;
+}

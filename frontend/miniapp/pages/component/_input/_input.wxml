@@ -1,0 +1,17 @@
+<!--components/_input/_input.wxml-->
+<_input class="component_input">
+  <view class="inputBody">
+    <input 
+      class="weui-input"
+      maxlength="39"
+      data-key="{{inputKey}}"
+      placeholder="{{placeholderValue}}"
+      value="{{value}}"
+      password="{{password}}"
+      bindinput="handleInputChange"
+    />
+  </view>
+  <view class="underline">
+    {{underline}}
+  </view>
+</_input>

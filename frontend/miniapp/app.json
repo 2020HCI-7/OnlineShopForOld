@@ -10,7 +10,9 @@
     "pages/component/list/list",
     "pages/component/coupon/coupon",
     "pages/component/search/search",
-    "pages/component/speech/speech"
+    "pages/component/speech/speech",
+    "pages/component/login/login",
+    "pages/component/register/register"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -1,0 +1,75 @@
+/* pages/login/login.wxss */
+.weui-flex__item{
+  text-align: center;
+}
+
+.headerblankPlaceholder{
+  height: 70px;
+}
+/*itemview的宽度等于item的宽度，高度为item的高度*/
+.usernameInputItemView{
+  width: auto;
+  height: 50px;
+
+  display: flex;/*水平居中*/
+  justify-content: center;/*水平居中*/
+
+  overflow: hidden;
+}
+/*view的高度小于item的高度，宽度自定*/
+.usernameInputView{
+  width: 70%;
+  height: 23px;
+  
+  text-align: left;
+
+  line-height: 30px;  
+}
+
+.passwordInputItemView{
+  width: auto;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.passwordInputView{
+  width: 70%;
+  height: 22px;
+
+  text-align: left;
+  
+  line-height: 30px;  
+}
+
+.toRegisterLinkItemView{
+  width: auto;
+  height: 30px;
+
+  display: flex;
+  align-items: left;
+
+  padding-left: 15%;
+}
+
+.toRegisterLinkView{
+  height: 20px;
+}
+
+.finishLoginButtonItemView{
+  width: auto;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.finishLoginButtonView{
+  width: 70%;
+  line-height: 40px;
+
+  text-align: left;
+}

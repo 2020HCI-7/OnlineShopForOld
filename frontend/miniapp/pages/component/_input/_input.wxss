@@ -1,0 +1,22 @@
+/* components/_input/_input.wxss */
+.inputBody{
+  width: inherit;
+
+  position: relative;
+  top: -2px;
+}
+
+.underline{
+  width: inherit;
+
+  position: relative;
+  top: -25px;
+
+  overflow: hidden;
+}
+
+/*
+.container{
+  width: 100px;
+}
+*/

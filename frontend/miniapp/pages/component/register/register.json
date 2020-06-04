@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "_input": "/pages/component/_input/_input",
+    "_button": "/pages/component/_button/_button",
+    "_link": "/pages/component/_link/_link"
+  },
+  "navigationBarTitleText": "注册"
+}

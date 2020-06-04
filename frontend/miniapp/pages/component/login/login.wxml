@@ -1,0 +1,71 @@
+<!--pages/login/login.wxml-->
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-flex">
+      <view class="headerblankPlaceholder"/>
+    </view>
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="usernameInputItemView">
+          <view class="usernameInputView">
+            <_input 
+              class="usernameInput"
+              inputKey="{{usernameKey}}"
+              placeholderValue="{{usernamePlaceholder}}"
+              bind:handleChange="handleChange"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+     
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="passwordInputItemView">
+          <view class="passwordInputView">
+            <_input 
+              class="passwordInput"
+              inputKey="{{passwordKey}}"
+              placeholderValue="{{passwordPlaceholder}}"
+              password="{{true}}"
+              bind:handleChange="handleChange"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="toRegisterLinkItemView">
+          <view class="toRegisterLinkView">
+            <_link 
+              class="toRegisterLink"
+              linkKey="{{toRegisterLinkKey}}"
+              linkText="{{toRegisterLinkText}}"
+              bind:handleChange="toRegisterLink"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="finishLoginButtonItemView">
+          <view class="finishLoginButtonView">
+            <_button 
+              class="finishLoginButton"
+              buttonKey="{{finishLoginButtonKey}}"
+              buttonText="{{finishLoginButtonPlaceholder}}"
+              bind:handleChange="finishLogin"
+            />
+          </view>
+        </view>
+      </view> 
+    </view>
+  </view>
+</view>
+
+<navigator open-type="navigate"></navigator>
+<navigator open-type="reLaunch"></navigator>

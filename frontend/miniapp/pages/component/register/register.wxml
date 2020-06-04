@@ -1,0 +1,100 @@
+<!--pages/register/register.wxml-->
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+    <view class="weui-flex">
+      <view class="headerblankPlaceholder"/>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="usernameInputItemView">
+          <view class="usernameInputView">
+            <_input 
+              class="usernameInput"
+              inputKey="{{usernameKey}}"
+              placeholderValue="{{usernamePlaceholder}}"
+              bind:handleChange="handleChange"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="passwordInputItemView">
+          <view class="passwordInputView">
+            <_input 
+              class="passwordInput"
+              inputKey="{{passwordKey}}"
+              placeholderValue="{{passwordPlaceholder}}"
+              password="{{true}}"
+              bind:handleChange="handleChange"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="passwordComfirmInputItemView">
+          <view class="passwordComfirmInputView">
+            <_input 
+              class="passwordComfirmInput"
+              inputKey="{{passwordComfirmKey}}"
+              placeholderValue="{{passwordComfirmPlaceholder}}"
+              password="{{true}}"
+              bind:handleChange="handleChange"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="toLoginLinkItemView">
+          <view class="toLoginLinkView">
+            <_link 
+              class="toLoginLink"
+              linkKey="{{toLoginLinkKey}}"
+              linkText="{{toLoginLinkText}}"
+              bind:handleChange="toLoginLink"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <view class="finishRegisterButtonItemView">
+          <view class="finishRegisterButtonView">
+            <_button 
+              class="finishRegisterButton"
+              buttonKey="{{finishRegisterButtonKey}}"
+              buttonText="{{finishRegisterButtonPlaceholder}}"
+              bind:handleChange="finishRegister"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+<navigator open-type="redirect"></navigator>
+<navigator open-type="reLaunch"></navigator>
+    
+
+
+
+
+
+
+
+
+
+
+

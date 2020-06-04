@@ -1,0 +1,7 @@
+<text
+  class="component_link"
+  data-Key="{{linkKey}}"
+  bindtap="handleLinkClicked"
+>
+  {{linkText}}
+</text>

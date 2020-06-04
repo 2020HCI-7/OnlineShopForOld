@@ -9,8 +9,8 @@
       complete: function (res) {},
       setCookie: true,//可选项，当设为true时会改变会根据返回头改变cookie，在自动登录时需要设定为true
       clearCookie: true,//可选项，当设为true时将在请求前清空cookie，在退出登录时需要设定为true
-    };
-    cookieRequest(requestInfo);
+    }
+    cookieRequest(requestInfo)
  */
 
 const cookieRequest = function (requestInfo) {
@@ -29,26 +29,26 @@ const cookieRequest = function (requestInfo) {
 
   obj.complete = function (res) {
     if (requestInfo.setCookie){
-      wx.setStorageSync("cookie", res.header['Set-Cookie']);
+      wx.setStorageSync("cookie", res.header['Set-Cookie'])
     }
     requestInfo.complete(res)
   }
   
   obj.header = {
-    "Content-Type": "application/json; charset=UTF-8",
+    "Content-Type": "application/json charset=UTF-8",
     "cookie": wx.getStorageSync("cookie"),
   }
 
-  obj.dataType = "json";
-  obj.responseType = "text";
+  obj.dataType = "json"
+  obj.responseType = "text"
 
   if(requestInfo.clearCookie){
-    wx.clearStorageSync("cookie");
+    wx.clearStorageSync("cookie")
   }
 
   wx.request(obj)
-};
+}
 
 module.exports = {
   cookieRequest: cookieRequest
-};
+}
