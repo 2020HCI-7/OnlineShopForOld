@@ -67,6 +67,10 @@ public class userService {
         tmp.setStoreId(discount.getStoreId());
         return new response(true,"",discountdao.useradddiscount(tmp));
     }
+    public response getconsumerinfo(Integer id)
+    {
+        return new response(true,"",consumerdao.getconsumerbyid(id));
+    }
 
 
 }

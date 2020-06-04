@@ -6,9 +6,9 @@ import javax.persistence.Table;
 @Entity
 
 public class Consumer extends User {
-    String phonenumber;
-    String wexinOpenid;
-    String neckName;
+    public String phonenumber;
+    public String wexinOpenid;
+    public String neckName;
 
 
 

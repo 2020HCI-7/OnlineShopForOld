@@ -55,5 +55,11 @@ public class usercontroller {
         return userservice.useradddiscount(userid,discount);
 
     }
+    @RequestMapping(value="/user/info")
+    public Object userinfo()
+    {
+        Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return userservice.getconsumerinfo(userid);
+    }
 
 }

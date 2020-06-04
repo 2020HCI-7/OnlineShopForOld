@@ -37,6 +37,7 @@ public class cartService {
     {
         Iterable<Cart> carts =cartdao.getallbyuserid(userid);
         Map<Integer,LinkedList<Cart>> orders=new HashMap<Integer,LinkedList<Cart>>();
+        float totalmoney=0.0f;
         for(Cart cart:carts)
         {
             Goods good=gooddao.getgoodbyid(cart.goodId).get();
@@ -95,11 +96,12 @@ public class cartService {
                     }
                 }
             }
+            totalmoney+=finalmoney;
             order.setMoney(money);
             order.setFinalmoney(finalmoney);
             orderdao.saveorder(order);
         }
-        return new response(true,null,null );
+        return new response(true,null,totalmoney );
     }
     public Object removecart(Integer cartid)
     {

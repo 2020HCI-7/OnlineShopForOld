@@ -30,6 +30,9 @@ public class upprovider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal();
         // 获取表单用户填写的密码
         String password = (String) authentication.getCredentials();
+        if (userdao.getbyusername(username).size()==0){
+            throw new BadCredentialsException("用户名或密码不正确");
+        }
         User user=userdao.getbyusername(username).get(0);
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         System.out.println(user.getRole());

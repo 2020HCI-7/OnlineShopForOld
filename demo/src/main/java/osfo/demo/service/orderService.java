@@ -24,7 +24,7 @@ public class orderService {
     public Object getorderbydealerid(Integer id)
     {
 
-        return new response(true,null,storedao.getstorebydealerid(id).get(0).getId());
+        return new response(true,null,orderdao.getorderbystoreid(storedao.getstorebydealerid(id).get(0).getId()) );
     }
     public Object getorderitems(Integer id)
     {
