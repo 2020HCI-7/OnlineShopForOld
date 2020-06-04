@@ -2,18 +2,13 @@ package osfo.demo.security.wxlogin;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import osfo.demo.dao.ConsumerDao;
 import osfo.demo.entity.Consumer;
@@ -28,10 +23,11 @@ import java.util.List;
 @Component
 public class wxprovider implements AuthenticationProvider {
     @Autowired
-    ConsumerDao consumerDao = new ConsumerDao();
+    ConsumerDao consumerDao ;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("inweixin");
         String code = (String) authentication.getPrincipal();
         String res = wxAuth.wxAuthCodeToSession(code);
 

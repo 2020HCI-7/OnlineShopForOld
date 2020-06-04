@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface consumerRepo extends JpaRepository<Consumer,Integer> {
     Iterable<Consumer> findAllByWexinOpenid(String openid);
+    List<Consumer> getConsumerByWexinOpenid(String openid);
 }

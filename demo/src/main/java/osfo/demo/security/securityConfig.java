@@ -33,7 +33,7 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register/*","/login/*","/store/*","/goods/*","/actuator","/image/*","/user/*").permitAll()
+                .antMatchers("/register/*","/login","/store/*","/goods/*","/actuator","/image/*","/user/*").permitAll()
                 .antMatchers("/cart/*").hasAuthority("user")
                 .antMatchers("/order/*").hasAnyAuthority("user","dealer")
                 .antMatchers("/actuator/*").hasAuthority("admin")

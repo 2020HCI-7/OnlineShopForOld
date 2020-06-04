@@ -1,14 +1,18 @@
 package osfo.demo.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
 import osfo.demo.security.uplogin.upprovider;
 import osfo.demo.security.wxlogin.wxprovider;
 
 public class myAuthenticationManager implements AuthenticationManager {
-    upprovider uppro = new upprovider();
-    wxprovider wxpro = new wxprovider();
+    @Autowired
+    upprovider uppro ;
+    @Autowired
+    wxprovider wxpro ;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

@@ -19,7 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class upauthfilter extends AbstractAuthenticationProcessingFilter {
-    myAuthenticationManager myManager = new myAuthenticationManager();
+    //myAuthenticationManager myManager = new myAuthenticationManager();
 
     public upauthfilter() {
         super(new AntPathRequestMatcher("/login", "POST"));
@@ -42,11 +42,12 @@ public class upauthfilter extends AbstractAuthenticationProcessingFilter {
         if (json.has("username")) {
             String username = json.getString("username");
             String password=json.getString("password");
-            return myManager.authenticate(new uptoken(username,password));
+            return this.getAuthenticationManager().authenticate(new uptoken(username,password));
         }
         else {
+            System.out.println("code");
             String code = json.getString("code");
-            return myManager.authenticate(new wxtoken(code));
+            return this.getAuthenticationManager().authenticate(new wxtoken(code));
         }
     }
 }

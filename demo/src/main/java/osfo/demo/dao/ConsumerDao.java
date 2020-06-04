@@ -15,6 +15,13 @@ import java.util.List;
 @Repository
 public class ConsumerDao {
     @Autowired
+    public ConsumerDao(consumerRepo consumerrepo,userRepo userrepo,addressRepo addressrepo)
+    {
+        this.consumerrepo=consumerrepo;
+        this.addressrepo=addressrepo;
+        this.userrepo=userrepo;
+    }
+    @Autowired
     consumerRepo consumerrepo;
     @Autowired
     userRepo userrepo;
@@ -40,7 +47,7 @@ public class ConsumerDao {
     }
     public Iterable<Consumer> getbyopenid(String openid)
     {
-        return consumerrepo.findAllByWexinOpenid(openid);
+        return consumerrepo.getConsumerByWexinOpenid(openid);
     }
     public Consumer saveuser(Consumer consumer)
     {
