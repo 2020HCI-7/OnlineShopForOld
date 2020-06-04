@@ -9,6 +9,7 @@ import osfo.demo.repo.addressRepo;
 import osfo.demo.repo.consumerRepo;
 import osfo.demo.repo.userRepo;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -27,8 +28,11 @@ public class ConsumerDao {
 
         }
         return new Consumer();
+    }
 
-
+    public List<Consumer> getconsuerbyopenid(String openid)
+    {
+        return consumerrepo.getConsumerByWexinOpenid(openid);
     }
     public List<Consumer> getall()
     {
@@ -40,9 +44,7 @@ public class ConsumerDao {
     }
     public Consumer saveuser(Consumer consumer)
     {
-
         return consumerrepo.save(consumer);
-
     }
 
     public Address addaddress(Address address)
