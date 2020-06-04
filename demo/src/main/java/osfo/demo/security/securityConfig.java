@@ -10,11 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import osfo.demo.entrypoint.unauthorized;
 import osfo.demo.handler.failHandler;
 import osfo.demo.handler.successHandler;
-import osfo.demo.security.uplogin.upauthfilter;
 
 @EnableWebSecurity
 public class securityConfig extends WebSecurityConfigurerAdapter {
@@ -31,8 +29,6 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-
-
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
@@ -43,7 +39,6 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/actuator/*").hasRole("admin")
                 .anyRequest().authenticated();
         http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
-
     }
 
 

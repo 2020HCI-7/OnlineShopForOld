@@ -37,7 +37,6 @@ public class upprovider implements AuthenticationProvider {
 
         ((uptoken)authentication).id=user.getId();
 
-
         System.out.print(username);
         System.out.print(password);
 
