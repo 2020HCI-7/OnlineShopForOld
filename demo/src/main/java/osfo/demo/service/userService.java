@@ -25,6 +25,7 @@ public class userService {
     {
         return consumerdao.getall();
     }
+//    public List<Consumer> getuserbyopenid(String openid) {return consumerdao.getconsuerbyopenid(openid);}
     public response register(Consumer consumer, String code)
     {
         String res = wxAuth.wxAuthCodeToSession(code);

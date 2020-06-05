@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import osfo.demo.dao.ConsumerDao;
 import osfo.demo.entity.Consumer;
 import osfo.demo.entity.User;
+import osfo.demo.service.userService;
 import osfo.demo.util.restapi.wxauth.wxAuth;
 
 import java.util.ArrayList;
@@ -27,21 +28,23 @@ import java.util.List;
 
 @Component
 public class wxprovider implements AuthenticationProvider {
-    @Autowired
-    ConsumerDao consumerDao = new ConsumerDao();
+    @Autowired(required = true)
+    public ConsumerDao consumerDao;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String code = (String) authentication.getPrincipal();
         String res = wxAuth.wxAuthCodeToSession(code);
 
-        System.out.println(res);
         JSONObject jsonRes = new JSONObject(res);
         if(jsonRes.has("errcode") && (Integer)jsonRes.get("errcode") != 0) {
             throw new BadCredentialsException("code 错误无法获取openid");
         }
 
         String openid = jsonRes.getString("openid");
+        if(consumerDao == null){
+            System.out.println("????");
+        }
         List<Consumer> consumerList = consumerDao.getconsuerbyopenid(openid);
         if (!consumerList.isEmpty()){
             throw new BadCredentialsException("用户不存在");

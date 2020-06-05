@@ -22,12 +22,13 @@ import java.util.Collection;
 @Component
 public class upprovider implements AuthenticationProvider {
     @Autowired
-    userDao userdao;
+    public userDao userdao;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = (String) authentication.getPrincipal();
+//        System.out.println(username);
         // 获取表单用户填写的密码
         String password = (String) authentication.getCredentials();
         if (userdao.getbyusername(username).size()==0){
