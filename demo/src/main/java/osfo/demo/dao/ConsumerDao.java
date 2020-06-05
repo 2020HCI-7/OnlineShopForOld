@@ -9,18 +9,10 @@ import osfo.demo.repo.addressRepo;
 import osfo.demo.repo.consumerRepo;
 import osfo.demo.repo.userRepo;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
 public class ConsumerDao {
-    @Autowired
-    public ConsumerDao(consumerRepo consumerrepo,userRepo userrepo,addressRepo addressrepo)
-    {
-        this.consumerrepo=consumerrepo;
-        this.addressrepo=addressrepo;
-        this.userrepo=userrepo;
-    }
     @Autowired
     consumerRepo consumerrepo;
     @Autowired
@@ -32,28 +24,25 @@ public class ConsumerDao {
         if(consumerrepo.findById(id).isPresent())
         {
             return consumerrepo.getOne(id);
-
         }
         return new Consumer();
-    }
 
-    public List<Consumer> getconsuerbyopenid(String openid)
-    {
-        return consumerrepo.getConsumerByWexinOpenid(openid);
+
     }
     public List<Consumer> getall()
     {
         return consumerrepo.findAll();
     }
-    public Iterable<Consumer> getbyopenid(String openid)
-    {
-        return consumerrepo.getConsumerByWexinOpenid(openid);
-    }
     public Consumer saveuser(Consumer consumer)
     {
-        return consumerrepo.save(consumer);
-    }
 
+        return consumerrepo.save(consumer);
+
+    }
+    public List<Consumer> getconsumerbyopenid(String openid)
+    {
+        return consumerrepo.getAllByWexinOpenid(openid);
+    }
     public Address addaddress(Address address)
     {
 

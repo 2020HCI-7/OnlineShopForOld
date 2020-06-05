@@ -19,11 +19,12 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
-    public Object userregister(@RequestBody Consumer consumer, @RequestParam(value="code")String code)
+    public Object userregister(@RequestBody Consumer consumer)
     {
-        return userservice.register(consumer, code);
-    }
 
+        return userservice.register(consumer);
+
+    }
     @RequestMapping("/register/dealer")
     public Object dealerregister(@RequestBody Dealer dealer)
     {
@@ -46,7 +47,7 @@ public class usercontroller {
     @RequestMapping(value="/user/edit")
     public Object setconsumer(@RequestBody Consumer consumer)
     {
-        return userservice.edit(consumer);
+        return userservice.register(consumer);
     }
     @RequestMapping(value="/user/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)
@@ -54,11 +55,6 @@ public class usercontroller {
         Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return userservice.useradddiscount(userid,discount);
 
-    }
-    @RequestMapping(value="/user/getbyopenid")
-    public Object getbyopenid(@RequestParam("openid") String openid)
-    {
-        return userservice.getconsumerbyopenid(openid);
     }
     @RequestMapping(value="/user/info")
     public Object userinfo()

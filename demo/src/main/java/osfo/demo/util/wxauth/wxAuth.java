@@ -1,4 +1,4 @@
-package osfo.demo.util.restapi.wxauth;
+package osfo.demo.util.wxauth;
 
 import osfo.demo.util.restapi.common.httpClient;
 

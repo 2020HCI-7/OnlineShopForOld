@@ -13,6 +13,8 @@ public class unauthorized implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+
+
         httpServletResponse.getWriter().write("not log in");
     }
 }

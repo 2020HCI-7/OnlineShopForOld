@@ -22,21 +22,15 @@ import java.util.Collection;
 @Component
 public class upprovider implements AuthenticationProvider {
     @Autowired
-    private userDao userdao;
-
-
+    userDao userdao;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         System.out.println("inup");
         String username = (String) authentication.getPrincipal();
-        System.out.println(username);
         // 获取表单用户填写的密码
         String password = (String) authentication.getCredentials();
-        System.out.println(password);
-        System.out.println(userdao);
-        System.out.println(userdao.getbyusername(username));
         if (userdao.getbyusername(username).size()==0){
             throw new BadCredentialsException("用户名或密码不正确");
         }
@@ -46,6 +40,7 @@ public class upprovider implements AuthenticationProvider {
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
         ((uptoken)authentication).id=user.getId();
+
 
         System.out.print(username);
         System.out.print(password);
