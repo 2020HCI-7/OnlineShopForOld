@@ -41,7 +41,9 @@ public class wxprovider implements AuthenticationProvider {
 
         String openid = jsonRes.getString("openid");
         List<Consumer> consumerList = consumerdao.getconsumerbyopenid(openid);
-        if (!consumerList.isEmpty()){
+        System.out.println(consumerList);
+        System.out.println(consumerList.isEmpty());
+        if (consumerList.isEmpty()){
             throw new BadCredentialsException("用户不存在");
         }
 

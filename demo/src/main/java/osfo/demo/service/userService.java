@@ -30,6 +30,8 @@ public class userService {
         String res = wxAuth.wxAuthCodeToSession(code);
         JSONObject jsonRes = new JSONObject(res);
         if(jsonRes.has("errcode") && (Integer)jsonRes.get("errcode") != 0) {
+            System.out.println(code);
+            System.out.println(res);
             return new response(false,"code 错误无法获取openid",null);
         }
 

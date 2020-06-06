@@ -18,7 +18,7 @@ public class failHandler implements AuthenticationFailureHandler {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         JSONObject res=new JSONObject();
         res.put("success",false);
-        res.put("errmsg","login fail");
+        res.put("errmsg", e.getMessage());
         res.put("content",null);
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(res.toJSONString());
