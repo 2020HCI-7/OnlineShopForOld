@@ -27,6 +27,7 @@ public class upprovider implements AuthenticationProvider {
     private PasswordEncoder passwordEncoder;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("inup");
         String username = (String) authentication.getPrincipal();
 //        System.out.println(username);
         // 获取表单用户填写的密码
@@ -40,6 +41,7 @@ public class upprovider implements AuthenticationProvider {
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
         ((uptoken)authentication).id=user.getId();
+
 
         System.out.print(username);
         System.out.print(password);

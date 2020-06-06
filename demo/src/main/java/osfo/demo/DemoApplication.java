@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
-/*@ServletComponentScan(basePackages = "osfo.demo.filter")*/
+@ServletComponentScan(basePackages = "osfo.demo.filter")
 public class DemoApplication {
 
     public static void main(String[] args) {

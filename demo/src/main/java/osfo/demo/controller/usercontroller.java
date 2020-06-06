@@ -19,11 +19,10 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
-    public Object userregister(@RequestBody Consumer consumer, @RequestParam(value="code")String code)
+    public Object userregister(@RequestBody Consumer consumer, @RequestParam("code")String code)
     {
         return userservice.register(consumer, code);
     }
-
     @RequestMapping("/register/dealer")
     public Object dealerregister(@RequestBody Dealer dealer)
     {

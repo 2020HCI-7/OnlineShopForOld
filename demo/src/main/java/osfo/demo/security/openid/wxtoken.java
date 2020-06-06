@@ -1,4 +1,4 @@
-package osfo.demo.security.wxlogin;
+package osfo.demo.security.openid;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +14,7 @@ public class wxtoken extends AbstractAuthenticationToken {
      */
     public String code;
 
+
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         return super.getAuthorities();
@@ -21,9 +22,11 @@ public class wxtoken extends AbstractAuthenticationToken {
 
     public wxtoken(String code) {
         super(null);
-        this.code = code;
-    }
+        this.code=code;
 
+
+
+    }
     public wxtoken(){
         super(null);
     }
@@ -38,4 +41,3 @@ public class wxtoken extends AbstractAuthenticationToken {
         return this.code;
     }
 }
-

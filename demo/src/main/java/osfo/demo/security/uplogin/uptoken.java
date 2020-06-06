@@ -26,6 +26,7 @@ public class uptoken extends AbstractAuthenticationToken {
         this.username=username;
         this.password=password;
 
+
     }
     public uptoken(){
         super(null);

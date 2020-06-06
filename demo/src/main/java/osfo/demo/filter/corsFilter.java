@@ -1,7 +1,5 @@
 package osfo.demo.filter;
 
-
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +21,10 @@ public class corsFilter implements Filter {
         HttpServletRequest request=(HttpServletRequest) req;
         HttpServletResponse response=(HttpServletResponse) resp;
         response.setContentType("application/json;charset=UTF-8");
-        //response.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS,GET,DELETE,PUT");
+        response.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS,GET,DELETE,PUT");
         response.setHeader("Access-Control-Allow-Credentials","true");
-        //response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization");
         chain.doFilter(request,response);
 
     }

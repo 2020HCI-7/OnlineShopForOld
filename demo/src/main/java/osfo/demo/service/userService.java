@@ -9,9 +9,9 @@ import osfo.demo.dao.dealerDao;
 import osfo.demo.dao.discountDao;
 import osfo.demo.entity.*;
 import osfo.demo.util.restapi.response;
+import osfo.demo.util.wxauth.wxAuth;
 
 import java.util.List;
-import osfo.demo.util.restapi.wxauth.wxAuth;
 
 @Service
 public class userService {
@@ -25,22 +25,16 @@ public class userService {
     {
         return consumerdao.getall();
     }
-//    public List<Consumer> getuserbyopenid(String openid) {return consumerdao.getconsuerbyopenid(openid);}
     public response register(Consumer consumer, String code)
     {
         String res = wxAuth.wxAuthCodeToSession(code);
         JSONObject jsonRes = new JSONObject(res);
         if(jsonRes.has("errcode") && (Integer)jsonRes.get("errcode") != 0) {
-            return new response(false,"code error: " + jsonRes.getString("errmsg"),null);
+            return new response(false,"code 错误无法获取openid",null);
         }
 
         String openid = jsonRes.getString("openid");
         consumer.setWexinOpenid(openid);
-        consumerdao.saveuser(consumer);
-        return new response(true,"",null);
-    }
-    public response edit(Consumer consumer)
-    {
         consumerdao.saveuser(consumer);
         return new response(true,"",null);
     }
@@ -57,6 +51,11 @@ public class userService {
     public response getaddressbyuserid(Integer userid)
     {
         return new response(true,"",consumerdao.getalladdrbyuserid(userid));
+    }
+    public response edit(Consumer consumer)
+    {
+        consumerdao.saveuser(consumer);
+        return new response(true,"",null);
     }
     public response useradddiscount(Integer userid, Discount discount)
     {
