@@ -19,11 +19,9 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
-    public Object userregister(@RequestBody Consumer consumer)
+    public Object userregister(@RequestBody Consumer consumer, @RequestParam(value="code")String code)
     {
-
-        return userservice.register(consumer);
-
+        return userservice.register(consumer, code);
     }
     @RequestMapping("/register/dealer")
     public Object dealerregister(@RequestBody Dealer dealer)
@@ -47,7 +45,7 @@ public class usercontroller {
     @RequestMapping(value="/user/edit")
     public Object setconsumer(@RequestBody Consumer consumer)
     {
-        return userservice.register(consumer);
+        return userservice.editconsumer(consumer);
     }
     @RequestMapping(value="/user/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)

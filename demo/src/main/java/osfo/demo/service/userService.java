@@ -1,5 +1,6 @@
 package osfo.demo.service;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import osfo.demo.dao.ConsumerDao;
@@ -7,6 +8,7 @@ import osfo.demo.dao.dealerDao;
 import osfo.demo.dao.discountDao;
 import osfo.demo.entity.*;
 import osfo.demo.util.restapi.response;
+import osfo.demo.util.wxauth.wxAuth;
 
 import java.util.List;
 
@@ -22,14 +24,27 @@ public class userService {
     {
         return consumerdao.getall();
     }
-    public response register(Consumer consumer)
+    public response register(Consumer consumer, String code)
     {
+        String res = wxAuth.wxAuthCodeToSession(code);
+        JSONObject jsonRes = new JSONObject(res);
+        if(jsonRes.has("errcode") && (Integer)jsonRes.get("errcode") != 0) {
+            return new response(false,"code error: " + jsonRes.getString("errmsg"),null);
+        }
+
+        String openid = jsonRes.getString("openid");
+        consumer.setWexinOpenid(openid);
         consumerdao.saveuser(consumer);
         return new response(true,"",null);
     }
     public response register1(Dealer dealer)
     {
         dealerdao.savedealer(dealer);
+        return new response(true,"",null);
+    }
+    public response editconsumer(Consumer consumer)
+    {
+        consumerdao.saveuser(consumer);
         return new response(true,"",null);
     }
     public response addaddress(Address address)
