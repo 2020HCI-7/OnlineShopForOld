@@ -19,7 +19,11 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
+<<<<<<< HEAD
     public Object userregister(@RequestBody Consumer consumer, @RequestParam("code")String code)
+=======
+    public Object userregister(@RequestBody Consumer consumer, @RequestParam(value="code")String code)
+>>>>>>> e182675b045e11cc0f377548491647c36e172382
     {
         return userservice.register(consumer, code);
     }
@@ -45,7 +49,11 @@ public class usercontroller {
     @RequestMapping(value="/user/edit")
     public Object setconsumer(@RequestBody Consumer consumer)
     {
+<<<<<<< HEAD
         return userservice.edit(consumer);
+=======
+        return userservice.editconsumer(consumer);
+>>>>>>> e182675b045e11cc0f377548491647c36e172382
     }
     @RequestMapping(value="/user/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)
