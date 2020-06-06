@@ -139,7 +139,6 @@ Page({
 
   finishRegister: function (e) {
     if (e.detail["value"] = true) {
-      
       if (this.checkInput()){
         var code = ""
         wx.login({
@@ -173,7 +172,7 @@ Page({
                   })
                 }
               },
-              fali: function (res) {
+              fail: function (res) {
                 wx.showToast({
                   title: "登录失败",
                   icon: "none",
@@ -184,6 +183,7 @@ Page({
                 console.log(res)
               }
             }
+            console.log(requestInfo)
             cookieRequest(requestInfo)
           },
         })
