@@ -139,43 +139,54 @@ Page({
 
   finishRegister: function (e) {
     if (e.detail["value"] = true) {
+      
       if (this.checkInput()){
-        var requestInfo = {
-          clearCookie: false,
-          url: hostUrl + registerUrl,
-          method: "POST",
-          data: {
-            username: this.record.username,
-            password: this.record.password,
-            code: app.globalData.code,
-          },
-          success: function (res) {
-            if(res.data.success){
-              app.login()
-              wx.reLaunch({
-                url: "/pages/component/index",
-              })
-            }
-            else{
-              wx.showToast({
-                title: "登录失败",
-                icon: "none",
-                duration: 2000,//持续的时间
-              })
-            }
-          },
-          fali: function (res) {
-            wx.showToast({
-              title: "登录失败",
-              icon: "none",
-              duration: 2000,//持续的时间
+        var code = ""
+        wx.login({
+          success: (res) => {
+            console.log( {
+              username: this.record.username,
+              password: this.record.password,
+              code: code,
             })
+            code = res.code;
+            var requestInfo = {
+              clearCookie: false,
+              url: hostUrl + registerUrl + "?code=" + code,
+              method: "POST",
+              data: {
+                username: this.record.username,
+                password: this.record.password,
+              },
+              success: function (res) {
+                if(res.data.success){
+                  app.login()
+                  wx.reLaunch({
+                    url: "/pages/component/index",
+                  })
+                }
+                else{
+                  wx.showToast({
+                    title: "登录失败",
+                    icon: "none",
+                    duration: 2000,//持续的时间
+                  })
+                }
+              },
+              fali: function (res) {
+                wx.showToast({
+                  title: "登录失败",
+                  icon: "none",
+                  duration: 2000,//持续的时间
+                })
+              },
+              complete: function (res) {
+                console.log(res)
+              }
+            }
+            cookieRequest(requestInfo)
           },
-          complete: function (res) {
-            console.log(res)
-          }
-        }
-        cookieRequest(requestInfo)
+        })
       }
     }
   }

@@ -1,5 +1,5 @@
 const hostUrl = "http://localhost:8080"
-const loginUrl = "/login"
+const loginUrl = "/login/wx"
 const registerUrl = "/register/consumer"
 const register_data = "/warehouse/user/register-info"
 const user_info = "/warehouse/user/info"

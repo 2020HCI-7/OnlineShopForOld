@@ -35,7 +35,7 @@ const cookieRequest = function (requestInfo) {
   }
   
   obj.header = {
-    "Content-Type": "application/json charset=UTF-8",
+    "Content-Type": "application/json;charset=UTF-8",
     "cookie": wx.getStorageSync("cookie"),
   }
 
