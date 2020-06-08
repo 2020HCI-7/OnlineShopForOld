@@ -1,4 +1,8 @@
 // page/component/new-pages/cart/cart.js
+import { cookieRequest } from "../../../api/cookieRequest"
+import { hostUrl, imageUrl, userCart } from "../../../api/url"
+const app = getApp();
+
 Page({
   data: {
     carts:[],               // 购物车列表
@@ -10,23 +14,35 @@ Page({
     }
   },
   onShow() {
-    this.setData({
-      hasList: true,
-      carts:[
-        {id:1,title:'芹菜',image:'/image/s5.png',num:4,price:0.01,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true}
-      ]
-    });
+    // this.setData({
+    //   hasList: true,
+    //   carts:[
+    //     {id:1,title:'芹菜',image:'/image/s5.png',num:4,price:0.01,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true}
+    //   ]
+    // });
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + userCart,
+      method: "POST",
+      success: function(res) {
+        console.log(res)
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo)
+
     this.getTotalPrice();
   },
   /**

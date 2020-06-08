@@ -38,6 +38,7 @@ const cookieRequest = function (requestInfo) {
     "Content-Type": "application/json;charset=UTF-8",
     "cookie": wx.getStorageSync("cookie"),
   }
+  console.log(wx.getStorageSync("cookie"))
 
   obj.dataType = "json"
   obj.responseType = "text"
