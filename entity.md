@@ -66,3 +66,9 @@
         public List<Integer> cartIds;
         public List<Integer> discountIds;
         public Integer addressId;
+        
+    Cart:
+        public Integer id;
+        public Integer userId;
+        public Integer goodId;
+        public float number;
