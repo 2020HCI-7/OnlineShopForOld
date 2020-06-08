@@ -1,0 +1,26 @@
+
+server:
+  port: 8080
+spring:
+  application:
+    name: osfo
+  datasource:
+    url : jdbc:mysql://101.132.98.60:3306/osfo?serverTimezone=GMT%2B8
+    username : root
+    password : 123456
+    driverClassName : com.mysql.cj.jdbc.Driver
+  jpa:
+    database : MYSQL
+    show-sql : true
+    hibernate:
+      ddl-auto : update
+    properties:
+      hibernate:
+        dialect : org.hibernate.dialect.MySQL5InnoDBDialect
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
