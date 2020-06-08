@@ -40,6 +40,7 @@ public class goodcontroller {
     @RequestMapping(value="/goods/getbystoreid")
     public Object getgoodsbystoreid(@RequestParam("storeId") Integer id)
     {
+
         return goodservice.getgoodsbystoreid(id);
     }
     @RequestMapping(value="/goods/getallgood")

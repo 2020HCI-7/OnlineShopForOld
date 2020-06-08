@@ -34,6 +34,18 @@ public class storeService {
         storedao.savestore(store);
         return new response(true,"",null);
     }
+    public response getstorebystoreid(Integer id)
+    {
+        if(storedao.getstorebystoreid(id).isPresent())
+        {
+            return new response(true,"",storedao.getstorebystoreid(id).get());
+        }
+        else
+        {
+            return new response(false,"no matching store",null);
+        }
+
+    }
     public response getstorebydealerid(Integer id)
     {
         return new response(true,"",storedao.getstorebydealerid(id));

@@ -51,7 +51,7 @@ public class wxprovider implements AuthenticationProvider {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
 
-        return new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword(), authorities);
+        return new UsernamePasswordAuthenticationToken(user,user.getPassword(), authorities);
 
 
     }

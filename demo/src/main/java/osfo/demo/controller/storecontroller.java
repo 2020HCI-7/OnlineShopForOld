@@ -27,6 +27,11 @@ public class storecontroller {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return storeservice.savestore(id,address,phone);
     }
+    @RequestMapping(value="/store/getbyid")
+    public Object getstorebyid(@RequestParam("storeid") Integer storeid)
+    {
+        return storeservice.getstorebystoreid(storeid);
+    }
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/get")
     public Object getstore()

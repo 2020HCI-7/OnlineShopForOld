@@ -58,6 +58,7 @@ public class usercontroller {
     public Object userinfo()
     {
         Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return userservice.getconsumerinfo(userid);
     }
 

@@ -18,5 +18,6 @@ public class storeDao {
     }
     public List<Store> getstorebydealerid(Integer id){return storerepo.getstorebydealerid(id);}
     public void savestore(Store store){storerepo.save(store);}
+    public Optional<Store> getstorebystoreid(Integer id){return storerepo.findById(id);}
 
 }

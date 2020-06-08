@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df12bbe9-f0a1-4c06-83e8-8db16ec96ccb" name="Default Changelist" comment="" />
+    <list default="true" id="df12bbe9-f0a1-4c06-83e8-8db16ec96ccb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/entity/fullgoods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/controller/goodcontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/controller/goodcontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/controller/storecontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/controller/storecontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/dao/goodDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/dao/goodDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/dao/storeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/dao/storeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/entity/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/entity/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/security/securityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/security/securityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/service/storeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/osfo/demo/service/storeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cqPENOHWIBXzL4DznBxPJ9B1aT" />
   <component name="ProjectViewState">
@@ -15,9 +30,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/demo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -32,6 +48,8 @@
       <option name="presentableId" value="Default" />
       <updated>1591253037357</updated>
       <workItem from="1591253038652" duration="15000" />
+      <workItem from="1591583761553" duration="1522000" />
+      <workItem from="1591598456220" duration="9000" />
     </task>
     <servers />
   </component>

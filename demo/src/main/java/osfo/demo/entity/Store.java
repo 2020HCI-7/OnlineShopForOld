@@ -16,6 +16,15 @@ public class Store {
     private Dealer dealer;
     private String address;
     private String phonenumber;
+    private String neckName;
+
+    public void setNeckName(String neckName) {
+        this.neckName = neckName;
+    }
+
+    public String getNeckName() {
+        return neckName;
+    }
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;

@@ -45,10 +45,10 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorize)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register/*","/login/*","/store/*","/goods/*","/actuator","/image/*").permitAll()
+                .antMatchers("/register/*","/login/*","/store/*","/goods/*","/actuator","/actuator/*","/actuator/*/*","/image/*").permitAll()
                 .antMatchers("/cart/*").hasAuthority("user")
                 .antMatchers("/order/*").hasAnyAuthority("user","dealer")
-                .antMatchers("/actuator/*").hasAuthority("admin")
+
                 .anyRequest().authenticated();
         http.addFilterBefore(upauthfilterr(), UsernamePasswordAuthenticationFilter.class);
         //http.addFilterBefore(wxauthfilterr(),UsernamePasswordAuthenticationFilter.class);
