@@ -72,3 +72,8 @@
         public Integer userId;
         public Integer goodId;
         public float number;
+        public boolean selected;
+    cartutil:
+        public Cart cart;
+        public Goods good;
+
