@@ -185,3 +185,15 @@
 
     return:
         byte[]
+        
+ # address
+ ### add address
+    url:
+        /address/add
+    body:
+        address
+### get address by userid
+    url:
+        /address/getbyuserid
+    return:
+        address
