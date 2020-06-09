@@ -7,6 +7,12 @@ const imageUrl = "/image/get"
 const getStoreById = "/store/getbyid"
 const goodSearch = "/goods/search"
 const userCart = "/cart/findbyuserid"
+const addToCart = "/cart/add"
+const cartEdit = "/cart/edit"
+const cartDelete = "/cart/delete"
+const cartClean = "/cart/clean"
+const addressAdd = "/address/add"
+const addressGet = "/address/getbyuserid"
 
 module.exports = {
   hostUrl,
@@ -16,5 +22,11 @@ module.exports = {
   imageUrl,
   getStoreById,
   goodSearch,
-  userCart
+  userCart,
+  addToCart,
+  cartEdit,
+  cartDelete,
+  cartClean,
+  addressAdd,
+  addressGet
 }

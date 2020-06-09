@@ -1,6 +1,6 @@
 // page/component/details/details.js
 import { cookieRequest } from "../../../api/cookieRequest"
-import { getAllGood, hostUrl, imageUrl, getStoreById } from "../../../api/url"
+import { getAllGood, hostUrl, imageUrl, getStoreById, addToCart, userCart } from "../../../api/url"
 const app = getApp();
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -182,7 +182,28 @@ Page({
         //console.log(res)
       }
     }
-    cookieRequest(requestInfo)
+    cookieRequest(requestInfo);
+
+    requestInfo = {
+      clearCookie: false,
+      url: hostUrl + userCart,
+      method: "POST",
+      success: function (res) {
+        var carts = res.data.content;
+
+        that.setData({
+          inCartNum: carts.length
+        })
+        if (carts.length != 0) {
+          that.setData({
+            hasCarts : true,
+          })
+        }
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo);
   },
 
   addCount() {
@@ -198,22 +219,43 @@ Page({
     const num = this.data.goodsAmount;
     let total = this.data.inCartNum;
 
-    self.setData({
-      showToCartAnim: true
-    })
-    setTimeout( function() {
-      self.setData({
-        showToCartAnim: false,
-        scaleCart : true
-      })
-      setTimeout( function() {
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + addToCart,
+      method: "POST",
+      data: {
+        goodId: self.data.goods[self.data.curGoodIndex].id,
+        number: 1
+      },
+      success: function (res) {
+        //console.log(res)
         self.setData({
-          scaleCart: false,
-          hasCarts : true,
-          inCartNum: num + total
+          showToCartAnim: true
         })
-      }, 200)
-    }, 300)
+        setTimeout( function() {
+          self.setData({
+            showToCartAnim: false,
+            scaleCart : true
+          })
+          setTimeout( function() {
+            self.setData({
+              scaleCart: false,
+              hasCarts : true,
+              inCartNum: num + total
+            })
+          }, 200)
+        }, 300)
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: "加入购入车失败",
+          icon: "none",
+          duration: 2000//持续的时间
+        });
+      },
+      complete: function (res) {}
+    }
+    cookieRequest(requestInfo)
 
   },
 
