@@ -63,7 +63,7 @@
         public float finalmoney;
 
     cleancart:
-        public List<Integer> cartIds;
+        
         public List<Integer> discountIds;
         public Integer addressId;
         
