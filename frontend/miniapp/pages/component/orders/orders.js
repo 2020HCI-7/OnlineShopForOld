@@ -99,11 +99,11 @@ Page({
   },
 
   toPay() {
-    var cartIds = []
-    var orders = this.data.orders
-    for (var i = 0; i < orders.length; i++) {
-      cartIds.push(orders[i].id)
-    }
+    // var cartIds = []
+    // var orders = this.data.orders
+    // for (var i = 0; i < orders.length; i++) {
+    //   cartIds.push(orders[i].id)
+    // }
 
     if (!this.data.hasAddress) {
       wx.showModal({
@@ -119,7 +119,7 @@ Page({
       url: hostUrl + cartClean,
       method: "POST",
       data: {
-        cartIds: cartIds,
+        //cartIds: cartIds,
         discountIds: [],
         addressId: this.data.addressId
       },

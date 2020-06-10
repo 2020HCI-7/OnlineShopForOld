@@ -13,6 +13,7 @@ const cartDelete = "/cart/delete"
 const cartClean = "/cart/clean"
 const addressAdd = "/address/add"
 const addressGet = "/address/getbyuserid"
+const ordersGet = "/order/getbyuserid"
 
 module.exports = {
   hostUrl,
@@ -28,5 +29,6 @@ module.exports = {
   cartDelete,
   cartClean,
   addressAdd,
-  addressGet
+  addressGet,
+  ordersGet
 }
