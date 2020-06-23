@@ -202,8 +202,8 @@
 .video-region{
     left: 0rpx;
     bottom: 0rpx;
-    width: 240rpx;
-    height: 240rpx;
+    width: 256rpx;
+    height: 256rpx;
     position: absolute;
     z-index: 1;
 }

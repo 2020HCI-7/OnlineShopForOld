@@ -8,7 +8,7 @@ var innerAudioContext = wx.createInnerAudioContext();
 Page({
   onReady: function(e) {
     //this.innerAudioContext = wx.createAudioContext("ItemAudio")
-    this.videoContext = wx.createVideoContext("VirtualAvatar")
+    // this.videoContext = wx.createVideoContext("VirtualAvatar")
   },
 
   data:{
@@ -77,7 +77,9 @@ Page({
     scaleCart: false,
     hasCarts: false,
 
-    videoSrc: "",
+    
+
+
   },
 
   onLoad() {

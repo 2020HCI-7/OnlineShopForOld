@@ -1,7 +1,8 @@
-const hostUrl = "http://101.132.98.60:12345"
-// const hostUrl = "http://localhost:8080"
+// const hostUrl = "http://101.132.98.60:12345"
+const hostUrl = "http://localhost:8080"
 const loginUrl = "/login/wx"
 const registerUrl = "/register/consumer"
+const vdealerUrl = "http://113.88.255.218:10000/getImage"
 const register_data = "/warehouse/user/register-info"
 const user_info = "/warehouse/user/info"
 const modify_info = "/warehouse/user/info"
@@ -28,6 +29,7 @@ module.exports = {
   loginUrl,
   registerUrl,
   hostUrl,
+  vdealerUrl,
   register_data,
   user_info,
   modify_info,

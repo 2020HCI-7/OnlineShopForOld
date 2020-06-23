@@ -4,7 +4,7 @@ import { hostUrl, loginUrl} from "./api/url"
 App({
   onLaunch: function () {
     console.log('App Launch')
-    this.login()
+    // this.login()
   },
   onShow: function () {
     console.log('App Show')
@@ -29,7 +29,7 @@ App({
     var t = this
     wx.login({
       success (res) {
-        // console.log(res.code)
+        console.log(res.code)
         if (res.code) {
           t.setGlobalData({code: res.code})
           var requestBody = {

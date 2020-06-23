@@ -16,11 +16,7 @@
             </audio> -->
         </view>
         <view class="video-region">
-            <video 
-                id="VirtualAvatar"
-                src="{{videoSrc}}"
-                class="video-window"
-             />
+            <_vdealer dealerId="1" state="idle"></_vdealer>
         </view>
         <!-- <view class="goods-operation">
             <text class="goods-operation-num">数量  {{goodsAmount}}</text>
