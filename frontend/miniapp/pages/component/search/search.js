@@ -1,3 +1,6 @@
+import { cookieRequest } from "../../../api/cookieRequest"
+import { hostUrl, goodSearch, imageUrl } from "../../../api/url"
+
 const app = getApp();
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -9,22 +12,23 @@ Page({
     data: {
         history: [],
         hot: ['新鲜芹菜', '大红枣', '滋补桂圆干'],
-        result: [
-            {
-                id: 1,
-                url: '../details/details',
-                thumb: '/image/s4.png',
-                title: '瓜子 100g',
-                price: 0.01
-            },
-            {
-                id: 2,
-                url: '../details/details',
-                thumb: '/image/s5.png',
-                title: '新鲜芹菜 500g',
-                price: 0.02
-            }
-        ],
+        // result: [
+        //     {
+        //         id: 1,
+        //         url: '../details/details?id=1',
+        //         thumb: '/image/s4.png',
+        //         title: '瓜子 100g',
+        //         price: 0.01
+        //     },
+        //     {
+        //         id: 2,
+        //         url: '../details/details?id=2',
+        //         thumb: '/image/s5.png',
+        //         title: '新鲜芹菜 500g',
+        //         price: 0.02
+        //     }
+        // ],
+        result: [],
         showKeywords: false,
         keywords: ['山东肚脐橙', '湖南冰糖橙', '麻涌香蕉', '冰糖心苹果'],
         userInput: '',
@@ -49,6 +53,36 @@ Page({
         }else{
             if(!this.data.showKeywords){
                 timeId && clearTimeout(timeId);
+
+                var that = this;
+                var requestInfo = {
+                    clearCookie: false,
+                    url: hostUrl + goodSearch + "?sound=" + e.detail.value,
+                    method: "GET",
+                    success: function(res) {
+                        var goods = res.data.content;
+                        var keywords = [];
+
+                        for (var i = 0; i < goods.length; i++) {
+                            if (i > 4) {
+                                break;
+                            }
+                            keywords.push(goods[i].goodname);
+                        }
+
+                        that.setData({
+                            keywords: keywords
+                        });
+                    },
+                    fail: function(res) {
+                        console.log("search fail");
+                    },
+                    complete: function(res) {
+                        console.log("search complete");
+                    }
+                };
+                cookieRequest(requestInfo);
+
                 timeId = setTimeout(() => {
                     this.setData({
                         showKeywords: true
@@ -65,6 +99,47 @@ Page({
             showResult: true
         })
         this.historyHandle(text);
+
+        var that = this;
+        var requestInfo = {
+            clearCookie: false,
+            url: hostUrl + goodSearch + "?sound=" + text,
+            method: "GET",
+            success: function(res) {
+                var goods = res.data.content;
+                //     {
+                //         id: 1,
+                //         url: '../details/details?id=1',
+                //         thumb: '/image/s4.png',
+                //         title: '瓜子 100g',
+                //         price: 0.01
+                //     }, 
+                var result = [];
+                for (var i = 0; i < goods.length; i++) {
+                    if (i > 6) {
+                        break;
+                    }
+                    
+                    var temp = {}
+                    temp.id = goods[i].id
+                    temp.url = "../details/details?id=" + goods[i].id.toString()
+                    temp.thumb = hostUrl + imageUrl + "?id=" + goods[i].id.toString() + '0'
+                    temp.title = goods[i].goodname
+                    temp.price = goods[i].normalPrice
+                    result.push(temp)
+                }
+                that.setData({
+                    result: result
+                })
+            },
+            fail: function(res) {
+                console.log("search fail");
+            },
+            complete: function(res) {
+                console.log("search complete");
+            }
+        };
+        cookieRequest(requestInfo);
     },
     historyHandle(value) {
         let history = this.data.history;

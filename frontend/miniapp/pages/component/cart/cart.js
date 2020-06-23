@@ -1,4 +1,8 @@
 // page/component/new-pages/cart/cart.js
+import { cookieRequest } from "../../../api/cookieRequest"
+import { hostUrl, imageUrl, userCart, cartEdit, cartDelete } from "../../../api/url"
+const app = getApp();
+
 Page({
   data: {
     carts:[],               // 购物车列表
@@ -10,24 +14,71 @@ Page({
     }
   },
   onShow() {
-    this.setData({
-      hasList: true,
-      carts:[
-        {id:1,title:'芹菜',image:'/image/s5.png',num:4,price:0.01,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
-        {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true}
-      ]
-    });
-    this.getTotalPrice();
+    // this.setData({
+    //   hasList: true,
+    //   carts:[
+    //     {id:1,title:'芹菜',image:'/image/s5.png',num:4,price:0.01,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true},
+    //     {id:2,title:'大米',image:'/image/s6.png',num:1,price:0.03,selected:true}
+    //   ]
+    // });
+    var that = this;
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + userCart,
+      method: "POST",
+      success: function(res) {
+        //console.log(res)
+        var goods = res.data.content;
+
+        var carts = []
+        for (var i = 0; i < goods.length; i++) {
+          var cart = goods[i].cart
+          var good = goods[i].good
+
+          var temp = {}
+          temp.id = cart.id
+          temp.num = cart.number
+          temp.image = hostUrl + imageUrl + "?id=" + good.id.toString() + '0'
+          temp.selected = cart.selected
+
+          temp.title = good.goodname
+          temp.price = good.normalPrice
+
+          temp.userId = cart.userId
+          temp.goodId = cart.goodId
+
+          carts.push(temp)
+        }
+        that.setData({
+          carts: carts
+        })
+        if (carts.length != 0) {
+          that.setData({
+            hasList: true
+          })
+        }
+        else {
+          that.setData({
+            hasList: false
+          })
+        }
+        that.getTotalPrice();
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo)
+
   },
   /**
    * 当前商品选中事件
@@ -41,6 +92,23 @@ Page({
       carts: carts
     });
     this.getTotalPrice();
+
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + cartEdit,
+      method: "POST",
+      data: {
+        id: carts[index].id,
+        userId: carts[index].userId,
+        goodId: carts[index].goodId,
+        selected: !selected,
+        number: carts[index].num
+      },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo)
   },
 
   /**
@@ -49,6 +117,7 @@ Page({
   deleteList(e) {
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
+    const cart = carts[index]
     carts.splice(index,1);
     this.setData({
       carts: carts
@@ -60,6 +129,16 @@ Page({
     }else{
       this.getTotalPrice();
     }
+    
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + cartDelete + "?cartId=" + cart.id,
+      method: "GET",
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo)
   },
 
   /**
@@ -72,6 +151,22 @@ Page({
 
     for (let i = 0; i < carts.length; i++) {
       carts[i].selected = selectAllStatus;
+      var requestInfo = {
+        clearCookie: false,
+        url: hostUrl + cartEdit,
+        method: "POST",
+        data: {
+          id: carts[i].id,
+          userId: carts[i].userId,
+          goodId: carts[i].goodId,
+          selected: selectAllStatus,
+          number: carts[i].num
+        },
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {}
+      }
+      cookieRequest(requestInfo)
     }
     this.setData({
       selectAllStatus: selectAllStatus,
@@ -93,6 +188,23 @@ Page({
       carts: carts
     });
     this.getTotalPrice();
+
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + cartEdit,
+      method: "POST",
+      data: {
+        id: carts[i].id,
+        userId: carts[i].userId,
+        goodId: carts[i].goodId,
+        selected: carts[i].selected,
+        number: num
+      },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo)
   },
 
   /**
@@ -112,6 +224,23 @@ Page({
       carts: carts
     });
     this.getTotalPrice();
+
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + cartEdit,
+      method: "POST",
+      data: {
+        id: carts[i].id,
+        userId: carts[i].userId,
+        goodId: carts[i].goodId,
+        selected: carts[i].selected,
+        number: num
+      },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo)
   },
 
   /**

@@ -27,21 +27,21 @@
         <button class="broadcast-button" bind:tap="bindTapBroadcast" type="primary">
             <text >播报订单</text>
         </button>
-        <view class="orders-list" wx:for="{{orders}}" wx:key="index">
-            <view class="orders-number">订单编号：{{item.number}}</view>
-            <view class="orders-detail">
-                <image src="{{item.thumb}}"></image>
-                <view class="">{{item.name}}</view>
-                <view class="">{{item.count}}</view>
-                <text class="orders-status">{{item.status}}</text>
+        <view class="orders-list" wx:for="{{orders}}" wx:for-item="order" wx:key="index">
+            <view class="orders-number">订单编号：{{order.number}}</view>
+            <view class="orders-detail" wx:for="{{order.goods}}" wx:for-item="good" wx:key="innerIndex">
+                <image src="{{good.thumb}}"></image>
+                <view class="">{{good.name}}</view>
+                <view class="">{{good.count}}</view>
+                <text class="orders-status">{{order.status}}</text>
             </view>
             <view class="orders-footer">
-                <block wx:if="{{item.showPay}}">
-                    <text>实付：￥{{item.money}}</text>
+                <block wx:if="{{order.showPay}}">
+                    <text>实付：￥{{order.money}}</text>
                     <button size="mini" class="orders-btn" bindtap="payOrders">付款</button>
                 </block>
                 <block wx:else>
-                    <text>物流信息：{{item.logistics}}</text>
+                    <text>物流信息：{{order.logistics}}</text>
                 </block>
             </view>
         </view>

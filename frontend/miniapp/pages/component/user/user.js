@@ -1,4 +1,6 @@
 // page/component/new-pages/user/user.js
+import { cookieRequest } from "../../../api/cookieRequest"
+import { hostUrl, imageUrl, addressGet, ordersGet } from "../../../api/url"
 const app = getApp()
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -11,28 +13,42 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse("button.open-type.getUserInfo"),
 
-    orders:[
-      {
-        number: 12345,
-        thumb: "/image/s4.png",
-        name: "红豆",
-        count: 2,
-        status: "待付款",
-        money: 123.4,
-        showPay: true,
-        logistics: ""
-      },
-      {
-        number: 12345,
-        thumb: "/image/s4.png",
-        name: "红豆",
-        count: 2,
-        status: "已付款",
-        money: 123.4,
-        showPay: false,
-        logistics: "待发货"
-      }
-    ],
+    // orders:[
+    //   {
+    //     number: 12345,
+    //     goods: [
+    //       {   
+    //         thumb: "/image/s4.png",
+    //         name: "红豆",
+    //         count: 2,
+    //       },
+    //       {   
+    //         thumb: "/image/s4.png",
+    //         name: "绿豆",
+    //         count: 2,
+    //       },
+    //     ],
+    //     status: "待付款",
+    //     money: 123.4,
+    //     showPay: true,
+    //     logistics: ""
+    //   },
+    //   {
+    //     number: 12345666,
+    //     goods: [
+    //       {   
+    //         thumb: "/image/s4.png",
+    //         name: "红豆",
+    //         count: 2,
+    //       },
+    //     ],
+    //     status: "已付款",
+    //     money: 123.4,
+    //     showPay: false,
+    //     logistics: "待发货"
+    //   }
+    // ],
+    orders: [],
     hasAddress:false,
     address:{},
     addressToString: "",
@@ -62,32 +78,113 @@ Page({
     //     })
     //   }
     // })
+
   },
   onShow(){
     var self = this;
     /**
      * 获取本地缓存 地址信息
      */
-    wx.getStorage({
-      key: 'address',
-      success: function(res){
-        var addressToString =
-          "姓名:" + res.data.name + 
-          " 手机号:" + res.data.phone + 
-          " 地址:" + res.data.detail
-        var len = 40
-        if (addressToString.length > len) {
-          addressToString = addressToString.substring(0, len);
-          addressToString = addressToString + "..."
+    // wx.getStorage({
+    //   key: 'address',
+    //   success: function(res){
+    //     var addressToString =
+    //       "姓名:" + res.data.name + 
+    //       " 手机号:" + res.data.phone + 
+    //       " 地址:" + res.data.detail
+    //     var len = 40
+    //     if (addressToString.length > len) {
+    //       addressToString = addressToString.substring(0, len);
+    //       addressToString = addressToString + "..."
+    //     }
+        
+    //     self.setData({
+    //       hasAddress: true,
+    //       address: res.data,
+    //       addressToString: addressToString
+    //     })
+    //   }
+    // })
+
+    // 得到地址信息
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + addressGet,
+      method: "GET",
+      success: function(res) { 
+        var addresses = res.data.content
+        if (addresses.length != 0) {
+          var address = addresses[0]
+          var temp = {}
+          temp.name = address.receivername
+          temp.phone = address.phonenumber
+          temp.detail = address.address
+
+          var addressToString =
+            "姓名:" + temp.name + 
+            " 手机号:" + temp.phone + 
+            " 地址:" + temp.detail
+          var len = 40
+          if (addressToString.length > len) {
+            addressToString = addressToString.substring(0, len);
+            addressToString = addressToString + "..."
+          }
+
+          self.setData({
+            address: temp,
+            hasAddress: true,
+            addressToString: addressToString
+          })
+        }
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo);
+
+    //得到订单信息
+    requestInfo = {
+      clearCookie: false,
+      url: hostUrl + ordersGet,
+      method: "GET",
+      success: function(res) {
+        var orders = res.data.content;
+
+        var tempOrders = []
+        for (var i = 0; i < orders.length; i++) {
+          var order = orders[i].order;
+          var goods = orders[i].goods;
+          var items = orders[i].items;
+          var temp = {}
+
+          temp.number = order.id
+          temp.status = self.translateStatus(order.status)
+          temp.money = order.money
+          temp.showPay = (order.status == 0)
+          temp.logistics = order.comment
+
+          var tempGoods = []
+          for (var j = 0; j < goods.length; j++) {
+            tempGoods.push({
+              thumb: hostUrl + imageUrl + "?id=" + goods[j].id.toString() + '0',
+              name: goods[j].goodname,
+              count: items[j].number
+            })
+          }
+          temp.goods = tempGoods
+
+          tempOrders.push(temp)
         }
         
         self.setData({
-          hasAddress: true,
-          address: res.data,
-          addressToString: addressToString
+          orders: tempOrders
         })
-      }
-    })
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+
+    }
+    cookieRequest(requestInfo);
 
     //得到用户信息
     if (app.globalData.userInfo) {
@@ -117,6 +214,31 @@ Page({
       })
     }
   },
+
+  translateStatus: function(status) {
+    if (status == 0) {
+      return "待付款";
+    }
+    else if (status == 1) {
+      return "已付款";
+    }
+    else if (status == 2) {
+      return "已发货";
+    }
+    else if (status == 3) {
+      return "已完成";
+    }
+    else if (status == 4) {
+      return "客户取消"
+    }
+    else if (status == 5) {
+      return "商家取消"
+    }
+    else if (status == 6) {
+      return "管理员取消"
+    }
+  },
+
   /**
    * 发起支付请求
    */

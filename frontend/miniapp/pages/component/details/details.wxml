@@ -8,8 +8,8 @@
             </view>
         </navigator>
         <image wx:if="{{showToCartAnim}}" src="/image/cart1.png" class="to-carts-icon"></image>
-        <view class="audio-icon" bind:tap="bindTapPlaySpeech">
-            <icon type="info" />
+        <view class="audio-icon">
+            <icon type="info" bind:tap="bindTapPlaySpeech" />
             <!-- <audio poster="{{audioPoster}}" name="{{audioName}}" 
                 author="{{audioAuthor}}" src="{{audioSrc}}" id="ItemAudio" loop>
                 <icon type="info" />
@@ -37,7 +37,7 @@
                         <view class="goods-title">{{item.title}}</view>
                         <view class="goods-price">
                             <text>价格：\n </text>
-                            <text style="font-size: 80rpx;">￥{{item.price}}</text>
+                            <text style="font-size: 80rpx;">￥{{item.normalPrice}}</text>
                         </view> 
                     </image>
                 </swiper-item>
@@ -58,9 +58,13 @@
         <view class="goods-tab-nav {{tabIndex === 2 ?'on':''}}" bindtap="bindTap" data-index="2">产品参数</view>
         <view class="goods-content">
             <view wx:if="{{tabIndex === 0}}">
-                <view wx:if="{{goods[curGoodIndex].serviceNumber !== ''}}">商家手机：{{goods[curGoodIndex].serviceNumber}}</view>
-                <view wx:if="{{goods[curGoodIndex].serviceWechat !== ''}}">商家微信：{{goods[curGoodIndex].serviceWechat}}</view>
-                {{goods[curGoodIndex].service}}
+                <view wx:if="{{stores[goods[curGoodIndex].storeId].phonenumber !== ''}}">
+                    商家手机：{{stores[goods[curGoodIndex].storeId].phonenumber}}
+                </view>
+                <!-- <view wx:if="{{stores[goods[curGoodIndex].storeId].serviceWechat !== ''}}">
+                    商家微信：{{stores[goods[curGoodIndex].storeId].serviceWechat}}
+                </view> -->
+                {{stores[goods[curGoodIndex].storeId].neckName}}
             </view>
             <view wx:if="{{tabIndex === 1}}">{{goods[curGoodIndex].detail}}</view>
             <view wx:if="{{tabIndex === 2}}">{{goods[curGoodIndex].parameter}}</view>

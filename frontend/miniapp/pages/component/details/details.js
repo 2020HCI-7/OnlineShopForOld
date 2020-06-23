@@ -1,4 +1,6 @@
 // page/component/details/details.js
+import { cookieRequest } from "../../../api/cookieRequest"
+import { getAllGood, hostUrl, imageUrl, getStoreById, addToCart, userCart } from "../../../api/url"
 const app = getApp();
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -27,44 +29,48 @@ Page({
     goods: [
       {
         id: 0,
+        storeId: 0,
+        normalPrice: 0.0,
+        leastPrice: 0.0,
+
         image: '../../../image/goods1.png',
         title: '新鲜梨',
-        price: 1.23,
-        stock: '有货',
+        //price: 1.23,
+        stock: 30,
         detail: '这是新鲜梨的详细信息',
         parameter: '一份一个，一个125g',
-        service: '不支持退货',
-        serviceNumber: "13456789012",
-        serviceWechat: "hsc10705581",
         speech: "",
       },
       {
         id: 1,
+        storeId: 0,
+        normalPrice: 0.0,
+        leastPrice: 0.0,
+
         image: '../../../image/s5.png',
         title: '芹菜',
-        price: 15.23,
-        stock: '有货',
+        //price: 15.23,
+        stock: 30,
         detail: '这是芹菜的详细信息',
         parameter: '一份500g',
-        service: '不支持退货',
-        serviceNumber: "10002132100",
-        serviceWechat: "hsc10705581",
         speech: "",
       },
       {
         id: 2,
+        storeId: 0,
+        normalPrice: 0.0,
+        leastPrice: 0.0,
+
         image: '../../../image/s4.png',
         title: '红豆',
-        price: 1.23,
-        stock: '有货',
+        //price: 1.23,
+        stock: 30,
         detail: '这是红豆的详细信息',
         parameter: '一份500g',
-        service: '不支持退货',
-        serviceNumber: "13456789012",
-        serviceWechat: "hsc10705581",
         speech: "",
       }
     ],
+    stores: {},
     curGoodIndex: 0,
     goodAutoPlay: false,
     goodSwiperInterval: 5000,
@@ -82,18 +88,122 @@ Page({
 
   },
 
-  onLoad() {
-    // 将来改成从后端获取数据
-    var goods = this.data.goods 
-    for (var i = 0; i < goods.length; i++) {
-      var good = goods[i]
-      var text = "商品名称：" + good.title + ";商品详情：" + good.detail + ";"
-      var saved_index = i
+  onLoad(options) {
+    if (options.id !== undefined) {
+      this.setData({
+        navigateID: options.id
+      })
     }
   },
 
   onShow() {
+    var that = this;
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + getAllGood,
+      method: "GET",
+      success: function (res) {
+        /* tempGood
+        {
+          id: 0,
+          storeId: 0,
+          normalPrice: 0.0,
+          leastPrice: 0.0,
 
+          image: '../../../image/goods1.png',
+          title: '新鲜梨',
+          //price: 1.23,
+          stock: 30,
+          detail: '这是新鲜梨的详细信息',
+          parameter: '一份一个，一个125g',
+          speech: "",
+        }, 
+        */
+        var tempGoods = []
+        var goods = res.data.content;
+        for (var i = 0; i < goods.length; i++) {
+          var tempGood = {}
+          var good = goods[i]
+
+          if (good.id == that.data.navigateID) {
+            that.setData({
+              curGoodIndex: i
+            })
+          }
+          
+          tempGood.id = good.id;
+          tempGood.storeId = good.storeId;
+          tempGood.normalPrice = good.normalPrice;
+          tempGood.leastPrice = good.leastPrice;
+
+          tempGood.image = hostUrl + imageUrl + "?id=" + good.id.toString() + '0';
+          tempGood.title = good.goodname;
+          tempGood.stock = good.storage;
+          tempGood.detail = good.description;
+          tempGood.parameter = "temp parameter";
+          tempGood.speech = "";
+
+          var storeId = good.storeId
+          var store = that.data.stores[good.storeId];
+          if (store == null) {
+            var storeRequestInfo = {
+              clearCookie: false,
+              url: hostUrl + getStoreById + "?storeid=" + storeId,
+              method: "GET",
+              success: function(res) {
+                var stores = that.data.stores;
+                stores[res.data.content.id] = res.data.content;
+                that.setData({
+                  stores: stores
+                });
+                console.log(that.data.stores);
+              },
+              fail: function(res) {console.log("get store error")},
+              complete: function(res) {}
+            }
+            cookieRequest(storeRequestInfo)
+          }
+          //console.log(store);
+
+          //tempGood.service = "temp service";
+          //tempGood.serviceNumber = "temp serviceNumber";
+          //tempGood.serviceWechat = "temp serviceWechat";
+
+          tempGoods.push(tempGood);
+        }
+        that.setData({
+          goods: tempGoods
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+      complete: function (res) {
+        //console.log(res)
+      }
+    }
+    cookieRequest(requestInfo);
+
+    requestInfo = {
+      clearCookie: false,
+      url: hostUrl + userCart,
+      method: "POST",
+      success: function (res) {
+        var carts = res.data.content;
+
+        that.setData({
+          inCartNum: carts.length
+        })
+        if (carts.length != 0) {
+          that.setData({
+            hasCarts : true,
+          })
+        }
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo);
   },
 
   addCount() {
@@ -109,22 +219,43 @@ Page({
     const num = this.data.goodsAmount;
     let total = this.data.inCartNum;
 
-    self.setData({
-      showToCartAnim: true
-    })
-    setTimeout( function() {
-      self.setData({
-        showToCartAnim: false,
-        scaleCart : true
-      })
-      setTimeout( function() {
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + addToCart,
+      method: "POST",
+      data: {
+        goodId: self.data.goods[self.data.curGoodIndex].id,
+        number: 1
+      },
+      success: function (res) {
+        //console.log(res)
         self.setData({
-          scaleCart: false,
-          hasCarts : true,
-          inCartNum: num + total
+          showToCartAnim: true
         })
-      }, 200)
-    }, 300)
+        setTimeout( function() {
+          self.setData({
+            showToCartAnim: false,
+            scaleCart : true
+          })
+          setTimeout( function() {
+            self.setData({
+              scaleCart: false,
+              hasCarts : true,
+              inCartNum: num + total
+            })
+          }, 200)
+        }, 300)
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: "加入购入车失败",
+          icon: "none",
+          duration: 2000//持续的时间
+        });
+      },
+      complete: function (res) {}
+    }
+    cookieRequest(requestInfo)
 
   },
 

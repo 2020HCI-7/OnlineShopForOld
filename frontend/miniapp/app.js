@@ -79,7 +79,10 @@ App({
             title: "登录失败",
             icon: "none",
             duration: 2000//持续的时间
-          })
+          });
+          wx.navigateTo({
+            url: '/pages/component/register/register',
+          });
         }
       },
       fail(res){
@@ -87,7 +90,10 @@ App({
           title: "登录失败",
           icon: "none",
           duration: 2000//持续的时间
-        })
+        });
+        wx.navigateTo({
+          url: '/pages/component/register/register',
+        });
       }
     })
   }
