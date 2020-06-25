@@ -22,11 +22,17 @@
         username string
         password string
 
-### edit user
+### edit consumer
     url:
-        /user/edit
+        /consumer/edit
     body:
         consumer
+        
+### edit dealer
+    url:
+        /dealer/edit
+    body:
+        dealer
 
 ### user add discount
     url:
@@ -57,12 +63,18 @@
 ### get store(used by dealer)
     url:
         /store/get
+        
+### edit store
+    url:
+        /store/edit
+    body:
+        store
 ### add discount
     url:
         /sotre/adddiscount
     body:
         discount
-    
+
 ### remove discount
     url:
         /store/removediscount
