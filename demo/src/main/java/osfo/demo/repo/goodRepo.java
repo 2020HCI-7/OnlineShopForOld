@@ -10,4 +10,5 @@ import java.util.List;
 public interface   goodRepo extends JpaRepository<Goods,Integer> {
     @Query("SELECT b from Goods b where b.storeId=?1")
     List<Goods> getgoodsbystoreid(Integer storeid);
+    List<Goods> getGoodsByTag(String tag);
 }

@@ -34,6 +34,12 @@ public class storeService {
         storedao.savestore(store);
         return new response(true,"",null);
     }
+    public response save(Store store)
+    {
+
+        storedao.savestore(store);
+        return new response(true,"",null);
+    }
     public response getstorebystoreid(Integer id)
     {
         if(storedao.getstorebystoreid(id).isPresent())

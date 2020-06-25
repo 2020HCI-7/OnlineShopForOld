@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import osfo.demo.dao.ConsumerDao;
 import osfo.demo.dao.dealerDao;
 import osfo.demo.dao.discountDao;
+import osfo.demo.dao.userDao;
 import osfo.demo.entity.*;
 import osfo.demo.util.restapi.response;
 import osfo.demo.util.wxauth.wxAuth;
@@ -17,6 +18,8 @@ import java.util.List;
 public class userService {
     @Autowired
     ConsumerDao consumerdao;
+    @Autowired
+    userDao userdao;
     @Autowired
     dealerDao dealerdao;
     @Autowired
@@ -54,9 +57,14 @@ public class userService {
     {
         return new response(true,"",consumerdao.getalladdrbyuserid(userid));
     }
-    public response edit(Consumer consumer)
+    public response editconsumer(Consumer consumer)
     {
         consumerdao.saveuser(consumer);
+        return new response(true,"",null);
+    }
+    public response editdealer(Dealer dealer)
+    {
+        dealerdao.savedealer(dealer);
         return new response(true,"",null);
     }
     public response useradddiscount(Integer userid, Discount discount)
@@ -71,7 +79,29 @@ public class userService {
     }
     public response getconsumerinfo(Integer id)
     {
-        return new response(true,"",consumerdao.getconsumerbyid(id));
+        Consumer consumer = consumerdao.getconsumerbyid(id);
+        if(consumer==null)
+        {
+            return new response(false,"no such user",null);
+        }
+        else
+        {
+            return new response(true,"",consumer);
+        }
+
+    }
+    public response getuserinfo(Integer id)
+    {
+        User user = userdao.getuserbyid(id);
+        if(user==null)
+        {
+            return new response(false,"no such user",null);
+        }
+        else
+        {
+            return new response(true,"",user);
+        }
+
     }
 
 

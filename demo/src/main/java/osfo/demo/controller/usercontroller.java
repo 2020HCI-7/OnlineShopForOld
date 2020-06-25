@@ -42,10 +42,15 @@ public class usercontroller {
         return userservice.getaddressbyuserid(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
-    @RequestMapping(value="/user/edit")
+    @RequestMapping(value="/consumer/edit")
     public Object setconsumer(@RequestBody Consumer consumer)
     {
-        return userservice.edit(consumer);
+        return userservice.editconsumer(consumer);
+    }
+    @RequestMapping(value="/dealer/edit")
+    public Object setconsumer(@RequestBody Dealer dealer)
+    {
+        return userservice.editdealer(dealer);
     }
     @RequestMapping(value="/user/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)
@@ -54,12 +59,19 @@ public class usercontroller {
         return userservice.useradddiscount(userid,discount);
 
     }
+    @RequestMapping(value="/consumer/info")
+    public Object consumerinfo()
+    {
+        Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return userservice.getconsumerinfo(userid);
+    }
     @RequestMapping(value="/user/info")
     public Object userinfo()
     {
         Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        return userservice.getconsumerinfo(userid);
+        return userservice.getuserinfo(userid);
     }
 
 }

@@ -25,9 +25,17 @@ public class goodDao {
     {
         return goodrepo.findAll();
     }
+    public Optional<Goods> getbyid(Integer id)
+    {
+        return goodrepo.findById(id);
+    }
     public void savegood(Goods good)
     {
         goodrepo.save(good);
+    }
+    public List<Goods> getgoodbytag(String tag)
+    {
+        return goodrepo.getGoodsByTag(tag);
     }
    public List<Goods> getgoodsbyname(String name)
    {

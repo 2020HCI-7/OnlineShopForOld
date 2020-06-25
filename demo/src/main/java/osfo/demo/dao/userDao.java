@@ -17,11 +17,19 @@ public class userDao {
     @Autowired
     userRepo userrepo;
 
-    public Optional<User> getuserbyid(Integer id)
+    public User getuserbyid(Integer id)
     {
-        return userrepo.findById(id);
+        if(userrepo.findById(id).isPresent())
+        {
+            return userrepo.getOne(id);
+        }
+        return null;
 
 
+    }
+    public void saveuser(User user)
+    {
+        userrepo.save(user);
     }
     public List<User> getall()
     {

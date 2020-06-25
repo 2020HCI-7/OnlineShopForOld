@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import osfo.demo.entity.Goods;
 import osfo.demo.entity.User;
 import osfo.demo.entity.Userorder;
 import osfo.demo.service.orderService;
@@ -27,6 +28,7 @@ public class ordercontroller {
     @RequestMapping(value="/order/getbyuserid")
     public Object getorderbyid()
     {
+
         return orderservice.getorderbyuserid(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
     @RequestMapping(value="/order/getbydealerid")

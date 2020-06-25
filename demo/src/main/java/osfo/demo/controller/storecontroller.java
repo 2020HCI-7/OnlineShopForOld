@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import osfo.demo.entity.Discount;
+import osfo.demo.entity.Store;
 import osfo.demo.entity.User;
 import osfo.demo.service.storeService;
 
@@ -38,6 +39,13 @@ public class storecontroller {
     {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return storeservice.getstorebydealerid(id);
+    }
+    @PreAuthorize("hasRole('dealer')")
+    @RequestMapping(value="/store/edit")
+    public Object getstore(@RequestBody Store store)
+    {
+
+        return storeservice.save(store);
     }
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/adddiscount")

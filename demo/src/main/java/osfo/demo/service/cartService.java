@@ -25,13 +25,36 @@ public class cartService {
     goodDao gooddao;
     @Autowired
     discountDao discountdao;
-    public Object addtocart(Cart cart)
+    public Object addtocart(Integer userid,Cart mycart)
     {
-        return new response(true,null,cartdao.save(cart));
+        Iterable<Cart> carts =cartdao.getallbyuserid(userid);
+        for(Cart cart:carts)
+        {
+
+            Goods good=gooddao.getgoodbyid(cart.goodId).get();
+            if(cart.goodId.equals(mycart.goodId))
+            {
+                cart.setNumber(cart.number+mycart.number);
+                return new response(true,null,cartdao.save(cart));
+            }
+
+        }
+        return new response(true,null,cartdao.save(mycart));
     }
     public Object getmycart(Integer userid)
     {
-        return new response(true,null,cartdao.getallbyuserid(userid));
+        List<cartutil> tmp=new LinkedList<cartutil>();
+        Iterable<Cart> carts =cartdao.getallbyuserid(userid);
+        for(Cart cart:carts)
+        {
+            Goods good=gooddao.getgoodbyid(cart.goodId).get();
+            cartutil tmpu=new cartutil();
+            tmpu.cart=cart;
+            tmpu.good=good;
+            tmp.add(tmpu);
+
+        }
+        return new response(true,null,tmp);
     }
     public Object cleancart(Integer userid, cleancart info)
     {
@@ -41,7 +64,7 @@ public class cartService {
         for(Cart cart:carts)
         {
             Goods good=gooddao.getgoodbyid(cart.goodId).get();
-            if(info.cartIds.contains(cart.id))
+            if(cart.selected)
             {
                 if(orders.containsKey(good.getStoreId()))
                 {
@@ -107,6 +130,30 @@ public class cartService {
     {
         cartdao.delete(cartid);
         return new response(true,null,null );
+    }
+    public Object autobuy(Integer userid)
+    {
+        List<orderutil> orderutils = orderdao.getorderbyuserid(userid);
+        if(orderutils.isEmpty())
+        {
+            return new response(false,"请先尝试一次买菜后再进行自动买菜哦",null);
+        }
+        orderutil tmp=orderutils.get(orderutils.size()-1);
+        Iterable<OrderItem> orderItems = orderdao.getorderitem(tmp.order.id);
+        for(OrderItem item:orderItems)
+        {
+            Cart cart=new Cart();
+            cart.setNumber(item.getNumber());
+            cart.setUserId(userid);
+            cart.setGoodId(item.getGoodId());
+
+            cartdao.save(cart);
+        }
+        return new response(true,null,null );
+    }
+    public Object soundbuy(String soundbuy)
+    {
+        
     }
     public Object editcat(Cart cart)
     {
