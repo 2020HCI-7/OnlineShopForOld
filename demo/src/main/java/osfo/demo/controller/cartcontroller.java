@@ -40,9 +40,10 @@ public class cartcontroller {
         return cartservice.editcat(cart);
     }
     @RequestMapping(value="/cart/soundbuy")
-    public Object soundbuy(@RequestParam("sound") String sound)
+    public Object soundbuy(@RequestBody String sound)
     {
-        return cartservice.soundbuy(sound);
+        Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return cartservice.soundbuy(sound,id);
     }
     @RequestMapping(value="/cart/autobuy")
     public Object autobuy()

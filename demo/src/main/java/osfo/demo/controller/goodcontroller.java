@@ -63,6 +63,13 @@ public class goodcontroller {
         return goodservice.addgood(id,good);
 
     }
+    @PreAuthorize("hasRole('dealer')")
+    @RequestMapping(value="/goods/editgood")
+    public Object editgood(@RequestBody Goods good)
+    {
+        return goodservice.editgood(good);
+
+    }
 
     @RequestMapping(value="/image/upload")
     public Object uploadimg(HttpServletRequest request, HttpServletResponse response)

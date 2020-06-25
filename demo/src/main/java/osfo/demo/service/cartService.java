@@ -151,13 +151,103 @@ public class cartService {
         }
         return new response(true,null,null );
     }
-    public Object soundbuy(String soundbuy)
+    public Object soundbuy(String sound,Integer userid)
     {
-        
+        try{
+            int i=0;
+            for(;i<sound.length();++i)
+            {
+                if(isnum(sound.substring(i,i+1)))
+                {
+                    break;
+                }
+            }
+            int p=sound.indexOf("斤");
+            List<Goods> goods = gooddao.getgoodsbyname(sound);
+            Goods goods1 = goods.get(0);
+
+            int i1 = chineseNumber2Int(sound.substring(i, p));
+            Cart cart=new Cart();
+            cart.setGoodId(goods1.getId());
+            cart.setUserId(userid);
+            cart.setNumber(chineseNumber2Int(sound.substring(i,p)));
+            cartdao.save(cart);
+            return new response(true,"",null);
+        }
+        catch (Exception e)
+        {
+            return new response(false,"cant recognize",null);
+        }
+
     }
     public Object editcat(Cart cart)
     {
         return new response(true,null,cartdao.save(cart));
+    }
+
+    public boolean isnum(String str)
+    {
+        String tmp="零一两二三四五六七八九十百千万";
+        if(tmp.contains(str))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private static int chineseNumber2Int(String chineseNumber){
+        int result = 0;
+        int temp = 1;//存放一个单位的数字如：十万
+        int count = 0;//判断是否有chArr
+        char[] cnArr = new char[]{'一','二','三','四','五','六','七','八','九'};
+        char[] chArr = new char[]{'十','百','千','万','亿'};
+        for (int i = 0; i < chineseNumber.length(); i++) {
+            boolean b = true;//判断是否是chArr
+            char c = chineseNumber.charAt(i);
+            for (int j = 0; j < cnArr.length; j++) {//非单位，即数字
+                if (c == cnArr[j]) {
+                    if(0 != count){//添加下一个单位之前，先把上一个单位值添加到结果中
+                        result += temp;
+                        temp = 1;
+                        count = 0;
+                    }
+                    // 下标+1，就是对应的值
+                    temp = j + 1;
+                    b = false;
+                    break;
+                }
+            }
+            if(b){//单位{'十','百','千','万','亿'}
+                for (int j = 0; j < chArr.length; j++) {
+                    if (c == chArr[j]) {
+                        switch (j) {
+                            case 0:
+                                temp *= 10;
+                                break;
+                            case 1:
+                                temp *= 100;
+                                break;
+                            case 2:
+                                temp *= 1000;
+                                break;
+                            case 3:
+                                temp *= 10000;
+                                break;
+                            case 4:
+                                temp *= 100000000;
+                                break;
+                            default:
+                                break;
+                        }
+                        count++;
+                    }
+                }
+            }
+            if (i == chineseNumber.length() - 1) {//遍历到最后一个字符
+                result += temp;
+            }
+        }
+        return result;
     }
 
 }

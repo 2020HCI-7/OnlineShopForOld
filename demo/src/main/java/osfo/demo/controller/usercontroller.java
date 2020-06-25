@@ -42,6 +42,13 @@ public class usercontroller {
         return userservice.getaddressbyuserid(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
+    @RequestMapping(value="/address/getbyid")
+    public Object getaddrbyid(@RequestParam("addressid") Integer id)
+    {
+        return userservice.getaddressbyid(id);
+    }
+
+
     @RequestMapping(value="/consumer/edit")
     public Object setconsumer(@RequestBody Consumer consumer)
     {

@@ -4,10 +4,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
-import osfo.demo.dao.ConsumerDao;
-import osfo.demo.dao.dealerDao;
-import osfo.demo.dao.discountDao;
-import osfo.demo.dao.userDao;
+import osfo.demo.dao.*;
 import osfo.demo.entity.*;
 import osfo.demo.util.restapi.response;
 import osfo.demo.util.wxauth.wxAuth;
@@ -24,6 +21,8 @@ public class userService {
     dealerDao dealerdao;
     @Autowired
     discountDao discountdao;
+    @Autowired
+    addressDao adddao;
     public List<Consumer> getalluser()
     {
         return consumerdao.getall();
@@ -102,6 +101,10 @@ public class userService {
             return new response(true,"",user);
         }
 
+    }
+    public response getaddressbyid(Integer id)
+    {
+        return new response(true,"",adddao.getaddressbyid(id));
     }
 
 

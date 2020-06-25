@@ -56,6 +56,11 @@ public class goodService {
         gooddao.savegood(good);
         return new response(true,"",null);
     }
+    public Object editgood(Goods good)
+    {
+        gooddao.savegood(good);
+        return new response(true,"",null);
+    }
     public Object getgoodsbyname(String name)
     {
         return new response(true,"",gooddao.getgoodsbyname(name));
