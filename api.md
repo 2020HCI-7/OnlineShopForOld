@@ -139,7 +139,11 @@
 ### 一键买菜
     url:
         /cart/autobuy
-
+### 语音买菜
+    url:
+        /cart/soundbuy
+    param:
+        sound string
 ### find one user's cart
     url:
         /cart/findbyuserid
