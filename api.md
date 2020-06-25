@@ -187,13 +187,13 @@
     url:
         /order/getbyuserid
     return:
-        list<userorder>
+        list<orderutil>
 
 ### get order by dealer id
     url:
         /order/getbydealerid
     return:
-        list<userorder>
+        list<orderutil>
 
 ### get goods in orders
     url:
@@ -233,3 +233,8 @@
         /address/getbyuserid
     return:
         address
+### get address by id
+    url:
+        /address/getbyid
+    return:
+        adress
