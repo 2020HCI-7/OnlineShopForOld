@@ -1,3 +1,7 @@
+import { cookieRequest } from "../../api/cookieRequest"
+import { hostUrl, autoBuy } from "../../api/url"
+const app = getApp();
+
 Page({
   data: {
     imgUrls: [
@@ -12,12 +16,26 @@ Page({
   },
 
   BindOneClickShopping(params) {
-    wx.switchTab({
-      url: "cart/cart",
-      success: function(res){
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + autoBuy,
+      method: "GET",
+      success: function (res) {
+        wx.switchTab({
+          url: "cart/cart",
+          success: function(res){
 
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+      complete: function (res) {
+        //console.log(res)
       }
-    })
+    }
+    cookieRequest(requestInfo);
   },
 
   BindVoiceShopping(params) {

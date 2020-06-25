@@ -1,16 +1,17 @@
 @import '../common/common.wxss';
 .search{
-    padding: 20rpx;
+    padding: 0rpx;
 }
 .search-text{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50rpx;
+    height: 100rpx;
     color: #aaa;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 20rpx;
+    font-size: 64rpx;
 }
 .search-text icon{
     margin-right: 10rpx;

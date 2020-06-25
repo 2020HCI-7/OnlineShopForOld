@@ -14,6 +14,8 @@ const cartClean = "/cart/clean"
 const addressAdd = "/address/add"
 const addressGet = "/address/getbyuserid"
 const ordersGet = "/order/getbyuserid"
+const autoBuy = "/cart/autobuy"
+const soundBuy = "/cart/soundbuy"
 
 module.exports = {
   hostUrl,
@@ -30,5 +32,7 @@ module.exports = {
   cartClean,
   addressAdd,
   addressGet,
-  ordersGet
+  ordersGet,
+  autoBuy,
+  soundBuy
 }
