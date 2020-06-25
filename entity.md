@@ -36,6 +36,7 @@
         private String goodname;
         private String description;
         private float storage;
+        private String tag;
 
     store:
         private Integer id;
