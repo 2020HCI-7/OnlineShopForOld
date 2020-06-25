@@ -77,4 +77,10 @@
     cartutil:
         public Cart cart;
         public Goods good;
+        
+    orderutil:
+        public Userorder order;
+        public List<OrderItem> items;
+        public List<Goods> goods;
+        public Address address;
 
