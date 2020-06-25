@@ -104,6 +104,12 @@
         /goods/addgood
     body:
         goods
+
+### editgoods
+    url:
+        /goods/edit
+    body:
+        goods
 ### getallgood
     url:
         /goods/getallgood
