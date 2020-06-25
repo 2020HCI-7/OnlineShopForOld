@@ -90,6 +90,7 @@
         dealerid string
     return:
         List<goods>
+
 ### addgoods
     url:
         /goods/addgood
@@ -105,6 +106,13 @@
         /goods/getbysound
     name:
         file
+    return:
+        List<goods>
+### getgoodbytag
+    url:
+        /goods/searchbytag
+    param:
+        tag string
     return:
         List<goods>
 ### search good by name
