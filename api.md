@@ -28,6 +28,7 @@
     body:
         consumer
         
+        
 ### edit dealer
     url:
         /dealer/edit
@@ -45,6 +46,13 @@
         /user/info
     return:
         list<user>
+        
+
+### get consumer info
+    url:
+        /consumer/info
+    return:
+        list<consumer>
         
 # store
 ### getallstore
