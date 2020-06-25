@@ -136,6 +136,10 @@
         /cart/add
     body:
         cart
+### 一键买菜
+    url:
+        /cart/autobuy
+
 ### find one user's cart
     url:
         /cart/findbyuserid
