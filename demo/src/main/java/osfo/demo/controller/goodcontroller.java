@@ -63,6 +63,7 @@ public class goodcontroller {
         return goodservice.addgood(id,good);
 
     }
+
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/goods/editgood")
     public Object editgood(@RequestBody Goods good)

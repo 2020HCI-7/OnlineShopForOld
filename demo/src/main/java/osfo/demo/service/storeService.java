@@ -26,11 +26,17 @@ public class storeService {
     }
     public response savestore(Integer dealerid,String address,String phone)
     {
+        if(!storedao.getstorebydealerid(dealerid).isEmpty())
+        {
+            return new response(false,"store has been created",null);
+        }
         Store store=new Store();
         store.setAddress(address);
         store.setPhonenumber(phone);
 
         store.setDealer(dealerdao.getdealerbyid(dealerid).get());
+
+
         storedao.savestore(store);
         return new response(true,"",null);
     }
