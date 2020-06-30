@@ -8,8 +8,5 @@
             <view class="">*{{item.count}}</view>
             <text class="coupons-describe">{{item.describe}}</text>
         </view>
-        <view class="coupons-footer">
-            <text>使用截止日期：{{item.end}}</text>
-        </view>
     </view>
 </view>

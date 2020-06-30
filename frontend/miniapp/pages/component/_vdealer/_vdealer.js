@@ -63,15 +63,8 @@ Component({
           url : vdealerUrl + "?name=" + this.data.storeId + "&action=" + newState,
         }, () => {
           var localStorage = wx.getStorageSync(this.data.storeId+ "&" + newState)
-          // console.log(localStorage)
-          if( localStorage === undefined || localStorage === "") {
-            this.download(newState)
-          }
-          else {
-            this.setData({
-              downloadPicturePath: localStorage
-            })
-          }
+          console.log(this.data.url)
+          this.download(newState)
         })
 
         return true
@@ -88,6 +81,7 @@ Component({
         url: this.data.url,
         success: function (res) {
           if (res.statusCode === 200) {
+            console.log("set")
             that.setData({
               downloadPicturePath: res.tempFilePath
             })

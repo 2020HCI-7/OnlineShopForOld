@@ -1,4 +1,6 @@
 // pages/component/coupon/coupon.js
+import { cookieRequest } from "../../../api/cookieRequest"
+import { hostUrl,getUserDiscount } from "../../../api/url"
 Page({
 
   /**
@@ -43,7 +45,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var self = this
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + getUserDiscount,
+      method: "GET",
+      success: function(res) {
+        var discounts = []
+        for (var i = 0; i < res.data.content.length; i++) {
+          var discount = res.data.content[i]
+          discount.number = discount.id
+          discount.thumb = "/image/s1.png"
+          discount.name = "满减卷"
+          discount.count = 1
+          discount.describe = "满"+ discount.man + "减" + discount.jian
+          discounts.push(discount)
+        }
+        self.setData({
+          coupons: discounts
+        })
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo);
   },
 
   /**

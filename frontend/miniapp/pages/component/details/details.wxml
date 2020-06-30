@@ -61,12 +61,12 @@
             <view wx:if="{{tabIndex === 0}}">
                 <view wx:if="{{stores[goods[curGoodIndex].storeId].phonenumber !== ''}}">
                     商家手机：{{stores[goods[curGoodIndex].storeId].phonenumber}}
-                    {{goods[curGoodIndex].storeId}}
+                    商家店铺编号：{{goods[curGoodIndex].storeId}}
                 </view>
                 <!-- <view wx:if="{{stores[goods[curGoodIndex].storeId].serviceWechat !== ''}}">
                     商家微信：{{stores[goods[curGoodIndex].storeId].serviceWechat}}
                 </view> -->
-                {{stores[goods[curGoodIndex].storeId].neckName}}
+                <!-- 商家名称：{{stores[goods[curGoodIndex].storeId].neckName}} -->
             </view>
             <view wx:if="{{tabIndex === 1}}">{{goods[curGoodIndex].detail}}</view>
             <view wx:if="{{tabIndex === 2}}">{{goods[curGoodIndex].parameter}}</view>

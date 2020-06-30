@@ -8,8 +8,8 @@
       placeholder="{{placeholderValue}}"
       value="{{value}}"
       password="{{password}}"
-    />
       bindinput="handleInputChange"
+    />
   </view>
   <view class="underline">
     {{underline}}
