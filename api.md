@@ -161,8 +161,8 @@
 ### 语音买菜
     url:
         /cart/soundbuy
-    param:
-        sound string
+    body:
+        the string of the sound
 ### find one user's cart
     url:
         /cart/findbyuserid
