@@ -31,6 +31,13 @@
                     <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
                 </navigator>
             </view>
+            <view class="newest-list">
+                <navigator url="details/details">
+                    <image src="/image/s7.jpg"></image>
+                    <view class="newest-text"><text>生鲜</text></view>
+                    <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
+                </navigator>
+            </view>
         </view>
     </view>
 
