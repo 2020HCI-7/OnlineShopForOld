@@ -41,6 +41,7 @@ public class goodDao {
    {
        List<Goods> allgood=getallgood();
        List<Goods> result=new LinkedList<Goods>();
+       System.out.println(name);
        for(Goods good:allgood)
        {
 

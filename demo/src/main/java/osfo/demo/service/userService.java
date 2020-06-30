@@ -73,6 +73,15 @@ public class userService {
     public response useradddiscount(Integer userid, Discount discount)
     {
         UserDiscount tmp=new UserDiscount();
+        Iterable<UserDiscount> discounts = discountdao.getalldiscount(userid);
+        System.out.println(discount.getId());
+        for(UserDiscount ud:discounts)
+        {
+            if(ud.getDiscountId().equals(discount.getId()))
+            {
+                return new response(false,"you have got this discount",null);
+            }
+        }
         tmp.setDiscountId(discount.getId());
         tmp.setUserId(userid);
         tmp.setJian(discount.getJian());
