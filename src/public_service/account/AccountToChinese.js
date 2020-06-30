@@ -21,6 +21,7 @@ const EnglishtoChinese = {
     turn_left: "向左看",
     turn_right: "向右看",
     shake: "摇头",
+    nickname: "商家名称"
 }
 
 var AccountToChinese = assign({}, EventEmitter.prototype,{

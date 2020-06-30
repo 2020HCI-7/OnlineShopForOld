@@ -99,6 +99,7 @@ var AccountFetch = assign({}, EventEmitter.prototype,{
             id: shopInfo.storeId, 
             phonenumber: shopInfo.phone,
             address: shopInfo.address,
+            nickname: shopInfo.nickname,
             dealer: {
                 id: shopInfo.dealerId
             }

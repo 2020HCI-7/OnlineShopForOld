@@ -8,6 +8,7 @@ const ShopInfoModifyAccess = {
     storeId: "read",
     address: "modify",
     phone: "modify",
+    nickname: "modify"
 }
 
 var ShopModifyStore = assign({}, EventEmitter.prototype, {
@@ -104,6 +105,7 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
                         })
                         t.items.shopInfo.address = " "
                         t.items.shopInfo.phone = " "
+                        t.items.shopInfo.nickname= " "
                         t.emitChange()
                     }
                     else {
@@ -111,6 +113,7 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
                         t.items.shopInfo.storeId = data.content[end].id
                         t.items.shopInfo.phone = data.content[end].phonenumber
                         t.items.shopInfo.address = data.content[end].address
+                        t.items.shopInfo.nickname = data.content[end].nickname
                         t.emitChange()
                     }
                 }
