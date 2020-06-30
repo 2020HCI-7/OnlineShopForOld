@@ -1,6 +1,6 @@
 // page/component/orders/orders.js
 import { cookieRequest } from "../../../api/cookieRequest"
-import { hostUrl, imageUrl, userCart, cartClean, addressGet } from "../../../api/url"
+import { hostUrl, imageUrl, userCart, cartClean, addressGet, getUserDiscount } from "../../../api/url"
 const app = getApp();
 
 Page({
@@ -13,7 +13,8 @@ Page({
     //     {id:2,title:'素米 500g',image:'/image/s6.png',num:1,price:0.03}
     //   ]
     orders: [],
-    addressId: -1
+    addressId: -1,
+    discounts: []
   },
   
   onShow:function(){
@@ -82,6 +83,24 @@ Page({
     }
     cookieRequest(requestInfo);
 
+    requestInfo = {
+      clearCookie: false,
+      url: hostUrl + getUserDiscount,
+      method: "GET",
+      success: function(res) {
+        var discounts = []
+        for (var i = 0; i < res.data.content.length; i++) {
+          var discount = res.data.content[i]
+          discounts.push(discount.discountId)
+        }
+        self.setData({
+          discounts: discounts
+        })
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo);
   },
 
   /**
@@ -120,7 +139,7 @@ Page({
       method: "POST",
       data: {
         //cartIds: cartIds,
-        discountIds: [],
+        discountIds: this.data.discounts,
         addressId: this.data.addressId
       },
       success: function(res) {

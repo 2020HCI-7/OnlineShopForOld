@@ -1,6 +1,6 @@
 // page/component/details/details.js
 import { cookieRequest } from "../../../api/cookieRequest"
-import { getAllGood, hostUrl, imageUrl, getStoreById, addToCart, userCart } from "../../../api/url"
+import { getAllGood, hostUrl, imageUrl, getStoreById, addToCart, userCart, goodSearchByTag, storeDiscount, addDiscount } from "../../../api/url"
 const app = getApp();
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -26,6 +26,7 @@ Page({
     //   serviceNumber: "13456789012",
     //   serviceWechat: "hsc10705581",
     // },
+    tag: "",
     goods: [
       {
         id: 0,
@@ -93,98 +94,109 @@ Page({
         navigateID: options.id
       })
     }
+    if (options.tag !== undefined) {
+      this.setData({
+        tag: options.tag
+      })
+    }
+    else {
+      this.setData({
+        tag: ""
+      })
+    }
   },
 
   onShow() {
     var that = this;
-    var requestInfo = {
-      clearCookie: false,
-      url: hostUrl + getAllGood,
-      method: "GET",
-      success: function (res) {
-        /* tempGood
-        {
-          id: 0,
-          storeId: 0,
-          normalPrice: 0.0,
-          leastPrice: 0.0,
+    var successFunc = function (res) {
+      // console.log(res)
+      var tempGoods = []
+      var goods = res.data.content;
+      for (var i = 0; i < goods.length; i++) {
+        var tempGood = {}
+        var good = goods[i]
 
-          image: '../../../image/goods1.png',
-          title: '新鲜梨',
-          //price: 1.23,
-          stock: 30,
-          detail: '这是新鲜梨的详细信息',
-          parameter: '一份一个，一个125g',
-          speech: "",
-        }, 
-        */
-        var tempGoods = []
-        var goods = res.data.content;
-        for (var i = 0; i < goods.length; i++) {
-          var tempGood = {}
-          var good = goods[i]
-
-          if (good.id == that.data.navigateID) {
-            that.setData({
-              curGoodIndex: i
-            })
-          }
-          
-          tempGood.id = good.id;
-          tempGood.storeId = good.storeId;
-          tempGood.normalPrice = good.normalPrice;
-          tempGood.leastPrice = good.leastPrice;
-
-          tempGood.image = hostUrl + imageUrl + "?id=" + good.id.toString() + '0';
-          tempGood.title = good.goodname;
-          tempGood.stock = good.storage;
-          tempGood.detail = good.description;
-          tempGood.parameter = "temp parameter";
-          tempGood.speech = "";
-
-          var storeId = good.storeId
-          var store = that.data.stores[good.storeId];
-          if (store == null) {
-            var storeRequestInfo = {
-              clearCookie: false,
-              url: hostUrl + getStoreById + "?storeid=" + storeId,
-              method: "GET",
-              success: function(res) {
-                var stores = that.data.stores;
-                stores[res.data.content.id] = res.data.content;
-                that.setData({
-                  stores: stores,
-                  currentStoreId: storeId,
-                  vdealerState: "idle"
-                });
-                // console.log(that.data.stores);
-              },
-              fail: function(res) {console.log("get store error")},
-              complete: function(res) {}
-            }
-            cookieRequest(storeRequestInfo)
-          }
-          //console.log(store);
-
-          //tempGood.service = "temp service";
-          //tempGood.serviceNumber = "temp serviceNumber";
-          //tempGood.serviceWechat = "temp serviceWechat";
-
-          tempGoods.push(tempGood);
+        if (good.id == that.data.navigateID) {
+          that.setData({
+            curGoodIndex: i
+          })
         }
-        that.setData({
-          goods: tempGoods
-        })
-      },
-      fail: function (res) {
-        console.log(res)
-      },
-      complete: function (res) {
-        //console.log(res)
-      }
-    }
-    cookieRequest(requestInfo);
+        
+        tempGood.id = good.id;
+        tempGood.storeId = good.storeId;
+        tempGood.normalPrice = good.normalPrice;
+        tempGood.leastPrice = good.leastPrice;
 
+        tempGood.image = hostUrl + imageUrl + "?id=" + good.id.toString() + '0';
+        tempGood.title = good.goodname;
+        tempGood.stock = good.storage;
+        tempGood.detail = good.description;
+        tempGood.parameter = "temp parameter";
+        tempGood.speech = "";
+
+        var storeId = good.storeId
+        var store = that.data.stores[good.storeId];
+        if (store == null) {
+          var storeRequestInfo = {
+            clearCookie: false,
+            url: hostUrl + getStoreById + "?storeid=" + storeId,
+            method: "GET",
+            success: function(res) {
+              var stores = that.data.stores;
+              stores[res.data.content.id] = res.data.content;
+              that.setData({
+                stores: stores,
+                currentStoreId: storeId,
+                vdealerState: "idle"
+              });
+              // console.log(that.data.stores);
+            },
+            fail: function(res) {console.log("get store error")},
+            complete: function(res) {}
+          }
+          cookieRequest(storeRequestInfo)
+        }
+        tempGoods.push(tempGood);
+      }
+      that.setData({
+        goods: tempGoods
+      })
+        
+      that.getDiscounnt()
+    };
+
+    if (this.data.tag == "") {
+      var requestInfo = {
+        clearCookie: false,
+        url: hostUrl + getAllGood,
+        method: "GET",
+        success: successFunc,
+        fail: function (res) {
+          console.log(res)
+        },
+        complete: function (res) {
+          //console.log(res)
+        }
+      }
+      cookieRequest(requestInfo);
+    }
+    else
+    {
+      var requestInfo = {
+        clearCookie: false,
+        url: hostUrl + goodSearchByTag,
+        method: "POST",
+        data: that.data.tag,
+        success: successFunc,
+        fail: function (res) {
+          console.log(res)
+        },
+        complete: function (res) {
+          //console.log(res)
+        }
+      }
+      cookieRequest(requestInfo);
+    }
     requestInfo = {
       clearCookie: false,
       url: hostUrl + userCart,
@@ -367,6 +379,49 @@ Page({
       innerAudioContext.src = this.data.goods[this.data.curGoodIndex].speech
       innerAudioContext.play()
     }
+  },
+
+  getDiscounnt() {
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + storeDiscount + "?storeid=" + this.data.goods[this.data.curGoodIndex].storeId,
+      method: "GET",
+      success: function (res) {
+        if (res.data.content.length == 0)
+        {
+          // wx.showToast({
+          //   title: '没有可以获取的优惠券',
+          //   icon: 'none',
+          //   duration: 2000
+          // })
+        }
+        else
+        {
+          for (var i = 0; i < res.data.content.length; i++) 
+          {
+            var discount = res.data.content[i]
+            var req = {
+              clearCookie: false,
+              url: hostUrl + addDiscount,
+              method: "POST",
+              data: discount,
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {}
+            }
+            cookieRequest(req)
+          }
+          wx.showToast({
+            title: '自动获取优惠券',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      },
+      fail: function (res) {},
+      complete: function (res) {}
+    }
+    cookieRequest(requestInfo)
   }
  
 })

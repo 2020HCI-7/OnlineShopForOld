@@ -11,28 +11,28 @@
         <!-- <view class="newest-title"><text>最近新品</text></view> -->
         <view class="newest-box">
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=干货">
                     <image src="/image/s4.png"></image>
                     <view class="newest-text"><text>瓜子干货</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.01</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=蔬菜">
                     <image src="/image/s5.png"></image>
                     <view class="newest-text"><text>蔬菜</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.02</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=粮油">
                     <image src="/image/s6.png"></image>
                     <view class="newest-text"><text>粮油</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=生鲜">
                     <image src="/image/s7.jpg"></image>
                     <view class="newest-text"><text>生鲜</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
@@ -60,7 +60,13 @@
                 <!-- <navigator url="cart/cart">
                     <text class="top-module-l">一键买菜</text>
                 </navigator> -->
-                <button class="top-module-l" bind:tap="BindOneClickShopping">一键买菜</button>
+                <button class="top-module-l" bind:tap="BindOneClickShopping">
+                    <image class="button-background-image" src="/image/back1.png" />
+                    <view class="button-image-block">
+                        <image class="button-image" src="/image/icons/click.png" />
+                    </view>
+                    <text class="button-text">一键买菜</text>
+                </button>
             </view>
             <view class="select-top-small">
                 <!-- <navigator url="list/list">
@@ -69,7 +75,13 @@
                 <!-- <navigator url="details/details">
                     <text class="top-module-r">语音买菜</text>
                 </navigator> -->
-                <button class="top-module-r" bind:tap="BindVoiceShopping">语音买菜</button>
+                <button class="top-module-r" bind:tap="BindVoiceShopping">
+                    <image class="button-background-image" src="/image/back2.jpeg" />
+                    <view class="button-image-block">
+                        <image class="button-image" src="/image/icons/microp.png" />
+                    </view>
+                    <text class="button-text">语音买菜</text>
+                </button>
             </view>
         </view>
         <view class="select-bottom">
@@ -77,13 +89,25 @@
                 <!-- <navigator url="cart/cart">
                     <text class="bottom-module-l">浏览菜市场</text>
                 </navigator> -->
-                <button class="bottom-module-l" bind:tap="BindMarket">浏览菜市场</button>
+                <button class="bottom-module-l" bind:tap="BindMarket">
+                    <image class="button-background-image" src="/image/back3.jpg" />
+                    <view class="button-image-block">
+                        <image class="button-image" src="/image/icons/market.png" />
+                    </view>
+                    <text class="button-text">浏览菜市场</text>
+                </button>
             </view>
             <view class="select-bottom-small">
                 <!-- <navigator url="user/user">
                     <text class="bottom-module-r">订单播报</text>
                 </navigator> -->
-                <button class="bottom-module-r" bind:tap="BindAnnounce">订单播报</button>
+                <button class="bottom-module-r" bind:tap="BindAnnounce">
+                    <image class="button-background-image" src="/image/back4.jpg" />
+                    <view class="button-image-block">
+                        <image class="button-image" src="/image/icons/play.png" />
+                    </view>
+                    <text class="button-text">订单播报</text>
+                </button>
             </view>
         </view>
     </view>

@@ -1,6 +1,6 @@
 // page/component/new-pages/user/user.js
 import { cookieRequest } from "../../../api/cookieRequest"
-import { hostUrl, imageUrl, addressGet, ordersGet } from "../../../api/url"
+import { hostUrl, imageUrl, addressGet, ordersGet, editOrder } from "../../../api/url"
 const app = getApp()
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -49,6 +49,7 @@ Page({
     //   }
     // ],
     orders: [],
+    saved_orders: [],
     hasAddress:false,
     address:{},
     addressToString: "",
@@ -149,6 +150,8 @@ Page({
       method: "GET",
       success: function(res) {
         var orders = res.data.content;
+        // console.log(orders)
+        var saved_orders = []
 
         var tempOrders = []
         for (var i = 0; i < orders.length; i++) {
@@ -174,10 +177,12 @@ Page({
           temp.goods = tempGoods
 
           tempOrders.push(temp)
+          saved_orders.push(order)
         }
         
         self.setData({
-          orders: tempOrders
+          orders: tempOrders,
+          saved_orders: saved_orders
         })
       },
       fail: function(res) {},
@@ -242,24 +247,36 @@ Page({
   /**
    * 发起支付请求
    */
-  payOrders(){
-    wx.requestPayment({
-      timeStamp: 'String1',
-      nonceStr: 'String2',
-      package: 'String3',
-      signType: 'MD5',
-      paySign: 'String4',
-      success: function(res){
-        console.log(res)
-      },
-      fail: function(res) {
+  payOrders(e){
+    var self = this
+    var id = e.target.id
+    var target_order = null
+
+    for (var i = 0; i < self.data.saved_orders.length; i++) {
+      var order = self.data.saved_orders[i]
+      if (order.id == id) {
+        target_order = order
+      }
+    }
+    target_order.status = 1
+
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + editOrder,
+      method: "POST",
+      data: target_order,
+      success: function(res) {
         wx.showModal({
           title:'支付提示',
-          content:'<text>',
+          content:'支付成功',
           showCancel: false
         })
-      }
-    })
+        self.onShow()
+      },
+      fail: function(res) {},
+      complete: function(res) {}
+    }
+    cookieRequest(requestInfo);
   },
 
   //尝试获得用户信息
@@ -280,9 +297,14 @@ Page({
       for (var i = 0; i < this.data.orders.length; i++) {
         text += "第" + (i+1).toString() + "个订单,"
         var order = this.data.orders[i]
+        console.log(order)
         text += "订单编号：Y" + order.number.toString() + ";"
-        text += "商品名称：" + order.name + ";"
-        text += "商品数量：" + order.count.toString() + "个;"
+        var goods = order.goods
+        for (var j = 0; j < goods.length; j++) {
+          var good = goods[j]
+          text += "商品名称：" + good.name + ";"
+          text += "商品数量：" + good.count.toString() + "个;"
+        }
         text += "商品总价：" + order.money.toString() + "元;"
       }
 

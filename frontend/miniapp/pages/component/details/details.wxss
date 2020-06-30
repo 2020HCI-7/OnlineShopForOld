@@ -199,6 +199,11 @@
     height: 100%;
 }
 
+.audio-icon-image {
+    width: 64rpx;
+    height: 64rpx;
+}
+
 .video-region{
     left: 0rpx;
     bottom: 0rpx;

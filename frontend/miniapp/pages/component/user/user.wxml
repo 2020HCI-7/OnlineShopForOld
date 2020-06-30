@@ -38,7 +38,7 @@
             <view class="orders-footer">
                 <block wx:if="{{order.showPay}}">
                     <text>实付：￥{{order.money}}</text>
-                    <button size="mini" class="orders-btn" bindtap="payOrders">付款</button>
+                    <button id="{{order.number}}" size="mini" class="orders-btn" bindtap="payOrders">付款</button>
                 </block>
                 <block wx:else>
                     <text>物流信息：{{order.logistics}}</text>
