@@ -25,7 +25,7 @@ public class ConsumerDao {
         {
             return consumerrepo.getOne(id);
         }
-        return new Consumer();
+        return null;
 
 
     }

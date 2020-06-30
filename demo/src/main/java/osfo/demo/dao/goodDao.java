@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import osfo.demo.entity.Goods;
 import osfo.demo.repo.goodRepo;
+import osfo.demo.repo.storeRepo;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,17 +14,28 @@ import java.util.Optional;
 public class goodDao {
     @Autowired
     goodRepo goodrepo;
+    @Autowired
+    storeRepo storerepo;
     public List<Goods> getgoodsbystorerid(Integer id)
     {
+
         return goodrepo.getgoodsbystoreid(id);
     }
     public List<Goods> getallgood()
     {
         return goodrepo.findAll();
     }
+    public Optional<Goods> getbyid(Integer id)
+    {
+        return goodrepo.findById(id);
+    }
     public void savegood(Goods good)
     {
         goodrepo.save(good);
+    }
+    public List<Goods> getgoodbytag(String tag)
+    {
+        return goodrepo.getGoodsByTag(tag);
     }
    public List<Goods> getgoodsbyname(String name)
    {
@@ -34,6 +46,7 @@ public class goodDao {
 
            if(good.getGoodname().contains(name))
            {
+
                result.add(good);
            }
            else if(name.contains(good.getGoodname()))

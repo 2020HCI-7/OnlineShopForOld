@@ -16,7 +16,9 @@ public class cartcontroller {
     @RequestMapping(method= RequestMethod.POST,value="/cart/add")
     public Object addtocart(@RequestBody Cart cart)
     {
-        return cartservice.addtocart(cart);
+        Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        cart.setUserId(id);
+        return cartservice.addtocart(id,cart);
     }
     @RequestMapping(method=RequestMethod.POST,value="/cart/findbyuserid")
     public Object findbyuserid()
@@ -31,10 +33,23 @@ public class cartcontroller {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return cartservice.cleancart(id,info);
     }
+
     @RequestMapping(value="/cart/edit")
     public Object editcart(@RequestBody Cart cart)
     {
         return cartservice.editcat(cart);
+    }
+    @RequestMapping(value="/cart/soundbuy")
+    public Object soundbuy(@RequestBody String sound)
+    {
+        Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return cartservice.soundbuy(sound,id);
+    }
+    @RequestMapping(value="/cart/autobuy")
+    public Object autobuy()
+    {
+        Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return cartservice.autobuy(id);
     }
     @RequestMapping(value = "/cart/delete")
     public Object deletecart(@RequestParam("cartId") Integer id)

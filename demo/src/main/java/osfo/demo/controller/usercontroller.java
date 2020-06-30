@@ -19,11 +19,7 @@ public class usercontroller {
 
 
     @RequestMapping("/register/consumer")
-<<<<<<< HEAD
-    public Object userregister(@RequestBody Consumer consumer, @RequestParam("code")String code)
-=======
     public Object userregister(@RequestBody Consumer consumer, @RequestParam(value="code")String code)
->>>>>>> e182675b045e11cc0f377548491647c36e172382
     {
         return userservice.register(consumer, code);
     }
@@ -46,14 +42,23 @@ public class usercontroller {
         return userservice.getaddressbyuserid(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
-    @RequestMapping(value="/user/edit")
+    @RequestMapping(value="/address/getbyid")
+    public Object getaddrbyid(@RequestParam("addressid") Integer id)
+    {
+        return userservice.getaddressbyid(id);
+    }
+
+
+    @RequestMapping(value="/consumer/edit")
     public Object setconsumer(@RequestBody Consumer consumer)
     {
-<<<<<<< HEAD
-        return userservice.edit(consumer);
-=======
+
         return userservice.editconsumer(consumer);
->>>>>>> e182675b045e11cc0f377548491647c36e172382
+    }
+    @RequestMapping(value="/dealer/edit")
+    public Object setconsumer(@RequestBody Dealer dealer)
+    {
+        return userservice.editdealer(dealer);
     }
     @RequestMapping(value="/user/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)
@@ -62,11 +67,19 @@ public class usercontroller {
         return userservice.useradddiscount(userid,discount);
 
     }
+    @RequestMapping(value="/consumer/info")
+    public Object consumerinfo()
+    {
+        Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return userservice.getconsumerinfo(userid);
+    }
     @RequestMapping(value="/user/info")
     public Object userinfo()
     {
         Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        return userservice.getconsumerinfo(userid);
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return userservice.getuserinfo(userid);
     }
 
 }

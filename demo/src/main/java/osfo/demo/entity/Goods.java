@@ -19,8 +19,15 @@ public class Goods {
     private String goodname;
     private String description;
     private float storage;
+    private String tag;
 
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
+    public String getTag() {
+        return tag;
+    }
 
     public void setDescription(String description) {
         this.description = description;

@@ -26,13 +26,37 @@ public class storeService {
     }
     public response savestore(Integer dealerid,String address,String phone)
     {
+        if(!storedao.getstorebydealerid(dealerid).isEmpty())
+        {
+            return new response(false,"store has been created",null);
+        }
         Store store=new Store();
         store.setAddress(address);
         store.setPhonenumber(phone);
 
         store.setDealer(dealerdao.getdealerbyid(dealerid).get());
+
+
         storedao.savestore(store);
         return new response(true,"",null);
+    }
+    public response save(Store store)
+    {
+
+        storedao.savestore(store);
+        return new response(true,"",null);
+    }
+    public response getstorebystoreid(Integer id)
+    {
+        if(storedao.getstorebystoreid(id).isPresent())
+        {
+            return new response(true,"",storedao.getstorebystoreid(id).get());
+        }
+        else
+        {
+            return new response(false,"no matching store",null);
+        }
+
     }
     public response getstorebydealerid(Integer id)
     {

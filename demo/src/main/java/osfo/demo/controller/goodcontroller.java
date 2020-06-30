@@ -40,12 +40,18 @@ public class goodcontroller {
     @RequestMapping(value="/goods/getbystoreid")
     public Object getgoodsbystoreid(@RequestParam("storeId") Integer id)
     {
+
         return goodservice.getgoodsbystoreid(id);
     }
     @RequestMapping(value="/goods/getallgood")
     public Object getallgood()
     {
         return goodservice.getallgoods();
+    }
+    @RequestMapping(value="/goods/getbyid")
+    public Object getallgood(@RequestParam("goodid") Integer id)
+    {
+        return goodservice.getbyid(id);
     }
 
     @PreAuthorize("hasRole('dealer')")
@@ -55,6 +61,14 @@ public class goodcontroller {
         Integer id=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 
         return goodservice.addgood(id,good);
+
+    }
+
+    @PreAuthorize("hasRole('dealer')")
+    @RequestMapping(value="/goods/editgood")
+    public Object editgood(@RequestBody Goods good)
+    {
+        return goodservice.editgood(good);
 
     }
 
@@ -112,6 +126,11 @@ public class goodcontroller {
     public Object getbyname(@RequestParam("sound") String sound) throws Exception
     {
         return goodservice.getgoodsbyname(sound);
+    }
+    @RequestMapping(value="/goods/searchbytag")
+    public Object getbytag(@RequestParam("tag") String tag) throws Exception
+    {
+        return goodservice.getgoodsbytag(tag);
     }
     @RequestMapping(value="/image/get",produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public Object getimg(@RequestParam("id") Integer id) throws Exception

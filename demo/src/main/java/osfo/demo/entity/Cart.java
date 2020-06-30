@@ -10,6 +10,13 @@ public class Cart {
     public Integer userId;
     public Integer goodId;
     public float number;
+    public boolean selected;
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+
 
     public float getNumber() {
         return number;

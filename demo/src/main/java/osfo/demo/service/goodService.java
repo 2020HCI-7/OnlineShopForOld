@@ -9,7 +9,9 @@ import osfo.demo.entity.Goods;
 import osfo.demo.entity.Image;
 import osfo.demo.util.restapi.response;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class goodService {
@@ -25,6 +27,23 @@ public class goodService {
 
         return new response(true,"",gooddao.getgoodsbystorerid(id));
     }
+    public Object getgoodsbytag(String tag)
+    {
+        return new response(true,"",gooddao.getgoodbytag(tag));
+    }
+    public response getbyid(Integer id)
+    {
+        Optional<Goods> tmp=gooddao.getbyid(id);
+        if(tmp.isPresent())
+        {
+            return new response(true,"",tmp.get());
+        }
+        else
+        {
+            return new response(false,"no that good",null);
+        }
+
+    }
     public response getallgoods()
     {
 
@@ -34,6 +53,11 @@ public class goodService {
     {
 
         good.setStoreId(storedao.getstorebydealerid(dealerid).get(0).getId());
+        gooddao.savegood(good);
+        return new response(true,"",null);
+    }
+    public Object editgood(Goods good)
+    {
         gooddao.savegood(good);
         return new response(true,"",null);
     }
