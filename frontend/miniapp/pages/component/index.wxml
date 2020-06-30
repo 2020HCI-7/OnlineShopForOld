@@ -11,28 +11,28 @@
         <!-- <view class="newest-title"><text>最近新品</text></view> -->
         <view class="newest-box">
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=干货">
                     <image src="/image/s4.png"></image>
                     <view class="newest-text"><text>瓜子干货</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.01</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=蔬菜">
                     <image src="/image/s5.png"></image>
                     <view class="newest-text"><text>蔬菜</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.02</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=粮油">
                     <image src="/image/s6.png"></image>
                     <view class="newest-text"><text>粮油</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="details/details">
+                <navigator url="details/details?tag=生鲜">
                     <image src="/image/s7.jpg"></image>
                     <view class="newest-text"><text>生鲜</text></view>
                     <!-- <view class="newest-text"><text>￥ 0.03</text></view> -->
