@@ -9,7 +9,8 @@
         </navigator>
         <image wx:if="{{showToCartAnim}}" src="/image/cart1.png" class="to-carts-icon"></image>
         <view class="audio-icon">
-            <icon type="info" bind:tap="bindTapPlaySpeech" />
+            <!-- <icon type="info" bind:tap="bindTapPlaySpeech" /> -->
+            <image class="audio-icon-image" src="/image/icons/voice.png" bind:tap="bindTapPlaySpeech" />
             <!-- <audio poster="{{audioPoster}}" name="{{audioName}}" 
                 author="{{audioAuthor}}" src="{{audioSrc}}" id="ItemAudio" loop>
                 <icon type="info" />
