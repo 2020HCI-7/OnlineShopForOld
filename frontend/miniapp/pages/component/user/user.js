@@ -150,6 +150,7 @@ Page({
       method: "GET",
       success: function(res) {
         var orders = res.data.content;
+        console.log(res)
         // console.log(orders)
         var saved_orders = []
 
@@ -162,7 +163,7 @@ Page({
 
           temp.number = order.id
           temp.status = self.translateStatus(order.status)
-          temp.money = order.money
+          temp.money = order.finalmoney
           temp.showPay = (order.status == 0)
           temp.logistics = order.comment
 
