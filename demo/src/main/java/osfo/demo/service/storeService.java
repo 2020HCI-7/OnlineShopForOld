@@ -67,6 +67,10 @@ public class storeService {
     {
         return new response(true,"",discountdao.adddiscount(discount));
     }
+    public response getdiscountbystore(Integer storeid)
+    {
+        return new response(true,"",discountdao.getalldiscountstore(storeid));
+    }
     public response editdiscount(Discount discount)
     {
         if(discount.id==null)

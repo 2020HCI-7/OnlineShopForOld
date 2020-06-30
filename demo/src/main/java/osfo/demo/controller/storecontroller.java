@@ -47,6 +47,11 @@ public class storecontroller {
 
         return storeservice.save(store);
     }
+    @RequestMapping(value="/store/alldiscount")
+    public Object getstorediscount(@RequestParam("storeid") Integer storeid)
+    {
+        return storeservice.getdiscountbystore(storeid);
+    }
     @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/adddiscount")
     public Object adddiscount(@RequestBody Discount discount)

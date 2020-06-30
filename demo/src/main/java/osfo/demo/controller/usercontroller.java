@@ -67,6 +67,12 @@ public class usercontroller {
         return userservice.useradddiscount(userid,discount);
 
     }
+    @RequestMapping(value="/user/getalldiscount")
+    public Object getuserdiscount()
+    {
+        Integer userid=((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return userservice.getuserdiscount(userid);
+    }
     @RequestMapping(value="/consumer/info")
     public Object consumerinfo()
     {

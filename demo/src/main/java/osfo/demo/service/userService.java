@@ -32,13 +32,9 @@ public class userService {
         String res = wxAuth.wxAuthCodeToSession(code);
         JSONObject jsonRes = new JSONObject(res);
         if(jsonRes.has("errcode") && (Integer)jsonRes.get("errcode") != 0) {
-<<<<<<< HEAD
-            System.out.println(code);
-            System.out.println(res);
-            return new response(false,"code 错误无法获取openid",null);
-=======
+
             return new response(false,"code error: " + jsonRes.getString("errmsg"),null);
->>>>>>> e182675b045e11cc0f377548491647c36e172382
+
         }
 
         String openid = jsonRes.getString("openid");
@@ -65,10 +61,9 @@ public class userService {
     {
         return new response(true,"",consumerdao.getalladdrbyuserid(userid));
     }
-    public response editconsumer(Consumer consumer)
+    public response getuserdiscount(Integer userid)
     {
-        consumerdao.saveuser(consumer);
-        return new response(true,"",null);
+        return new response(true,"",discountdao.getalldiscount(userid));
     }
     public response editdealer(Dealer dealer)
     {

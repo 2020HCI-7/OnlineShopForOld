@@ -19,8 +19,26 @@ public class Userorder {
     private String comment;
     public float money;
     public float finalmoney;
+    public float man;
+    public float jian;
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setJian(float jian) {
+        this.jian = jian;
+    }
+
+    public void setMan(float man) {
+        this.man = man;
+    }
+
+    public float getJian() {
+        return jian;
+    }
+
+    public float getMan() {
+        return man;
     }
 
     public Integer getId() {

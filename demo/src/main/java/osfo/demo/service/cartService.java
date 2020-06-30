@@ -118,11 +118,14 @@ public class cartService {
                     {
                         finalmoney-=tmp.getJian();
                         discountdao.deleteuserdiscount(tmp);
+                        order.setMan(tmp.getMan());
+                        order.setJian(tmp.getJian());
                         break;
                     }
                 }
             }
             totalmoney+=finalmoney;
+
             order.setMoney(money);
             order.setFinalmoney(finalmoney);
             orderdao.saveorder(order);

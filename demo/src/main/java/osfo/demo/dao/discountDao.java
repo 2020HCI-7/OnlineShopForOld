@@ -34,6 +34,10 @@ public class discountDao {
     {
         return userdiscountrepo.findAllByUserId(userid);
     }
+    public Iterable<Discount> getalldiscountstore(Integer storeid)
+    {
+        return discountrepo.findAllByStoreId(storeid);
+    }
     public List<UserDiscount> getallbyid(Collection<Integer> ids)
     {
         return userdiscountrepo.findAllByIdIn(ids);
