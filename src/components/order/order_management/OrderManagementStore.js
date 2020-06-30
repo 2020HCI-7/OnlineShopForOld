@@ -38,8 +38,6 @@ var OrderManagementStore = assign({}, EventEmitter.prototype,{
     },
 
     toOrderModify(orderId){
-        console.log(orderId);
-        
         this.items.selectedOrderId = orderId;
         this.items.showState = "modify";
     },

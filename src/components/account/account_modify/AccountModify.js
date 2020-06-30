@@ -31,7 +31,6 @@ class AccountModify extends Component {
 
     /*render*/
     showUserInfo() {
-        console.log(this.props.items.userInfo);
         return (
             <Panel
                 id="accountModifyPanel"

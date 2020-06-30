@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Collapse, Button, Typography, Input, Select,Table } from 'antd';
+import { Row, Col, Collapse, Button, Typography, Input, Select, Card} from 'antd';
 import UploadImageController from "../../UploadImage/UploadImageController";
-import TagChooseController from "../../tag/tag_choose/TagChooseController";
 import CommodityToChinese from "../../../public_service/commodity/CommodityToChinese";
 
 const { Option } = Select;
@@ -36,17 +35,24 @@ class CommodityModify extends Component {
         return (
             <Panel
                 id="commodityModifyPanel"
-                header="基本信息"
+                header="商品信息"
                 key="1"
             >
                 <Row id="shopModifyImgRow">
                     <Col id="shopModifyImgCol" span={24}>
-                        <UploadImageController
-                            imageUrl={this.props.items.commodityInfo.imgPath}
-                            size={this.props.items.commodityInfo.commodityImageSize}
-                            updateImage={this.props.items.commodityInfo.updataImage}
-                            commodityId={this.props.items.commodityInfo.id}
-                        />
+                        <Card
+                            title="点击上传图片"
+                            style={{ width: 150 }}
+                            headStyle={{ textAlign: "center" }}
+                            bodyStyle={{ alignContent: "center" }}
+                        >
+                            <UploadImageController
+                                imageUrl={this.props.items.image.imgPath}
+                                size={this.props.items.image.commodityImageSize}
+                                updateImage={this.props.items.image.updateImage}
+                                commodityId={this.props.items.commodityInfo.id}
+                            />
+                        </Card>
                     </Col>
                 </Row>
 
@@ -175,53 +181,7 @@ class CommodityModify extends Component {
         }
     }
 
-    showCommodityComment() {
-        return (
-            <Panel
-                id="commodityModifyPanel"
-                header="商品评价信息"
-                key="2"
-            >
-                <Table
-                    columns={this.getTableColumns()}
-                    dataSource={this.props.items.commodityComment}
-                />
-            </Panel>
-            
-        )
-    }
-
-    getTableColumns() {
-        return (
-            [
-                {
-                    title: "用户编号",
-                    dataIndex: "commodityId",
-                    key: "commodityId",
-                    defaultSortOrder: "descend",
-                    sorter: (a, b) => a.commodityId - b.commodityId,
-                },
-                {
-                    title: "评价分数",
-                    dataIndex: "grade",
-                    key: "grade",
-                    sorter: (a, b) => a.grade - b.grade,
-                },
-                {
-                    title: "评价时间",
-                    dataIndex: "time",
-                    key: "time",
-                    sorter: (a, b) => (a.time > b.time ? 1 : -1),
-                },
-                {
-                    title: "评价内容",
-                    dataIndex: "content",
-                    key: "content",
-                    sorter: (a, b) => (a.content > b.content ? 1 : -1),
-                },
-            ]
-        );
-    }
+    
 
     render() {
         //console.log(this.props.items);
@@ -232,8 +192,6 @@ class CommodityModify extends Component {
                         id="commodityModifyCollapse"
                     >
                         {this.showCommodityInfo()}
-                        <TagChooseController commodityInfo={this.props.items.commodityInfo} />
-                        {this.showCommodityComment()}
                     </Collapse>
 
 

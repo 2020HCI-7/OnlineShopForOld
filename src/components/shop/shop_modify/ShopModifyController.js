@@ -26,7 +26,7 @@ class ShopModifyController extends Component {
     }
 
     onChange() {
-        console.log(ShopModifyStore.getItems());
+        // console.log(ShopModifyStore.getItems());
         this.setState({
             items: ShopModifyStore.getItems(),
         });

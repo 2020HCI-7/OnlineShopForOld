@@ -1,14 +1,14 @@
-import AccountFetch from "../../../public_service/account/AccountFetch";
-import ImageFetch from "../../../public_service/image/ImageFetch";
-import { message } from 'antd';
-import CommodityFetch from "../../../public_service/commodity/CommodityFetch";
-var EventEmitter = require("events").EventEmitter;
-var assign = require("object-assign");
+import AccountFetch from "../../../public_service/account/AccountFetch"
+import ImageFetch from "../../../public_service/image/ImageFetch"
+import { message } from 'antd'
+var EventEmitter = require("events").EventEmitter
+var assign = require("object-assign")
 
 const ShopInfoModifyAccess = {
+    storeId: "read",
     address: "modify",
     phone: "modify",
-};
+}
 
 var ShopModifyStore = assign({}, EventEmitter.prototype, {
     items: {
@@ -21,130 +21,144 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
     },
 
     emitChange: function () {
-        this.emit("change");
+        this.emit("change")
     },
 
     addChangeListener: function (callback) {
-        this.on("change", callback);
+        this.on("change", callback)
     },
 
     removeChangeListener: function (callback) {
-        this.removeListener("change", callback);
+        this.removeListener("change", callback)
     },
 
     getItems: function () {
-        return this.items;
+        return this.items
     },
 
     init: function (initInfo) {
-        this.record.initInfo = initInfo;
-        this.getShopInfo();
-        this.items.shopInfoModifyAccess = this.getShopInfoModifyAccess();
+        console.log(initInfo)
+        this.record.initInfo = initInfo
+        this.getShopInfo()
+        this.items.shopInfoModifyAccess = this.getShopInfoModifyAccess()
     },
 
     getShopInfo: function () {
-        var response = null;
-        var t = this;
-        response = AccountFetch.fetchGetSelfShop();
+        var response = null
+        var t = this
+        //del
+        t.items.shopInfo = {}
+        t.items.shopInfo.phone = ""
+        t.items.shopInfo.address = ""
+        t.items.shopInfo.shopImageSize = 100
+        t.items.shopInfo.updateImage = (data, dealerId) => {
+            t.items.shopInfo.imageState = "loading"
+            t.emitChange()
+            setTimeout(() => {
+                t.items.shopInfo.imageState = "finished"
+                t.emitChange()
+            }, 120000);
+            return ImageFetch.fetchUpdateDealerImage(data, dealerId)
+        }
+        t.items.shopInfo.dealerId = this.record.initInfo.userId
+        t.items.shopInfo.imageUrl = {
+            origin: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=origin",
+            idle: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=idle",
+            turn_left: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=turn_left",
+            turn_right: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=turn_right",
+            speak: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=speak",
+            nod: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=nod",
+            shake: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=shake",
+        }
+        t.items.shopInfo.imageState = "finished"
+
+        response = AccountFetch.fetchGetSelfShop()
         response.then(
             function (response) {
                 if (response.status !== 200) {
-                    console.log("存在一个问题，状态码为：" + response.status);
-                    return;
+                    console.log("存在一个问题，状态码为：" + response.status)
+                    return
                 }
-                return response.json();
+                return response.json()
             }
         ).then(
             function (data) {
                 if (data.success) {
-                    console.log(data.content);
+                    console.log(data.content)
                     if (data.content.length === 0) {
-                        console.log("????");
-                        var new_res = AccountFetch.fetchModifySelfShop({
+                        var new_res = AccountFetch.fetchCreateSelfShop({
                             address: "",
                             phone: "",
-                        });
+                        })
                         new_res.then(
                             function (response) {
                                 if (response.status !== 200) {
-                                    console.log("存在一个问题，状态码为：" + response.status);
-                                    return;
+                                    console.log("存在一个问题，状态码为：" + response.status)
+                                    return
                                 }
-                                return response.json();
-                            }
-                        ).then(
-                            function (data) {
-                                if (data.success) {
-                                    t.items.shopInfo = {
-                                        address: " ",
-                                        phone: " ",
-                                    }
-                                    t.emitChange();
-                                }
-                                else {
-                                    console.log(data.errmsg, 1);
-                                }
+                                return response.json()
                             }
                         ).catch(function (err) {
-                            console.log(err);
-                        });
+                            console.log(err)
+                        })
+                        t.items.shopInfo.address = " "
+                        t.items.shopInfo.phone = " "
+                        t.emitChange()
                     }
                     else {
-                        t.items.shopInfo = {};
-                        var end = data.content.length - 1;
-                        CommodityFetch.id = data.content[end].dealer.id;
-                        console.log(CommodityFetch.id)
-                        t.items.shopInfo.phone = data.content[end].phonenumber;
-                        t.items.shopInfo.address = data.content[end].address;
-                        t.emitChange();
+                        var end = data.content.length - 1
+                        t.items.shopInfo.storeId = data.content[end].id
+                        t.items.shopInfo.phone = data.content[end].phonenumber
+                        t.items.shopInfo.address = data.content[end].address
+                        t.emitChange()
                     }
                 }
                 else {
-                    console.log(data.errmsg, 1);
+                    console.log(data.errmsg, 1)
                 }
             }
         ).catch(function (err) {
-            console.log(err);
-        });
+            console.log(err)
+        })
     },
 
     getShopInfoModifyAccess: function () {
-        return ShopInfoModifyAccess;
+        return ShopInfoModifyAccess
     },
 
     /*change items*/
     handleChange: function (key, value) {
-        this.items.shopInfo[key] = value;
+        this.items.shopInfo[key] = value
     },
 
     finishShopInfoModify: function () {
-        var response = null;
-        console.log(this.items.shopInfo);
-        response = AccountFetch.fetchModifySelfShop(this.items.shopInfo);
+        var response = null
+        console.log(this.items.shopInfo)
+        response = AccountFetch.fetchModifySelfShop(this.items.shopInfo)
         response.then(
             function (response) {
-                console.log(response);
+                console.log(response)
                 if (response.status !== 200) {
-                    console.log("存在一个问题，状态码为：" + response.status);
-                    return;
+                    console.log("存在一个问题，状态码为：" + response.status)
+                    return
                 }
-                return response.json();
+                return response.json()
             }
         ).then(
             function (data) {
                 console.log(data)
                 if (data.success) {
-                    message.success("修改成功", 1);
+                    message.success("修改成功", 1)
                 }
                 else {
-                    message.error("修改失败", 1);
+                    message.error("修改失败", 1)
                 }
             }
         ).catch(function (err) {
-            console.log(err);
-        });
+            console.log(err)
+        })
     },
-});
+})
 
-export default ShopModifyStore;
+export default ShopModifyStore
 

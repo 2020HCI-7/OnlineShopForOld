@@ -12,9 +12,10 @@ const EnglishtoChinese = {
     price: "价格",
     goodname: "商品名",
     storage: "库存",
-    normalprice: "日常价",
-    descrip: "商品描述",
-    leastprice: "最低价",
+    normalPrice: "日常价",
+    description: "商品描述",
+    leastPrice: "最低价",
+    tag:"标签",
 }
 
 var CommodityToChinese = assign({}, EventEmitter.prototype,{

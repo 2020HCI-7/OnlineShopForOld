@@ -32,10 +32,16 @@ var CommodityAddStore = assign({}, EventEmitter.prototype,{
         this.record.initInfo = initInfo;
         this.items.commodityInfo = {
             goodname: "",
-            normalprice: 0,
+            normalPrice: 0,
             storage: 0,
-            descrip: "",
-            leastprice: 0,
+            description: "",
+            leastPrice: 0,
+            tag: [
+                "生鲜",
+                "干货",
+                "蔬菜",
+                "粮油",
+            ],
         }
     },
 

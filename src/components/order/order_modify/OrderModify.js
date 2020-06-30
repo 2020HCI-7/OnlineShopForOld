@@ -150,7 +150,6 @@ class OrderModify extends Component {
     render(){
         
         if(this.props.items !== null){
-            console.log(this.props.items);
             return (
                 <div id="orderModifyDiv">
                     <Collapse 

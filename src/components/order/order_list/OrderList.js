@@ -5,14 +5,15 @@ import { Table, Button } from "antd";
 class OrderList extends Component {
     constructor(props) {
         super(props);
-        this.state={};
+        this.state = {
+        };
     }
 
     toOrderModify(orderId){
         this.props.toOrderModify(orderId);
     }
 
-    getTableColumns(){
+    getTableColumns() {
         return(
             [
                 {
@@ -23,10 +24,10 @@ class OrderList extends Component {
                     sorter: (a, b) => a.orderId - b.orderId,
                 },
                 {
-                    title: "商家编号",
-                    dataIndex: "dealerId",
-                    key: "dealerId",
-                    sorter: (a, b) => a.consumerId - b.consumerId,
+                    title: "店铺编号",
+                    dataIndex: "storeId",
+                    key: "storeId",
+                    sorter: (a, b) => a.storeId - b.storeId,
                 },
                 {
                     title: "消费者编号",
@@ -68,12 +69,12 @@ class OrderList extends Component {
     }
 
     render(){
-        if(this.props.items != null){
+        if (this.props.items != null) {
             return (
                 <div id="orderListDiv">
                     <Table 
                         columns={this.getTableColumns()} 
-                        dataSource={this.props.items.orderList} 
+                        dataSource={JSON.parse(JSON.stringify(this.props.items.orderList))} 
                     />
                 </div>
             );

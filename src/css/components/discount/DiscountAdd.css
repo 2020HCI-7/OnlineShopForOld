@@ -1,0 +1,34 @@
+#discountAddRow{
+    height: 35px;
+    width: 1200px;
+}
+
+#discountAddCol{
+    height: 35px;
+}
+
+#discountAddText {
+    position: relative;
+    top: 5px;
+    left: 25px;
+}
+
+#discountAddInfoText{
+    position: relative;
+    top: 6px;
+    left: 11px;
+}
+
+#discountAddRemindText{
+    position: relative;
+    left: 10px;
+}
+
+#discountAddButtonText{
+    margin: 0 auto; 
+    text-align: center;
+}
+
+#discountAddFinishAccountAddButton{
+    top: 5px;
+}

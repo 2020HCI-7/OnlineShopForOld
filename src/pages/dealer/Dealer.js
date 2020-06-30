@@ -8,6 +8,7 @@ import AccountModifyController from "../../components/account/account_modify/Acc
 import OrderManagementController from "../../components/order/order_management/OrderManagementController";
 import CommodityManagementController from "../../components/commodity/commodity_management/CommodityManagementController"
 import ShopModifyController from "../../components/shop/shop_modify/ShopModifyController"
+import DiscountManagementController from '../../components/discount/discount_management/DiscountManagementController';
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -53,6 +54,7 @@ class Dealer extends Component {
                         initInfo = {
                             {
                                 userId: this.props.items.account.userId,
+                                storeId: this.props.items.account.storeId,
                             }
                         }
                     />
@@ -63,6 +65,17 @@ class Dealer extends Component {
                         initInfo = {
                             {
                                 userId: this.props.items.account.userId,
+                                storeId: this.props.items.account.storeId,
+                            }
+                        }
+                    />
+                )
+            case "/dealer/shop/my_discount":
+                return (
+                    <DiscountManagementController
+                        initInfo={
+                            {
+                                storeId: this.props.items.account.storeId
                             }
                         }
                     />
@@ -75,7 +88,8 @@ class Dealer extends Component {
     }
 
     render(){
-        if(this.props.items !== null){
+        if (this.props.items !== null) {
+            
             return (
                 <div id="dealerDiv">
                     <Layout id="dealerLayot">

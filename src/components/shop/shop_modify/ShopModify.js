@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import { Row, Col, Collapse, Button, Typography, Input, Select } from 'antd';
+import { Row, Col, Collapse, Button, Typography, Input, Select, Tag, Card, Avatar, Spin} from 'antd';
 
 import UploadImageController from "../../UploadImage/UploadImageController";
 import AccountToChinese from "../../../public_service/account/AccountToChinese";
-
 
 const { Option } = Select;
 const { Text } = Typography;
@@ -35,21 +34,12 @@ class ShopModify extends Component {
     /*render*/
     showShopInfo() {
         return (
-            
             <Panel
                 id="shopModifyPanel"
                 header="基本信息"
                 key="1"
             >
-                <Row id="shopModifyImgRow">
-                    <Col id="shopModifyImgCol" span={24}>
-                        <UploadImageController 
-                            imageUrl={this.props.items.shopInfo.cover}
-                            size={this.props.items.shopInfo.shopImageSize}
-                            updateImage={this.props.items.shopInfo.updateImage}
-                        />                      
-                    </Col>
-                </Row>   
+                   
                 {Object.getOwnPropertyNames(this.props.items.shopInfo).map((key) => {
                     return (
                         this.showShopInfoRowItem(key)
@@ -174,7 +164,86 @@ class ShopModify extends Component {
         }
     }
 
-   
+    showVirtualDealer() {
+        return (
+            <Panel
+                id = "shopModifyPanel"
+                header = "虚拟商家形象"
+                key = "2"
+            >
+                < Row id = "shopModifyImgRow">
+                    <Col id="shopModifyImgCol" span={24}>
+                        <p>
+                            < Tag color = "#108ee9" > 图片要求： </Tag>
+                            < Tag color = "#87d068" > 正面 </Tag>
+                            < Tag color = "#87d068" > 背景透明 </Tag>
+                            < Tag color = "#87d068" > 睁眼 </Tag>
+                            < Tag color = "#87d068" > 表情微笑 </Tag>
+                            < Tag color="#87d068" > 上半身照 </Tag>
+                            < Tag color = "#87d068" > PNG格式 </Tag>
+                        </p>
+                    </Col>
+                </Row>
+                <Row id="shopModifyImgRow">
+                    <Col id="shopModifyImgCol" span={4}>
+                        <Card
+                            title="点击上传图片"
+                            style={{ width: 150 }}
+                            headStyle={{ textAlign: "center" }}
+                            bodyStyle={{ alignContent: "center" }}
+                        >
+                            <UploadImageController 
+                                imageUrl={this.props.items.shopInfo.imageUrl.origin}
+                                size={this.props.items.shopInfo.shopImageSize}
+                                updateImage={this.props.items.shopInfo.updateImage}
+                                dealerId={this.props.items.shopInfo.dealerId}
+                            />
+                        </Card>
+                    </Col>
+                    
+                    {
+                        Object.getOwnPropertyNames(this.props.items.shopInfo.imageUrl).map((key) => {
+                            if (key !== "origin") {
+                                return (
+                                    <Col id="shopModifyImgCol" span={3}>
+                                        <Card
+                                            title={AccountToChinese.toChinese(key)}
+                                            style={{ width: 150 }}
+                                            headStyle={{ textAlign: "center" }}
+                                        >
+                                            {
+                                                this.props.items.shopInfo.imageState === "finished" ?
+                                                    (
+                                                        <Avatar
+                                                            src={this.props.items.shopInfo.imageUrl[key]}
+                                                            shape="square" 
+                                                            size={this.props.items.shopInfo.shopImageSize}
+                                                        >
+                                                        </Avatar>
+                                                    )
+                                                    :
+                                                    (
+                                                        <Avatar
+                                                            shape="square" 
+                                                            size={this.props.items.shopInfo.shopImageSize}
+                                                        >
+                                                            <Spin size="small"></Spin>
+                                                        </Avatar>
+                                                    )
+                                            }
+                                        </Card>
+                                    </Col>
+                                );
+                            }
+                            else {
+                                return (<div></div>)
+                            }
+                        })   
+                    }
+                </Row>
+            </Panel>
+        )
+    }
 
     render() {
         //console.log(this.props.items);
@@ -185,6 +254,7 @@ class ShopModify extends Component {
                         id="shopModifyCollapse"
                     >
                         {this.showShopInfo()}
+                        {this.showVirtualDealer()}
                     </Collapse>
                 </div>
             );

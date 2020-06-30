@@ -31,19 +31,18 @@ class CommodityManagement extends Component {
                     {
                         this.props.items.showState === "list" ?
                         (
-                            
                             <div id="CommodityManagementModifyDiv">
                                 <Button
                                     id="toCommodityListButton"
                                     type="link"
                                     onClick={this.toCommodityAdd.bind(this)}
                                 >
-                                    添加商品
+                                        添加商品
                                 </Button>
                                 <CommodityListController
                                     initInfo={
                                         {
-                                            userRole: this.props.items.userRoleModify,
+                                            storeId: this.props.items.storeId,
                                         }
                                     }
                                     toCommodityModify={this.toCommodityModify.bind(this)}
@@ -62,12 +61,12 @@ class CommodityManagement extends Component {
                                 </Button>
                                 {
                                     this.props.items.showState === "modify" ?
-
                                     (
                                         <CommodityModifyController
                                             initInfo={
                                                 {
                                                     commodityId: this.props.items.selectedCommodityId,
+                                                    storeId: this.props.items.storeId,
                                                 }
                                             }
                                         />

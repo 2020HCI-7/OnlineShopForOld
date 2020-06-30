@@ -1,16 +1,15 @@
-import CommodityFetch from "../../../public_service/commodity/CommodityFetch";
+import DiscountFetch from "../../../public_service/discount/DiscountFetch";
+import { message } from 'antd';
+
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
-
-
-var CommodityListStore = assign({}, EventEmitter.prototype,{
+var DiscountAddStore = assign({}, EventEmitter.prototype,{
     items: {
-        commodityList: null,
-        toCommodityModify: false,
+        discount: {}
     },
 
-    record: {
+    record:{
         initInfo: null,
     },
 
@@ -31,14 +30,18 @@ var CommodityListStore = assign({}, EventEmitter.prototype,{
     },
 
     init: function (initInfo) {
+        console.log("???")
         this.record.initInfo = initInfo;
-        this.getCommodityList();
+        this.items.discount["store_id"] = initInfo.storeId
     },
 
-    getCommodityList(){
-        var response = CommodityFetch.fetchGetCommodityList(this.record.initInfo.storeId);
-        var responseCommodityList = [];
-        var t=this;
+    /*change items*/
+    handleChange: function(key, value){
+        this.items.discount[key] = value;
+    },
+
+    finishDiscountAdd: function () {
+        var response = DiscountFetch.fetchAddDiscount(this.items.discount)
         response.then(
             function(response){
                 if(response.status !== 200){
@@ -50,25 +53,17 @@ var CommodityListStore = assign({}, EventEmitter.prototype,{
         ).then(
             function(data){
                 if(data.success){
-                    responseCommodityList = data.content;
-                    t.items.commodityList = responseCommodityList.map((item, index) =>{
-                        item["key"] = index;
-                        return item;
-                    })
-                    console.log(t.items.commodityList)
-                    t.emitChange();
+                    message.success("添加成功", 1);
                 }
                 else{
-                    console.log(data.errmsg);
+                    message.error("添加失败", 1);
                 }
-                return data.success;
             }
         ).catch(function(err){
             console.log(err);
         });
-        return;
     },
 });
 
-export default CommodityListStore;
+export default DiscountAddStore;
 

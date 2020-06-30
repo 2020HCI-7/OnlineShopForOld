@@ -6,21 +6,23 @@ var assign = require("object-assign");
 const serverUrl = "http://101.132.98.60:12345";
 
 const postHeader = new Headers({
-    // "Content-Type": "application/json",
+    "Content-Type": "application/json",
 });
 
 const getHeader = new Headers({
 });
 var CommodityFetch = assign({}, EventEmitter.prototype,{
 
-    fetchGetCommodityList: function () {
-        console.log(this.id);
-        var url = serverUrl + "/goods/getbydealerid";
-        var response = fetch(url + "?" + "dealerid=" + 25, {
-            method: "GET",
-            headers: getHeader,
+    fetchGetCommodityList: function (storeId) {
+        var url = serverUrl + "/goods/getbystoreid";
+        var response = fetch(url + "?" + "storeId=" + storeId, {
+            method: "POST",
+            headers: postHeader,
             credentials: "include",
             mode: "cors",
+            body: JSON.stringify({
+                storeId: storeId
+            })
         });
         return response;
     },
@@ -50,32 +52,29 @@ var CommodityFetch = assign({}, EventEmitter.prototype,{
     },
 
     fetchModifyCommodityInfo: function(commodity){
-        var url = serverUrl + "/commodities/dealer/modify";
-        var fetchBody = {
-            commodity: commodity,
-        };
+        var url = serverUrl + "/goods/editgood";
+        console.log(commodity)
+
         var response = fetch(url,{
             method: "POST",
             headers: postHeader,
             credentials: "include",
             mode: "cors",
-            body: JSON.stringify(fetchBody),
+            body: JSON.stringify(commodity),
             }
         );
         return response;
     },
 
-    fetchAddCommodityInfo: function(commodity){
+    fetchAddCommodityInfo: function (commodity) {
+        console.log(commodity)
         var url = serverUrl + "/goods/addgood";
-        var fetchBody = Object.keys(commodity).map((key) => {
-            return encodeURIComponent(key) + "=" + encodeURIComponent(commodity[key]);
-        }).join("&");
-        var response = fetch(url + "?" + fetchBody,{
+        var response = fetch(url,{
             method: "POST",
             headers: postHeader,
             credentials: "include",
             mode: "cors",
-            body: JSON.stringify(fetchBody),
+            body: JSON.stringify(commodity),
         });
         return response;
     },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
-import { Card ,Row ,Col ,Cascader ,Button ,Typography ,Input, Select } from 'antd';
+import { Card ,Row ,Col ,Cascader ,Button ,Typography ,Input } from 'antd';
 const { Text } = Typography;
 // const { Option } = Select;
 

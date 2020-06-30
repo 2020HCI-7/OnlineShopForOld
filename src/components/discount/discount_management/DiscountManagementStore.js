@@ -1,13 +1,11 @@
 import AccountFetch from "../../../public_service/account/AccountFetch"
 import AppDispatcher from "../../../dispatcher/AppDispatcher"
-var EventEmitter = require("events").EventEmitter
-var assign = require("object-assign")
+var EventEmitter = require("events").EventEmitter;
+var assign = require("object-assign");
 
-var CommodityManagementStore = assign({}, EventEmitter.prototype,{
+var DiscountManagementStore = assign({}, EventEmitter.prototype,{
     items : {
-        userId: null,
         showState: null,
-        selectedCommodityId: null,
     },
 
     record : {
@@ -15,46 +13,34 @@ var CommodityManagementStore = assign({}, EventEmitter.prototype,{
     },
 
     getItems: function(){
-        return this.items
+        return this.items;
     },
 
     emitChange: function () {
-        this.emit("change")
+
+        this.emit("change");
     },
     
     addChangeListener: function(callback) {
-        this.on("change", callback)
+        this.on("change", callback);
     },
     
     removeChangeListener: function(callback) {
-        this.removeListener("change", callback)
+        this.removeListener("change", callback);
     },
 
-    init: function (initInfo) {
-        console.log(initInfo)
-        this.record.initInfo = initInfo
-        this.items.userId = initInfo.userId
-        this.items.showState = "list"
-        this.items.storeId = initInfo.storeId
-        if (this.items.storeId === undefined) {
-            this.getStoreId()
-        }
-        this.emitChange()
-    },
-    
-
-    toCommodityModify(commodityId){
-        this.items.selectedCommodityId = commodityId
-        this.items.showState = "modify"
+    init: function(initInfo){
+        this.record.initInfo = initInfo;
+        this.items.showState = "list";
+        this.getStoreId()
     },
 
-    toCommodityAdd(){
-        this.items.showState = "add"
+    toDiscountAdd(){
+        this.items.showState = "add";
     },
 
-    toCommodityList(){
-        this.items.selectedCommodityId = null
-        this.items.showState = "list"
+    toDiscountList(){
+        this.items.showState = "list";
     },
 
     getStoreId: function () {
@@ -97,13 +83,11 @@ var CommodityManagementStore = assign({}, EventEmitter.prototype,{
                         var end = data.content.length - 1
                         t.items.storeId = data.content[end].id
                         AppDispatcher.dispatch({
-                            actionType: "COMMODITY_LIST_INIT",
+                            actionType: "DISCOUNT_LIST_INIT",
                             initInfo: {
-                                userId: t.items.userId,
                                 storeId: t.items.storeId
                             },
                         });
-                        
                     }
                 } else {
                     console.log(data.errmsg, 1)
@@ -113,7 +97,7 @@ var CommodityManagementStore = assign({}, EventEmitter.prototype,{
             console.log(err)
         })
     },
-})
+});
 
-export default CommodityManagementStore
+export default DiscountManagementStore;
 

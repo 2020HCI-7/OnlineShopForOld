@@ -1,9 +1,9 @@
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
-const serverUrl = "http://202.120.40.8:30495";
+const serverUrl = "http://101.132.98.60:12345";
 
-const serverImgUrl = "http://202.120.40.8:30492/goods/getimg?id=";
+const virtualDealerUrl = "http://113.88.252.27:10000"
 
 const imageHeader = new Headers({
     
@@ -11,7 +11,11 @@ const imageHeader = new Headers({
 
 var ImageFetch = assign({}, EventEmitter.prototype,{
     getServerImgUrl: function(){
-        return serverImgUrl;
+        return serverUrl;
+    },
+
+    getVirtualDealerUrl: function(){
+        return virtualDealerUrl;
     },
 
     fetchUpdateShopImage: function(formData){
@@ -27,8 +31,30 @@ var ImageFetch = assign({}, EventEmitter.prototype,{
         return response;
     },
 
+    fetchUpdateDealerImage: function (formData, dealerId) {
+        var url = virtualDealerUrl + "/setImage?name=" + dealerId;
+        var response = fetch(url, {
+            method: "POST",
+            headers: imageHeader,
+            credentials: "include",
+            mode: "cors",
+            body: formData,
+        });
+        return response;
+    },
+
+    fetchGetDealerImage: function (dealerId) {
+        var url = virtualDealerUrl + "/setImage?name=" + dealerId + "&action=idle";
+        var response = fetch(url, {
+            method: "GET",
+            credentials: "include",
+            mode: "cors",
+        });
+        return response;
+    },
+
     fetchUpdateCommodityImage: function(formData, id){
-        var url = serverUrl + "goods/uploadimg?id=" + id;
+        var url = serverUrl + "/image/upload?id=" + id + "0";
         console.log(url);
         var response = fetch(url,{
             method: "POST",

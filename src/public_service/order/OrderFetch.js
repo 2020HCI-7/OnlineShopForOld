@@ -1,7 +1,7 @@
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
-const serverUrl = "http://202.120.40.8:30495";
+const serverUrl = "http://101.132.98.60:12345";
 
 const homeUrl = "http://localhost:3000";
 
@@ -10,9 +10,6 @@ const postHeader = new Headers({
 });
 
 const getHeader = new Headers({
-    "Access-Control-Allow-Origin":"*",
-    "Content-Type":"text/plain",
-    "Authorization" : "BasicCustom"
 });
 
 var OrderFetch = assign({}, EventEmitter.prototype,{
@@ -22,7 +19,7 @@ var OrderFetch = assign({}, EventEmitter.prototype,{
     },
 
     fetchGetOrderList: function(){
-        var url = serverUrl + "/order/list";
+        var url = serverUrl + "/order/getbydealerid";
         var response = fetch(url,{
             method: "GET",
             headers: getHeader,
@@ -34,27 +31,42 @@ var OrderFetch = assign({}, EventEmitter.prototype,{
 
     fetchGetOrderInfo: function(id){
         
-        var url = serverUrl + "/order/info?id=" + id;
-        var response = fetch(url,{
-            method: "GET",
-            headers: getHeader,
-            credentials: "include",
-            mode: "cors",
-        });
-        return response;
-    },
-
-    fetchModifyOrderInfo: function(order){
-        var url = serverUrl + "/order/modify";
-        var fetchBody = {
-            order: order,
-        };
+        var url = serverUrl + "/order/getbyorderid?orderid=" + id;
         var response = fetch(url,{
             method: "POST",
             headers: postHeader,
             credentials: "include",
             mode: "cors",
-            body: JSON.stringify(fetchBody),
+            body: JSON.stringify({
+                orderid: id 
+            })
+        });
+        return response;
+    },
+
+    fetchGetDeliveryInfo: function (addressId) {
+        var url = serverUrl + "/order/getbyorderid?orderid=" + addressId;
+        var response = fetch(url, {
+            method: "POST",
+            headers: postHeader,
+            credentials: "include",
+            mode: "cors",
+            body: JSON.stringify({
+                orderid: addressId
+            })
+        });
+        return response;
+    },
+
+    fetchModifyOrderInfo: function(order){
+        var url = serverUrl + "/order/edit";
+        console.log(order)
+        var response = fetch(url,{
+            method: "POST",
+            headers: postHeader,
+            credentials: "include",
+            mode: "cors",
+            body: JSON.stringify(order),
             }
         );
         return response;

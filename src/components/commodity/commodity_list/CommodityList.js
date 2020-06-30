@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { Table, Button } from "antd";
 
-import CommodityToChinese from "../../../public_service/commodity/CommodityToChinese";
 
 class CommodityList extends Component {
     constructor(props) {
@@ -32,15 +31,15 @@ class CommodityList extends Component {
                 },
                 {
                     title: "最高价",
-                    dataIndex: "normal_price",
-                    key: "normal_price",
-                    sorter: (a, b) => a.normalprice - b.normalprice,
+                    dataIndex: "normalPrice",
+                    key: "normalPrice",
+                    sorter: (a, b) => a.normalPrice - b.normalPrice,
                 },
                 {
                     title: "最低价",
-                    dataIndex: "least_price",
-                    key: "least_price",
-                    sorter: (a, b) => a.leastprice - b.leastprice,
+                    dataIndex: "leastPrice",
+                    key: "leastPrice",
+                    sorter: (a, b) => a.leastPrice - b.leastPrice,
                 },
                 {
                     title: "库存",

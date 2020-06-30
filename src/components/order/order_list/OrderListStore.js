@@ -33,17 +33,11 @@ var OrderListStore = assign({}, EventEmitter.prototype, {
     },
 
     getOrderList() {
-        this.items.orderList = [
-            {
-                time: this.stringTime(123123),
-                orderId: 123,
-            }
-        ];
+        this.items.orderList = [];
         var t = this;
         var response = OrderFetch.fetchGetOrderList();
         response.then(
             function (response) {
-                console.log(response)
                 if (response.status !== 200) {
                     console.log("存在一个问题，状态码为：" + response.status);
                     return;
@@ -53,10 +47,17 @@ var OrderListStore = assign({}, EventEmitter.prototype, {
         ).then(
             function (data) {
                 if (data.success) {
-                    for (var i = 0; i < data.orderList.length; i++) {
-                        data.orderList[i].time = t.stringTime(data.orderList[i].time);
-                        data.orderList[i]["key"] = i + 1;
-                        t.items.orderList.push(data.orderList[i]);
+                    for (var i = 0; i < data.content.length; i++) {
+                        console.log(data)
+                        var temp = {}
+                        temp.orderId = data.content[i].order.id
+                        temp.consumerId = data.content[i].order.userId
+                        temp.time = data.content[i].order.date
+                        temp.status = t.stringStatus(data.content[i].order.status)
+                        temp.storeId = data.content[i].order.storeId
+                        temp.key = i + 1
+                        temp.totalPrice = data.content[i].order.finalmoney
+                        t.items.orderList.push(JSON.parse(JSON.stringify(temp)));
                     }
                     t.emitChange();
                 }
@@ -78,6 +79,27 @@ var OrderListStore = assign({}, EventEmitter.prototype, {
         var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
         var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
         return YY + MM + DD + " " + hh + mm + ss;
+    },
+
+    stringStatus: function (status) {
+        switch (status) {
+            case 0:
+                return "未付款"
+            case 1:
+                return "已付款"
+            case 2:
+                return "已发货"
+            case 3:
+                return "已完成"
+            case 4:
+                return "用户取消"
+            case 5:
+                return "商家取消"
+            case 6:
+                return "管理员取消"
+            default:
+                return undefined
+        }
     }
 });
 export default OrderListStore;

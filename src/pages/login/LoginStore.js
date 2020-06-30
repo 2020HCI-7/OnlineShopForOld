@@ -1,8 +1,8 @@
-import { message } from 'antd';
-import AccountFetch from "../../public_service/account/AccountFetch";
+import { message } from 'antd'
+import AccountFetch from "../../public_service/account/AccountFetch"
 
-var EventEmitter = require("events").EventEmitter;
-var assign = require("object-assign");
+var EventEmitter = require("events").EventEmitter
+var assign = require("object-assign")
 
 var LoginStore = assign({}, EventEmitter.prototype,{
     items : {
@@ -47,51 +47,51 @@ var LoginStore = assign({}, EventEmitter.prototype,{
     },
 
     getItems: function(){
-        return this.items;
+        return this.items
     },
 
     emitChange: function () {
-        this.emit("change");
+        this.emit("change")
     },
     
     addChangeListener: function(callback) {
-        this.on("change", callback);
+        this.on("change", callback)
     },
     
     removeChangeListener: function(callback) {
-        this.removeListener("change", callback);
+        this.removeListener("change", callback)
     },
 
     init(){
-        this.emitChange();
+        this.emitChange()
     },
 
     handleChange: function(key, value){
-        this.record[key] = value;
+        this.record[key] = value
         switch(key){
             case "username":
-                this.handleUsernameInputChange();
-                break;
+                this.handleUsernameInputChange()
+                break
             case "password":
-                this.handlePasswordInputChange();
-                break;
+                this.handlePasswordInputChange()
+                break
             case "usertype":
-                this.handleUsertypesInputChange();
-                break;
+                this.handleUsertypesInputChange()
+                break
             default:
-                break;
+                break
         }
-        this.emitChange();
+        this.emitChange()
     },
 
     handleUsernameInputChange: function(){
         if(this.record.username.length>=3 && this.record.username.length<=30){
-            this.items.usernameRemindText = "";
+            this.items.usernameRemindText = ""
         }
         else{
-            this.items.usernameRemindText = this.record.itemscp.usernameRemindText;
+            this.items.usernameRemindText = this.record.itemscp.usernameRemindText
         }
-        return;
+        return
     },
 
     
@@ -100,65 +100,63 @@ var LoginStore = assign({}, EventEmitter.prototype,{
             this.items.passwordRemindText = ""
         }
         else{
-            this.items.passwordRemindText = this.record.itemscp.passwordRemindText;
+            this.items.passwordRemindText = this.record.itemscp.passwordRemindText
         }
-        return;
+        return
     },
 
     handleUsertypesInputChange: function(){
         if(this.record.usertype === undefined){
-            this.record.usertype = "";
-            return;
+            this.record.usertype = ""
+            return
         }
-        return;
+        return
     },
 
     finishLogin: function(){
         if(this.items.usernameRemindText !== ""){
-            message.error("请检查用户名格式");
-            return;
+            message.error("请检查用户名格式")
+            return
         }
         if(this.items.passwordRemindText !== ""){
-            message.error("请检查密码格式");
-            return;
+            message.error("请检查密码格式")
+            return
         }
         if(this.record.usertype === ""){
-            message.error("请选择身份");
-            return;
+            message.error("请选择身份")
+            return
         }
         
-        var t = this;
-        console.log(this.record);
+        var t = this
         var response = AccountFetch.fetchLogin(this.record.username, this.record.password, this.record.usertype)
         response.then(function(response){
-            console.log(response);
             if(response.status !== 200){
-                console.log("存在一个问题，状态码为：" + response.status);
-                message.error("登录失败");
-                return;
+                console.log("存在一个问题，状态码为：" + response.status)
+                message.error("登录失败")
+                return
             }
-            return response.json();
+            return response.json()
         }).then(function(data){
             if(data.success){
-                message.success("登录成功", 1);
-                t.items.loginState = true;
-                t.items.url = "/" + t.record.usertype;
-                t.emitChange();
-                return;
+                message.success("登录成功", 1)
+                t.items.loginState = true
+                t.items.url = "/" + t.record.usertype
+                t.emitChange()
+                return
             }
             else{
                 if(data.errmsg === "user is forbidden"){
-                    message.error("该用户已被禁用");
+                    message.error("该用户已被禁用")
                 }
                 else{
-                    message.error("用户名或密码错误");
+                    message.error("用户名或密码错误")
                 }
-                return;
+                return
             }
         }).catch(function(err){
-            message.error("用户名或密码错误");
-            console.log(err);
-        });
+            message.error("用户名或密码错误")
+            console.log(err)
+        })
     },
-});
-export default LoginStore;
+})
+export default LoginStore

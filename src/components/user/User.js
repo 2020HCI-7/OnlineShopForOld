@@ -17,7 +17,7 @@ class User extends Component {
     }
 
     render(){
-        if(this.props.items != null){
+        if (this.props.items != null) {
             return (
                 <div id="userDiv">
                     <Row id="userRow">
