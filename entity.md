@@ -36,6 +36,7 @@
         private String goodname;
         private String description;
         private float storage;
+        private String tag;
 
     store:
         private Integer id;
@@ -63,6 +64,23 @@
         public float finalmoney;
 
     cleancart:
-        public List<Integer> cartIds;
+        
         public List<Integer> discountIds;
         public Integer addressId;
+        
+    Cart:
+        public Integer id;
+        public Integer userId;
+        public Integer goodId;
+        public float number;
+        public boolean selected;
+    cartutil:
+        public Cart cart;
+        public Goods good;
+        
+    orderutil:
+        public Userorder order;
+        public List<OrderItem> items;
+        public List<Goods> goods;
+        public Address address;
+
