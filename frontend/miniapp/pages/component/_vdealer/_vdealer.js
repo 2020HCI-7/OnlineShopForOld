@@ -6,7 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    dealerId:{
+    storeId:{
       type: String,
       observer: function (newVal, oldVal) {
         this.changeState("idle")
@@ -15,7 +15,7 @@ Component({
     state : {
       type: String,
       observer: function (newVal, oldVal) {
-        console.log(newVal)
+        // console.log(newVal)
         this.changeState(newVal)
       }
     },
@@ -60,10 +60,10 @@ Component({
       {
         this.setData({
           state : newState,
-          url : vdealerUrl + "?name=" + this.data.dealerId + "&action=" + newState,
+          url : vdealerUrl + "?name=" + this.data.storeId + "&action=" + newState,
         }, () => {
-          var localStorage = wx.getStorageSync(this.data.dealerId+ "&" + newState)
-          console.log(localStorage)
+          var localStorage = wx.getStorageSync(this.data.storeId+ "&" + newState)
+          // console.log(localStorage)
           if( localStorage === undefined || localStorage === "") {
             this.download(newState)
           }
@@ -91,7 +91,7 @@ Component({
             that.setData({
               downloadPicturePath: res.tempFilePath
             })
-            wx.setStorageSync(that.data.dealerId+ "&" + newState, res.tempFilePath)
+            wx.setStorageSync(that.data.storeId+ "&" + newState, res.tempFilePath)
           }
         },
         fail: function (res) {

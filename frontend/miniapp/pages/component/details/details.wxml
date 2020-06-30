@@ -16,7 +16,7 @@
             </audio> -->
         </view>
         <view class="video-region">
-            <_vdealer dealerId="{{currentStoreId}}" state="{{vdealerState}}"></_vdealer>
+            <_vdealer storeId="{{currentStoreId}}" state="{{vdealerState}}"></_vdealer>
         </view>
         <!-- <view class="goods-operation">
             <text class="goods-operation-num">数量  {{goodsAmount}}</text>
