@@ -22,11 +22,18 @@
         username string
         password string
 
-### edit user
+### edit consumer
     url:
-        /user/edit
+        /consumer/edit
     body:
         consumer
+        
+        
+### edit dealer
+    url:
+        /dealer/edit
+    body:
+        dealer
 
 ### user add discount
     url:
@@ -39,6 +46,13 @@
         /user/info
     return:
         list<user>
+        
+
+### get consumer info
+    url:
+        /consumer/info
+    return:
+        list<consumer>
         
 # store
 ### getallstore
@@ -57,12 +71,18 @@
 ### get store(used by dealer)
     url:
         /store/get
+        
+### edit store
+    url:
+        /store/edit
+    body:
+        store
 ### add discount
     url:
         /sotre/adddiscount
     body:
         discount
-    
+
 ### remove discount
     url:
         /store/removediscount
@@ -78,9 +98,16 @@
         dealerid string
     return:
         List<goods>
+
 ### addgoods
     url:
         /goods/addgood
+    body:
+        goods
+
+### editgoods
+    url:
+        /goods/edit
     body:
         goods
 ### getallgood
@@ -93,6 +120,13 @@
         /goods/getbysound
     name:
         file
+    return:
+        List<goods>
+### getgoodbytag
+    url:
+        /goods/searchbytag
+    param:
+        tag string
     return:
         List<goods>
 ### search good by name
@@ -108,6 +142,14 @@
         /cart/add
     body:
         cart
+### 一键买菜
+    url:
+        /cart/autobuy
+### 语音买菜
+    url:
+        /cart/soundbuy
+    param:
+        sound string
 ### find one user's cart
     url:
         /cart/findbyuserid
@@ -151,13 +193,13 @@
     url:
         /order/getbyuserid
     return:
-        list<userorder>
+        list<orderutil>
 
 ### get order by dealer id
     url:
         /order/getbydealerid
     return:
-        list<userorder>
+        list<orderutil>
 
 ### get goods in orders
     url:
@@ -185,3 +227,20 @@
 
     return:
         byte[]
+        
+ # address
+ ### add address
+    url:
+        /address/add
+    body:
+        address
+### get address by userid
+    url:
+        /address/getbyuserid
+    return:
+        address
+### get address by id
+    url:
+        /address/getbyid
+    return:
+        adress
