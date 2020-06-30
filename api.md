@@ -129,7 +129,7 @@
 ### getgoodbytag
     url:
         /goods/searchbytag
-    param:
+    body:
         tag string
     return:
         List<goods>
