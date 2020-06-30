@@ -16,7 +16,7 @@
             </audio> -->
         </view>
         <view class="video-region">
-            <_vdealer dealerId="1" state="idle"></_vdealer>
+            <_vdealer dealerId="{{currentStoreId}}" state="{{vdealerState}}"></_vdealer>
         </view>
         <!-- <view class="goods-operation">
             <text class="goods-operation-num">数量  {{goodsAmount}}</text>
@@ -60,6 +60,7 @@
             <view wx:if="{{tabIndex === 0}}">
                 <view wx:if="{{stores[goods[curGoodIndex].storeId].phonenumber !== ''}}">
                     商家手机：{{stores[goods[curGoodIndex].storeId].phonenumber}}
+                    {{goods[curGoodIndex].storeId}}
                 </view>
                 <!-- <view wx:if="{{stores[goods[curGoodIndex].storeId].serviceWechat !== ''}}">
                     商家微信：{{stores[goods[curGoodIndex].storeId].serviceWechat}}

@@ -8,9 +8,16 @@ Component({
   properties: {
     dealerId:{
       type: String,
+      observer: function (newVal, oldVal) {
+        this.changeState("idle")
+      }
     },
     state : {
       type: String,
+      observer: function (newVal, oldVal) {
+        console.log(newVal)
+        this.changeState(newVal)
+      }
     },
   },
 
@@ -29,8 +36,12 @@ Component({
     attached: function () {
       this.changeState(this.data.state)
     },
-    moved: function () { },
-    detached: function () { }
+    moved: function () {
+      this.changeState(this.data.state)
+    },
+    detached: function () {
+      this.changeState(this.data.state)
+    }
   },
 
   /**
@@ -47,12 +58,20 @@ Component({
         newState === "turn_right" 
       )
       {
-        console.log(newState)
         this.setData({
           state : newState,
           url : vdealerUrl + "?name=" + this.data.dealerId + "&action=" + newState,
         }, () => {
-          this.download()
+          var localStorage = wx.getStorageSync(this.data.dealerId+ "&" + newState)
+          console.log(localStorage)
+          if( localStorage === undefined || localStorage === "") {
+            this.download(newState)
+          }
+          else {
+            this.setData({
+              downloadPicturePath: localStorage
+            })
+          }
         })
 
         return true
@@ -62,8 +81,8 @@ Component({
       }
     },
 
-    download: function() {
-      console.log(this.data.url)
+    download: function(newState) {
+      // console.log(this.data.url)
       var that = this
       wx.downloadFile({
         url: this.data.url,
@@ -72,6 +91,7 @@ Component({
             that.setData({
               downloadPicturePath: res.tempFilePath
             })
+            wx.setStorageSync(that.data.dealerId+ "&" + newState, res.tempFilePath)
           }
         },
         fail: function (res) {
