@@ -97,11 +97,15 @@
 ### get user discount(should log in)
     url:
         /user/getalldiscount
+    return:
+        list<userdiscount>
 ### get store discount
     url:
         /store/alldiscount
     param:
         storeid integer
+    return:
+        list<discount>
 ### 
 # good
 ### getbydealerid
