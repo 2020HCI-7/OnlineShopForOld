@@ -13,9 +13,11 @@
     
 </textarea>
 
-<button class="confirm-button" bind:tap="bindSpeechShopping" type="primary">
-    <text >确 认</text>
-</button>
+<navigator open-type="switchTab" url="../cart/cart">
+    <button class="confirm-button" bind:tap="bindSpeechShopping" type="primary">
+        <text >确 认</text>
+    </button>
+</navigator>
 
 <view class="yuyinWrap">
     <view class=''>

@@ -1,4 +1,7 @@
 // pages/component/speech/speech.js
+import { cookieRequest } from "../../../api/cookieRequest"
+import { hostUrl, soundBuy } from "../../../api/url"
+
 const app = getApp();
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -14,6 +17,7 @@ Page({
     //语音
     recordState: false, //录音状态
     content:'',//内容
+    userInput:''
   },
 
   /**
@@ -101,6 +105,31 @@ Page({
     manager.stop();
   },
   bindSpeechShopping: function () {
+    var self = this
+    var requestInfo = {
+      clearCookie: false,
+      // url: hostUrl + soundBuy + "?sound=" + self.data.userInput,
+      url: hostUrl + soundBuy,
+      method: "POST",
+      data: {
+        sound: self.data.userInput
+      },
+      success: function (res) {
 
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+      complete: function (res) {
+        //console.log(res)
+      }
+    }
+    cookieRequest(requestInfo);
+    wx.switchTab({
+      url: "cart/cart",
+      success: function(res){
+
+      }
+    })
   },
 })
