@@ -24,6 +24,11 @@ const cookieRequest = function (requestInfo) {
   }
 
   obj.success = function (res) {
+    if (requestInfo.setCookie){
+      // console.log(res.header)
+      // console.log(res.header['Set-Cookie'])
+      wx.setStorageSync("cookie", res.header['Set-Cookie'])
+    }
     requestInfo.success(res)
   }
 
@@ -33,15 +38,15 @@ const cookieRequest = function (requestInfo) {
       try {
         wx.setStorageSync("cookie", res.header['Set-Cookie'])
       } catch (e) { console.log(e) }
-      console.log(res.header['Set-Cookie'])
-      console.log(wx.getStorageSync("cookie"))
+      // console.log(res.header['Set-Cookie'])
+      // console.log(wx.getStorageSync("cookie"))
     }
     requestInfo.complete(res)
   }
   
   obj.header = {
     "Content-Type": "application/json;charset=UTF-8",
-    //"cookie": wx.getStorageSync("cookie"),
+    // "cookie": wx.getStorageSync("cookie"),
   }
 
   if (!requestInfo.setCookie) {

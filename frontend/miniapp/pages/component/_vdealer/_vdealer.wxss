@@ -1,0 +1,5 @@
+/* pages/component/_vdealer/_vdealer.wxss */
+._vdealer_img {
+  width: 256rpx;
+  height: 256rpx;
+}

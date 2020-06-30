@@ -1,0 +1,4 @@
+<!--pages/component/_vdealer/_vdealer.wxml-->
+<view class="_vdealer"> 
+  <image class="_vdealer_img" src='{{downloadPicturePath}}'></image>
+</view>

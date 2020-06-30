@@ -10,7 +10,7 @@ var innerAudioContext = wx.createInnerAudioContext();
 Page({
   onReady: function(e) {
     //this.innerAudioContext = wx.createAudioContext("ItemAudio")
-    this.videoContext = wx.createVideoContext("VirtualAvatar")
+    // this.videoContext = wx.createVideoContext("VirtualAvatar")
   },
 
   data:{
@@ -83,9 +83,8 @@ Page({
     scaleCart: false,
     hasCarts: false,
 
-    videoSrc: "",
-
-    navigateID: -1
+    currentStoreId: 0,
+    vdealerState: "idle",
   },
 
   onLoad(options) {
@@ -154,9 +153,11 @@ Page({
                 var stores = that.data.stores;
                 stores[res.data.content.id] = res.data.content;
                 that.setData({
-                  stores: stores
+                  stores: stores,
+                  currentStoreId: storeId,
+                  vdealerState: "idle"
                 });
-                console.log(that.data.stores);
+                // console.log(that.data.stores);
               },
               fail: function(res) {console.log("get store error")},
               complete: function(res) {}
@@ -190,7 +191,6 @@ Page({
       method: "POST",
       success: function (res) {
         var carts = res.data.content;
-
         that.setData({
           inCartNum: carts.length
         })
@@ -257,6 +257,17 @@ Page({
     }
     cookieRequest(requestInfo)
 
+    var that = this
+    this.setData({
+      vdealerState: "nod",
+    },setTimeout(
+      ()=>{
+        that.setData({
+          vdealerState: "idle"
+        })
+      },
+      1000
+    ))
   },
 
   bindTap(e) {
@@ -276,25 +287,59 @@ Page({
   bindTapSwitch(e) {
     let result = this.data.curGoodIndex
     let amount = this.data.goods.length
+    var changeVdealer = true
+    var newState = ""
     if (e.currentTarget.dataset.type === "left") {
       result = result - 1
+      newState = "turn_right"
     }
     else if (e.currentTarget.dataset.type === "right") {
       result = result + 1
+      newState = "turn_left"
     }
     if (result < 0) {
       result = 0
+      changeVdealer = false
     }
     else if (result >= amount)
     {
       result = amount-1
+      changeVdealer = false
     }
+
     this.setData({
       curGoodIndex: result
     })
+
+    var that = this
+    if(changeVdealer) {
+      this.setData({
+        vdealerState: newState,
+      },setTimeout(
+        ()=>{
+          that.setData({
+            vdealerState: "idle"
+          })
+        },
+        1000
+      ))
+    }
   },
 
   bindTapPlaySpeech(e) {
+    var that = this
+    innerAudioContext.onEnded(
+      () => {
+        that.setData({
+          vdealerState: "idle"
+        })
+      }
+    )
+
+    this.setData({
+      vdealerState: "speak"
+    })
+
     if (this.data.goods[this.data.curGoodIndex].speech === "") {
       var self = this
       var goods = this.data.goods

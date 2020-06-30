@@ -1,7 +1,8 @@
-//const hostUrl = "http://localhost:8080"
+// const hostUrl = "http://101.132.98.60:12345"
 const hostUrl = "http://101.132.98.60:12345"
 const loginUrl = "/login/wx"
 const registerUrl = "/register/consumer"
+const vdealerUrl = "http://113.88.252.27:10000/getImage"
 const getAllGood = "/goods/getallgood"
 const imageUrl = "/image/get"
 const getStoreById = "/store/getbyid"
@@ -22,6 +23,7 @@ module.exports = {
   hostUrl,
   loginUrl,
   registerUrl,
+  vdealerUrl,
   getAllGood,
   imageUrl,
   getStoreById,
