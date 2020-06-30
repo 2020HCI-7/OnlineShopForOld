@@ -382,6 +382,9 @@ Page({
   },
 
   getDiscounnt() {
+    if (this.data.goods.length == 0) {
+      return;
+    }
     var requestInfo = {
       clearCookie: false,
       url: hostUrl + storeDiscount + "?storeid=" + this.data.goods[this.data.curGoodIndex].storeId,
