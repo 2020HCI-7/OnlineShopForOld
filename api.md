@@ -94,6 +94,15 @@
         /store/editdiscount
     body:
         discount
+### get user discount(should log in)
+    url:
+        /user/getalldiscount
+### get store discount
+    url:
+        /store/alldiscount
+    param:
+        storeid integer
+### 
 # good
 ### getbydealerid
     url:
