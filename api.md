@@ -89,7 +89,11 @@
     body:
         discount
 
-
+### edit discount
+    url:
+        /store/editdiscount
+    body:
+        discount
 # good
 ### getbydealerid
     url:
