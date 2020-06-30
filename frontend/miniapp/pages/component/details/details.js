@@ -1,6 +1,6 @@
 // page/component/details/details.js
 import { cookieRequest } from "../../../api/cookieRequest"
-import { getAllGood, hostUrl, imageUrl, getStoreById, addToCart, userCart, goodSearchByTag } from "../../../api/url"
+import { getAllGood, hostUrl, imageUrl, getStoreById, addToCart, userCart, goodSearchByTag, storeDiscount, addDiscount } from "../../../api/url"
 const app = getApp();
 //引入插件：微信同声传译
 const plugin = requirePlugin('WechatSI');
@@ -109,7 +109,7 @@ Page({
   onShow() {
     var that = this;
     var successFunc = function (res) {
-      console.log(res)
+      // console.log(res)
       var tempGoods = []
       var goods = res.data.content;
       for (var i = 0; i < goods.length; i++) {
@@ -161,6 +161,8 @@ Page({
       that.setData({
         goods: tempGoods
       })
+        
+      that.getDiscounnt()
     };
 
     if (this.data.tag == "") {
@@ -377,6 +379,49 @@ Page({
       innerAudioContext.src = this.data.goods[this.data.curGoodIndex].speech
       innerAudioContext.play()
     }
+  },
+
+  getDiscounnt() {
+    var requestInfo = {
+      clearCookie: false,
+      url: hostUrl + storeDiscount + "?storeid=" + this.data.goods[this.data.curGoodIndex].storeId,
+      method: "GET",
+      success: function (res) {
+        if (res.data.content.length == 0)
+        {
+          // wx.showToast({
+          //   title: '没有可以获取的优惠券',
+          //   icon: 'none',
+          //   duration: 2000
+          // })
+        }
+        else
+        {
+          for (var i = 0; i < res.data.content.length; i++) 
+          {
+            var discount = res.data.content[i]
+            var req = {
+              clearCookie: false,
+              url: hostUrl + addDiscount,
+              method: "POST",
+              data: discount,
+              success: function(res) {},
+              fail: function(res) {},
+              complete: function(res) {}
+            }
+            cookieRequest(req)
+          }
+          wx.showToast({
+            title: '自动获取优惠券',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      },
+      fail: function (res) {},
+      complete: function (res) {}
+    }
+    cookieRequest(requestInfo)
   }
  
 })

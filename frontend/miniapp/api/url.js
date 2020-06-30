@@ -19,6 +19,9 @@ const autoBuy = "/cart/autobuy"
 const soundBuy = "/cart/soundbuy"
 const editOrder = "/order/edit"
 const goodSearchByTag = "/goods/searchbytag"
+const storeDiscount = "/store/alldiscount"
+const addDiscount = "/user/adddiscount"
+const getUserDiscount = "/user/getalldiscount"
 
 module.exports = {
   hostUrl,
@@ -40,5 +43,8 @@ module.exports = {
   autoBuy,
   soundBuy,
   editOrder,
-  goodSearchByTag
+  goodSearchByTag,
+  storeDiscount,
+  addDiscount,
+  getUserDiscount
 }
