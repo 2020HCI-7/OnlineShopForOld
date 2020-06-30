@@ -36,6 +36,7 @@ public class ordercontroller {
     {
         return orderservice.getorderbydealerid(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
+
     @RequestMapping(value="/order/getitems")
     public Object getitembyorderid(@RequestParam("orderid") Integer orderid)
     {

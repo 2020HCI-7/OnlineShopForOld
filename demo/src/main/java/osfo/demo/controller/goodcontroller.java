@@ -128,8 +128,9 @@ public class goodcontroller {
         return goodservice.getgoodsbyname(sound);
     }
     @RequestMapping(value="/goods/searchbytag")
-    public Object getbytag(@RequestParam("tag") String tag) throws Exception
+    public Object getbytag(@RequestBody String tag) throws Exception
     {
+
         return goodservice.getgoodsbytag(tag);
     }
     @RequestMapping(value="/image/get",produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})

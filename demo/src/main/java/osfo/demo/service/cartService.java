@@ -99,8 +99,11 @@ public class cartService {
                 item.setNumber(cart.getNumber());
                 item.setGoodId(cart.getGoodId());
                 item.setUserorderId(order.getId());
+
                 orderdao.saveorderitem(item);
                 Goods good=gooddao.getgoodbyid(cart.goodId).get();
+                item.setGoodname(good.getGoodname());
+                item.setGoodprice(good.getLeastPrice());
                 System.out.println(cart.goodId);
                 money+=good.getLeastPrice()*cart.getNumber();
                 System.out.println(cart.goodId);

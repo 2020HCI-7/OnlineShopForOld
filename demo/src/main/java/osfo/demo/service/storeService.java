@@ -9,6 +9,7 @@ import osfo.demo.entity.Discount;
 import osfo.demo.entity.Store;
 import osfo.demo.util.restapi.response;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -64,6 +65,15 @@ public class storeService {
     }
     public response adddiscount(Discount discount)
     {
+        return new response(true,"",discountdao.adddiscount(discount));
+    }
+    public response editdiscount(Discount discount)
+    {
+        if(discount.id==null)
+        {
+            return new response(false,"should have id",null);
+        }
+
         return new response(true,"",discountdao.adddiscount(discount));
     }
     public response deletediscount(Discount discount)

@@ -54,6 +54,12 @@ public class storecontroller {
         return storeservice.adddiscount(discount);
     }
     @PreAuthorize("hasRole('dealer')")
+    @RequestMapping(value="/store/editdiscount")
+    public Object editdiscount(@RequestBody Discount discount)
+    {
+        return storeservice.editdiscount(discount);
+    }
+    @PreAuthorize("hasRole('dealer')")
     @RequestMapping(value="/store/removediscount")
     public Object removediscount(@RequestBody Discount discount)
     {
