@@ -142,6 +142,12 @@ var OrderModifyStore = assign({}, EventEmitter.prototype, {
                             t.items.orderInfo["status"] = t.stringStatus(item.order.status)
                             t.items.orderInfo["consumerId"] = item.order.userId
                             t.items.orderInfo["time"] = item.order.date
+                            if (item.order.man === 0) {
+                                t.items.orderInfo["discountInfo"] = "没有使用优惠卷"
+                            }
+                            else {
+                                t.items.orderInfo["discountInfo"] = "满" + item.order.man + "元" + "减" + item.order.jian + "元"
+                            }
                             t.record.order = item.order
 
                             t.items.deliveryInfo = {}

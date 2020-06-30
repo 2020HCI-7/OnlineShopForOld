@@ -47,7 +47,6 @@ var CommodityModifyStore = assign({}, EventEmitter.prototype, {
 
     init: function (initInfo) {
         this.record.initInfo = initInfo
-
         this.getCommodityInfo(this.record.initInfo.commodityId)
         this.getCommodityInfoModifyAccess()
     },

@@ -66,6 +66,18 @@ class DiscountAdd extends Component {
                                         </Input>
                                     </Col>
                                 </Row>
+                                < Row id = "discountAddRow" >
+                                    <Col id="discountAddCol" span={10}>
+                                        < Text id = "discountAddButtonText" >
+                                            <Button 
+                                                id = "discountAddFinishAddButton"
+                                                type="Button" 
+                                                onClick={this.finishDiscountAdd} >
+                                                确认添加
+                                            </Button>
+                                        </Text>
+                                    </Col>
+                                </Row>
                             </div>
                         </Panel>
                     </Collapse>

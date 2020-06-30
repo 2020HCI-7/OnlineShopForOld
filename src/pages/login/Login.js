@@ -85,7 +85,7 @@ class Login extends Component {
                                     </Text>
                                 </Col>
                             </Row>
-                            <Row id="loginRow">
+                            {/* <Row id="loginRow">
                                 <Col id="loginCol" span={6}>
                                     <Text id="loginText">
                                         {this.props.items.constText.usertype}
@@ -99,16 +99,9 @@ class Login extends Component {
                                         onChange={(value) => this.handleChange("usertype", value[0])} 
                                     >
                                     </Cascader>
-                                    {/* <Select
-                                        placeholder=""
-                                        onChange={(value) => this.handleChange("usertype", value[0])}
-                                        allowClear
-                                        >
-                                        <Option value={this.props.items.usertypes[0].value}>{this.props.items.usertypes[0].label}</Option>
-                                        <Option value={this.props.items.usertypes[1].value}>{this.props.items.usertypes[1].label}</Option>
-                                    </Select> */}
+                                    
                                 </Col>
-                            </Row>
+                            </Row> */}
                             <Row id="loginRow">
                                 <Col id="loginCol" span={24}>
                                     {/*empty*/}

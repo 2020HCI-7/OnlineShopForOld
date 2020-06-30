@@ -12,6 +12,7 @@ const EnglishtoChinese = {
     freightCharge: "运费",
     destination: "收件地址",
     deliveryFirm: "快递公司",
+    deliveryInfo: "优惠卷信息"
 }
 
 var OrderToChinese = assign({}, EventEmitter.prototype,{

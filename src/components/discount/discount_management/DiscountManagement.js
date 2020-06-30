@@ -33,7 +33,7 @@ class DiscountManagement extends Component {
                                         type="link"
                                         onClick={this.toDiscountAdd.bind(this)}
                                     >
-                                        添加商品
+                                        添加优惠卷
                                     </Button>
                                     <DiscountListController
                                         initInfo={{
@@ -50,7 +50,7 @@ class DiscountManagement extends Component {
                                         type="link"
                                         onClick={this.toDiscountList.bind(this)}
                                     >
-                                        返回用户列表
+                                        返回优惠卷列表
                                     </Button>
                                     < DiscountAddController
                                         initInfo={{

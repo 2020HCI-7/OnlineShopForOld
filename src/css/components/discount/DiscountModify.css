@@ -1,36 +1,36 @@
-#accountModifyRow{
+#discountModifyRow{
     height: 35px;
     width: 1200px;
 }
 
-#accountModifyCol{
+#discountModifyCol{
     height: 35px;
 }
 
-#accountModifyText {
+#discountModifyText {
     position: relative;
     top: 5px;
     left: 25px;
 }
 
-#accountModifyInfoText{
+#discountModifyInfoText{
     position: relative;
     top: 6px;
     left: 11px;
 }
 
-#accountModifyRemindText{
+#discountModifyRemindText{
     position: relative;
     left: 10px;
 }
 
-#accountModifyButtonText{
+#discountModifyButtonText{
     margin: 0 auto; 
     text-align: center;
 
     
 }
 
-#accountModifyFinishModifyButton{
+#discountModifyFinishModifyButton{
     top: 5px;
 }

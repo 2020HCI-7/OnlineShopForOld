@@ -18,8 +18,8 @@ class UploadImageController extends Component {
         if (this.props.commodityId !== undefined) {
             res = this.props.updateImage(formData, this.props.commodityId);
         }
-        else if (this.props.dealerId !== undefined) {
-            res = this.props.updateImage(formData, this.props.dealerId);
+        else if (this.props.storeId !== undefined) {
+            res = this.props.updateImage(formData, this.props.storeId);
         }
         else {
             return
@@ -64,10 +64,11 @@ class UploadImageController extends Component {
         
         const props = {
             name: "file",
-            beforeUpload: function(file){
-                const isPng = file.type === 'image/png';
-                if (!isPng) {
-                    message.error('你只能上传PNG图片文件');
+            beforeUpload: function (file) {
+                console.log(file.type)
+                const isPngOrJpg = file.type === 'image/png' || file.type === 'image/jpeg';
+                if (!isPngOrJpg) {
+                    message.error('你只能上传PNG或JPG图片文件');
                     return false;
                 }
                 const isLt2M = file.size / 1024 / 1024 < 1;

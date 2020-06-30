@@ -196,7 +196,7 @@ class ShopModify extends Component {
                                 imageUrl={this.props.items.shopInfo.imageUrl.origin}
                                 size={this.props.items.shopInfo.shopImageSize}
                                 updateImage={this.props.items.shopInfo.updateImage}
-                                dealerId={this.props.items.shopInfo.dealerId}
+                                storeId={this.props.items.shopInfo.storeId}
                             />
                         </Card>
                     </Col>

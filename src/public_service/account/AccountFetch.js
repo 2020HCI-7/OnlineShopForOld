@@ -40,8 +40,8 @@ var AccountFetch = assign({}, EventEmitter.prototype,{
         var params = {
             "username": username,
             "password": password,
+            "status": 0,
         }
-        console.log(params)
 
         var response = fetch(url, {
             method: "POST",
@@ -76,12 +76,11 @@ var AccountFetch = assign({}, EventEmitter.prototype,{
     },
 
     fetchCreateSelfShop: function (shopInfo) {
-        console.log(shopInfo)
         var params = {
             phonenumber: shopInfo.phone,
             address: shopInfo.address,
+            dealer_id: shopInfo.userId,
         };
-        console.log(params)
 
         var url = serverUrl + "/store/create?address=" + shopInfo.address + "&phone=" + shopInfo.phone;
         var response = fetch(url, {
@@ -97,12 +96,16 @@ var AccountFetch = assign({}, EventEmitter.prototype,{
     fetchModifySelfShop: function (shopInfo) {
         console.log(shopInfo)
         var params = {
+            id: shopInfo.storeId, 
             phonenumber: shopInfo.phone,
             address: shopInfo.address,
+            dealer: {
+                id: shopInfo.dealerId
+            }
         };
         console.log(params)
         
-        var url = serverUrl + "/store/create?address=" + shopInfo.address + "&phone=" + shopInfo.phone;
+        var url = serverUrl + "/store/edit";
         var response = fetch(url, {
             method: "POST",
             headers: postHeader,

@@ -41,7 +41,7 @@ class DiscountList extends Component {
                     render: (text, record) => (
                         <Button 
                             id="toDiscountModifyButton"
-                            onClick={(record) => this.deleteDiscount(record)}    
+                            onClick={() => this.deleteDiscount(record)}    
                         >
                             删除优惠卷
                         </Button>

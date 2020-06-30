@@ -23,7 +23,7 @@ const EnglishtoChinese = {
     shake: "摇头",
 }
 
-var AccountToChinese = assign({}, EventEmitter.prototype,{
+var DiscountToChinese = assign({}, EventEmitter.prototype,{
 
     toChinese: function(english){
         if(EnglishtoChinese[english]){
@@ -37,4 +37,4 @@ var AccountToChinese = assign({}, EventEmitter.prototype,{
     
 });
 
-export default AccountToChinese;
+export default DiscountToChinese;

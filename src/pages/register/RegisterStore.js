@@ -129,14 +129,13 @@ var RegisterStore = assign({}, EventEmitter.prototype,{
         var t = this;
         var response = AccountFetch.fetchRegister(this.record.username, this.record.password)
         response.then(function(response){
-            console.log(response);
+          
             if(response.status !== 200){
                 console.log("存在一个问题，状态码为：" + response.status);
                 return;
             }
             return response.json();
         }).then(function (data) {
-            console.log(data)
             if(data.success){
                 message.success("注册成功", 1);
                 t.items.registerState = true;

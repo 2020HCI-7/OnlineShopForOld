@@ -61,14 +61,15 @@ var ShopModifyStore = assign({}, EventEmitter.prototype, {
             return ImageFetch.fetchUpdateDealerImage(data, dealerId)
         }
         t.items.shopInfo.dealerId = this.record.initInfo.userId
+        t.items.shopInfo.storeId = this.record.initInfo.storeId
         t.items.shopInfo.imageUrl = {
-            origin: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=origin",
-            idle: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=idle",
-            turn_left: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=turn_left",
-            turn_right: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=turn_right",
-            speak: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=speak",
-            nod: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=nod",
-            shake: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.userId + "&action=shake",
+            origin: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=origin",
+            idle: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=idle",
+            turn_left: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=turn_left",
+            turn_right: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=turn_right",
+            speak: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=speak",
+            nod: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=nod",
+            shake: ImageFetch.getVirtualDealerUrl() + "/getImage?name=" + this.record.initInfo.storeId + "&action=shake",
         }
         t.items.shopInfo.imageState = "finished"
 

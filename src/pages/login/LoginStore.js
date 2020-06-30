@@ -105,14 +105,6 @@ var LoginStore = assign({}, EventEmitter.prototype,{
         return
     },
 
-    handleUsertypesInputChange: function(){
-        if(this.record.usertype === undefined){
-            this.record.usertype = ""
-            return
-        }
-        return
-    },
-
     finishLogin: function(){
         if(this.items.usernameRemindText !== ""){
             message.error("请检查用户名格式")
@@ -120,10 +112,6 @@ var LoginStore = assign({}, EventEmitter.prototype,{
         }
         if(this.items.passwordRemindText !== ""){
             message.error("请检查密码格式")
-            return
-        }
-        if(this.record.usertype === ""){
-            message.error("请选择身份")
             return
         }
         
@@ -140,7 +128,7 @@ var LoginStore = assign({}, EventEmitter.prototype,{
             if(data.success){
                 message.success("登录成功", 1)
                 t.items.loginState = true
-                t.items.url = "/" + t.record.usertype
+                t.items.url = "/dealer"
                 t.emitChange()
                 return
             }
